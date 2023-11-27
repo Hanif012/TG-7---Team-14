@@ -4,15 +4,16 @@
 [ext_resource type="Texture2D" uid="uid://bhkxtrj54pfj4" path="res://icon.svg" id="1_g4tic"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ayapy"]
-size = Vector2(36, 36)
+size = Vector2(128, 128)
 
 [node name="PlayerCharacter" type="CharacterBody2D"]
 script = ExtResource("1_1p5c6")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
-scale = Vector2(0.25, 0.25)
 texture = ExtResource("1_g4tic")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_ayapy")
+
+[node name="Camera2D" type="Camera2D" parent="."]
