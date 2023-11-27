@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://chjam1dcabmk5"]
 
 [ext_resource type="Script" path="res://src/PlayerCharacter.gd" id="1_1p5c6"]
-[ext_resource type="Texture2D" uid="uid://bhkxtrj54pfj4" path="res://icon.svg" id="1_g4tic"]
+[ext_resource type="Texture2D" uid="uid://bhkxtrj54pfj4" path="res://assets/icon.svg" id="2_fy5mc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ayapy"]
 size = Vector2(128, 128)
@@ -11,9 +11,10 @@ script = ExtResource("1_1p5c6")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
-texture = ExtResource("1_g4tic")
+texture = ExtResource("2_fy5mc")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_ayapy")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, -120)

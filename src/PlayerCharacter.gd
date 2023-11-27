@@ -4,8 +4,8 @@ extends CharacterBody2D
 const SPEED = 300.0
 const TIRED_TRESHOLD = 10.0
 const STAMINA_DRAIN = 2
-const STAMINA_REGEN_STILL = 1
-const STAMINA_REGEN_MOVING = 0.2
+const STAMINA_REGEN_STILL = 5
+const STAMINA_REGEN_MOVING = 0.5
 
 var stamina = 200.0
 var tired_flag = false
