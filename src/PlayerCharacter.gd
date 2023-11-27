@@ -21,25 +21,25 @@ func _process(delta):
 	# Sprint Detection
 	if Input.is_action_pressed("sprint"):
 		if stamina > 0:
-			stamina = max(0, stamina-1)
+			stamina = max(0, stamina - STAMINA_DRAIN)
 			velocity.x *= 2
-			# Apply tiredFlag if drops to 0 stamina
+			# Apply tired_flag if drops to 0 stamina
 			if !stamina:
-				tiredFlag = true
+				tired_flag = true
 	# Stamina Regeneration
 	else: 
 		# Different stamina regeneration speed based on if you're standing still or not
 		if !velocity.x:
-			stamina = min(240, stamina+0.5)
+			stamina = min(240, stamina + STAMINA_REGEN_MOVING)
 		else:
-			stamina = min(240, stamina+0.1)
+			stamina = min(240, stamina + STAMINA_REGEN_STILL)
 		
-		# Remove TiredFlag after a certain stamina treshold
-		if stamina > TIRED_TRESHOLD and tiredFlag:
-			tiredFlag = false
+		# Remove tired_flag after a certain stamina treshold
+		if stamina > TIRED_TRESHOLD and tired_flag:
+			tired_flag = false
 	
-	# Stop movement if tiredFlag is true
-	if tiredFlag:
+	# Stop movement if tired_flag is true
+	if tired_flag:
 		velocity.x = 0
 	
 	print(stamina, " | ", velocity.x)
