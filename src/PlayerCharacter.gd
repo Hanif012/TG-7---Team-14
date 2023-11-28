@@ -1,16 +1,18 @@
 extends CharacterBody2D
 
 
-const SPEED = 300.0
-const TIRED_TRESHOLD = 50.0
-const STAMINA_DRAIN = 1
-const STAMINA_REGEN_IDLE = 2
-const STAMINA_REGEN_WALKING = 1
-const STAMINA_REGEN_CROUCHING = 0.25
-const STAMINA_REGEN_TIRED = 0.5
+const SPEED = 200.0
+const TIRED_TRESHOLD = 200
+const WALK_STAMINA_CAP = 400
+const STAMINA_DRAIN = 4
+const STAMINA_REGEN_IDLE = 8
+const STAMINA_REGEN_WALKING = 4
+const STAMINA_REGEN_CROUCHING = 1
+const STAMINA_REGEN_TIRED = 2
 
-var stamina = 150.0
-var max_stamina = 150.0
+var stamina = 600
+@export var max_stamina = 600
+
 var state = 0
 var tired_flag = false
 
@@ -18,6 +20,9 @@ var tired_flag = false
 var debug_output
 @onready var debug_label = $DebugLabel
 
+func  _ready():
+	position.x = PlayerState.position_in_room
+	stamina = max_stamina
 func _process(delta):
 	# Handle Tiredness
 	if tired_flag:
@@ -30,8 +35,9 @@ func _process(delta):
 		_movement_handler()
 	_stamina_handler()
 	
-	#Debug
-	debug_output = str("Stamina: ",stamina, "\nVelocity:", velocity.x, "\nPlayerstate:", PlayerState.movement_state)
+	# Debug
+	debug_output = str("Stamina: ",stamina, "/ ", max_stamina, "\nVelocity:", velocity.x, "\nPlayerstate:", PlayerState.movement_state)
+	
 	debug_label.set_text(debug_output)
 	
 
@@ -61,8 +67,8 @@ func _stamina_handler() -> void:
 		PlayerState.MovementState.IDLE:
 			stamina = min(max_stamina, stamina + STAMINA_REGEN_IDLE)
 		PlayerState.MovementState.WALKING:
-			if stamina < 100:
-				stamina = min(100, stamina + STAMINA_REGEN_WALKING)
+			if stamina < WALK_STAMINA_CAP:
+				stamina = min(WALK_STAMINA_CAP, stamina + STAMINA_REGEN_WALKING)
 		PlayerState.MovementState.SPRINTING:
 			stamina = max(0, stamina - STAMINA_DRAIN)
 			tired_flag = !stamina
