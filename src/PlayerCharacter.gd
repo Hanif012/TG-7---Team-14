@@ -4,7 +4,7 @@ signal player_moves
 
 const SPEED = 300.0
 const TIRED_TRESHOLD = 200
-const WALK_STAMINA_CAP = 400
+const STAMINA_CAP = 400
 const STAMINA_DRAIN = 4
 const STAMINA_REGEN_IDLE = 8
 const STAMINA_REGEN_WALKING = 4
@@ -15,21 +15,24 @@ var stamina = 600
 @export var max_stamina = 600
 
 var state = 0
-var tired_flag = false
 
-#debug
+# Debug
 var debug_output
 @onready var debug_label = $DebugLabel
+@onready var sprite = $Sprite2D
 
 func  _ready():
 	position.x = PlayerState.position_in_room
 	stamina = max_stamina
-func _process(delta):
+
+func _physics_process(_delta):
 	# Handle Tiredness
-	if tired_flag:
+	if PlayerState.tired_flag:
 		if stamina > TIRED_TRESHOLD:
-			tired_flag = false
+			sprite.modulate = (Color(1, 1, 1, 1))
+			PlayerState.tired_flag = false
 		else:
+			sprite.modulate = (Color(1, 1, 1, 0.5))
 			velocity.x = move_toward(velocity.x, 0, SPEED / 3)
 			PlayerState.movement_state = PlayerState.MovementState.TIRED
 	else:
@@ -41,9 +44,7 @@ func _process(delta):
 	
 	debug_label.set_text(debug_output)
 	
-	if abs(velocity.x) > 0:
-		player_moves.emit()
-		move_and_slide()
+	move_and_slide()
 
 func _movement_handler() -> void:
 	var direction = Input.get_axis("ui_left", "ui_right")
@@ -62,19 +63,25 @@ func _movement_handler() -> void:
 			PlayerState.movement_state = PlayerState.MovementState.WALKING
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
-		PlayerState.movement_state = PlayerState.MovementState.IDLE
+		if Input.is_action_pressed("ui_down"):
+			PlayerState.movement_state = PlayerState.MovementState.CROUCHING
+		else:
+			PlayerState.movement_state = PlayerState.MovementState.IDLE
+		
+		
 	
 func _stamina_handler() -> void:
 	match (PlayerState.movement_state):
 		PlayerState.MovementState.IDLE:
 			stamina = min(max_stamina, stamina + STAMINA_REGEN_IDLE)
 		PlayerState.MovementState.WALKING:
-			if stamina < WALK_STAMINA_CAP:
-				stamina = min(WALK_STAMINA_CAP, stamina + STAMINA_REGEN_WALKING)
+			if stamina < STAMINA_CAP:
+				stamina = min(STAMINA_CAP, stamina + STAMINA_REGEN_WALKING)
 		PlayerState.MovementState.SPRINTING:
 			stamina = max(0, stamina - STAMINA_DRAIN)
-			tired_flag = !stamina
+			PlayerState.tired_flag = !stamina
 		PlayerState.MovementState.CROUCHING:
-			stamina = min(max_stamina, stamina + STAMINA_REGEN_CROUCHING)
+			if stamina < STAMINA_CAP:
+				stamina = min(STAMINA_CAP, stamina + STAMINA_REGEN_CROUCHING)
 		PlayerState.MovementState.TIRED:
 			stamina = min(max_stamina, stamina + STAMINA_REGEN_TIRED)

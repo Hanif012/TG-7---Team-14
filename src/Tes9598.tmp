@@ -3,13 +3,15 @@
 [ext_resource type="Script" path="res://src/TestRoom.gd" id="1_b8x6u"]
 [ext_resource type="Texture2D" uid="uid://dqx0nh56lsn2o" path="res://assets/test-room.bmp" id="1_w5vcb"]
 [ext_resource type="PackedScene" uid="uid://chjam1dcabmk5" path="res://src/PlayerCharacter.tscn" id="2_eeyvi"]
-[ext_resource type="PackedScene" uid="uid://le2tdlm8njnf" path="res://src/Door.tscn" id="3_smmkp"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_sic8f"]
 normal = Vector2(1, 0)
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_lylfe"]
 normal = Vector2(-1, 0)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jc2g7"]
+size = Vector2(200, 450)
 
 [sub_resource type="LabelSettings" id="LabelSettings_b7kxq"]
 font_size = 32
@@ -36,17 +38,19 @@ scale = Vector2(0.819672, 0.819672)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Background/RightBorder"]
 shape = SubResource("WorldBoundaryShape2D_lylfe")
 
-[node name="Doors" type="Node2D" parent="."]
+[node name="BackDoor" type="Area2D" parent="Background"]
+position = Vector2(435, 30)
+metadata/_edit_group_ = true
 
-[node name="BackDoor" parent="Doors" instance=ExtResource("3_smmkp")]
-position = Vector2(531, 413)
-target_room = 1
-room_name = "To Bathroom"
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Background/BackDoor"]
+shape = SubResource("RectangleShape2D_jc2g7")
 
-[node name="SideDoor" parent="Doors" instance=ExtResource("3_smmkp")]
-position = Vector2(1032, 406)
-target_room = 2
-room_name = "To Balcony"
+[node name="Side Door" type="Area2D" parent="Background"]
+position = Vector2(828.688, 38.5246)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Background/Side Door"]
+shape = SubResource("RectangleShape2D_jc2g7")
 
 [node name="PlayerCharacter" parent="." instance=ExtResource("2_eeyvi")]
 position = Vector2(152, 549)
@@ -55,12 +59,15 @@ position = Vector2(152, 549)
 position = Vector2(0, 560)
 offset = Vector2(0, -200)
 
-[node name="CameraLabel" type="Label" parent="Camera2D"]
+[node name="Label" type="Label" parent="Camera2D"]
 offset_left = -75.0
 offset_top = -460.0
 offset_right = 75.0
 offset_bottom = -410.0
+text = "TOP TEXT"
 label_settings = SubResource("LabelSettings_b7kxq")
 horizontal_alignment = 1
 
+[connection signal="area_entered" from="Background/BackDoor" to="." method="area_entered"]
+[connection signal="body_entered" from="Background/BackDoor" to="." method="body_entered"]
 [connection signal="player_moves" from="PlayerCharacter" to="." method="_on_player_character_player_moves"]
