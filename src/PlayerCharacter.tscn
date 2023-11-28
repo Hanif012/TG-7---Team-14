@@ -16,9 +16,6 @@ texture = ExtResource("2_fy5mc")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_ayapy")
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(0, -120)
-
 [node name="DebugLabel" type="Label" parent="."]
 anchors_preset = 8
 anchor_left = 0.5

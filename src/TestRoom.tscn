@@ -1,0 +1,49 @@
+[gd_scene load_steps=7 format=3 uid="uid://dp4hisgdb02lb"]
+
+[ext_resource type="Script" path="res://src/TestRoom.gd" id="1_b8x6u"]
+[ext_resource type="Texture2D" uid="uid://dqx0nh56lsn2o" path="res://assets/test-room.bmp" id="1_w5vcb"]
+[ext_resource type="PackedScene" uid="uid://chjam1dcabmk5" path="res://src/PlayerCharacter.tscn" id="2_eeyvi"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_sic8f"]
+normal = Vector2(1, 0)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_lylfe"]
+normal = Vector2(-1, 0)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jc2g7"]
+size = Vector2(206, 447.5)
+
+[node name="TestRoom" type="Node2D"]
+script = ExtResource("1_b8x6u")
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(0, 360)
+scale = Vector2(1.22, 1.22)
+texture = ExtResource("1_w5vcb")
+
+[node name="LetBorder" type="StaticBody2D" parent="."]
+position = Vector2(-1000, 560)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LetBorder"]
+shape = SubResource("WorldBoundaryShape2D_sic8f")
+
+[node name="RightBorder" type="StaticBody2D" parent="."]
+position = Vector2(1000, 560)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightBorder"]
+shape = SubResource("WorldBoundaryShape2D_lylfe")
+
+[node name="BackDoor" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BackDoor"]
+position = Vector2(533, 408.25)
+shape = SubResource("RectangleShape2D_jc2g7")
+
+[node name="PlayerCharacter" parent="." instance=ExtResource("2_eeyvi")]
+position = Vector2(390, 560)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, 560)
+offset = Vector2(0, -200)
+
+[connection signal="player_moves" from="PlayerCharacter" to="." method="_on_player_character_player_moves"]

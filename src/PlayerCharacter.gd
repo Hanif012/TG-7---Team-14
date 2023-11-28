@@ -1,7 +1,8 @@
 extends CharacterBody2D
 
+signal player_moves
 
-const SPEED = 200.0
+const SPEED = 300.0
 const TIRED_TRESHOLD = 200
 const WALK_STAMINA_CAP = 400
 const STAMINA_DRAIN = 4
@@ -40,8 +41,9 @@ func _process(delta):
 	
 	debug_label.set_text(debug_output)
 	
-
-	move_and_slide()
+	if abs(velocity.x) > 0:
+		player_moves.emit()
+		move_and_slide()
 
 func _movement_handler() -> void:
 	var direction = Input.get_axis("ui_left", "ui_right")
