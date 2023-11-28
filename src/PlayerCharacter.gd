@@ -72,7 +72,7 @@ func _stamina_handler() -> void:
 			PlayerState.stamina = min(PlayerState.max_stamina, PlayerState.stamina + STAMINA_REGEN_IDLE)
 		PlayerState.MovementState.WALKING:
 			if PlayerState.stamina < STAMINA_CAP:
-				PlayerState.stamina = min(PlayerState.STAMINA_CAP, PlayerState.stamina + STAMINA_REGEN_WALKING)
+				PlayerState.stamina = min(STAMINA_CAP, PlayerState.stamina + STAMINA_REGEN_WALKING)
 		PlayerState.MovementState.SPRINTING:
 			PlayerState.stamina = max(0, PlayerState.stamina - STAMINA_DRAIN)
 			PlayerState.tired_flag = !PlayerState.stamina
