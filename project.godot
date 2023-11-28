@@ -17,6 +17,7 @@ config/features=PackedStringArray("4.1", "Mobile")
 [autoload]
 
 PlayerState="*res://src/PlayerState.gd"
+SceneTransition="*res://src/SceneTransition.tscn"
 
 [display]
 
