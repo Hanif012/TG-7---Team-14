@@ -14,6 +14,10 @@ var max_stamina = 150.0
 var state = 0
 var tired_flag = false
 
+#debug
+var debug_output
+@onready var debug_label = $DebugLabel
+
 func _process(delta):
 	# Handle Tiredness
 	if tired_flag:
@@ -25,8 +29,11 @@ func _process(delta):
 	else:
 		_movement_handler()
 	_stamina_handler()
-
-	print(stamina, " | ", velocity.x, " | ", PlayerState.movement_state)
+	
+	#Debug
+	debug_output = str("Stamina: ",stamina, "\nVelocity:", velocity.x, "\nPlayerstate:", PlayerState.movement_state)
+	debug_label.set_text(debug_output)
+	
 
 	move_and_slide()
 

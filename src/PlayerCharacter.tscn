@@ -18,3 +18,7 @@ shape = SubResource("RectangleShape2D_ayapy")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(0, -120)
+
+[node name="DebugLabel" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
