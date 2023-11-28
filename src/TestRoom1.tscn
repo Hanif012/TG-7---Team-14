@@ -1,9 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://dp4hisgdb02lb"]
+[gd_scene load_steps=8 format=3 uid="uid://d0mqyveglwwyn"]
 
-[ext_resource type="Script" path="res://src/TestRoom.gd" id="1_b8x6u"]
-[ext_resource type="Texture2D" uid="uid://dqx0nh56lsn2o" path="res://assets/test-room.bmp" id="1_w5vcb"]
-[ext_resource type="PackedScene" uid="uid://chjam1dcabmk5" path="res://src/PlayerCharacter.tscn" id="2_eeyvi"]
-[ext_resource type="PackedScene" uid="uid://le2tdlm8njnf" path="res://src/Door.tscn" id="3_smmkp"]
+[ext_resource type="Script" path="res://src/Room.gd" id="1_ikf3l"]
+[ext_resource type="Texture2D" uid="uid://bbaub2iwio7a4" path="res://assets/test-room-1.bmp" id="2_ayp85"]
+[ext_resource type="PackedScene" uid="uid://le2tdlm8njnf" path="res://src/Door.tscn" id="3_pptsr"]
+[ext_resource type="PackedScene" uid="uid://chjam1dcabmk5" path="res://src/PlayerCharacter.tscn" id="4_qmgak"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_sic8f"]
 normal = Vector2(1, 0)
@@ -13,24 +13,26 @@ normal = Vector2(-1, 0)
 
 [sub_resource type="LabelSettings" id="LabelSettings_b7kxq"]
 font_size = 32
+outline_size = 16
+outline_color = Color(0, 0, 0, 1)
 
 [node name="TestRoom" type="Node2D"]
-script = ExtResource("1_b8x6u")
+script = ExtResource("1_ikf3l")
 
 [node name="Background" type="Sprite2D" parent="."]
 position = Vector2(0, 360)
 scale = Vector2(1.22, 1.22)
-texture = ExtResource("1_w5vcb")
+texture = ExtResource("2_ayp85")
 
 [node name="LetBorder" type="StaticBody2D" parent="Background"]
-position = Vector2(-819.672, 163.934)
+position = Vector2(-500, 163.934)
 scale = Vector2(0.819672, 0.819672)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Background/LetBorder"]
 shape = SubResource("WorldBoundaryShape2D_sic8f")
 
 [node name="RightBorder" type="StaticBody2D" parent="Background"]
-position = Vector2(819.672, 163.934)
+position = Vector2(500, 163.934)
 scale = Vector2(0.819672, 0.819672)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Background/RightBorder"]
@@ -38,17 +40,11 @@ shape = SubResource("WorldBoundaryShape2D_lylfe")
 
 [node name="Doors" type="Node2D" parent="."]
 
-[node name="BackDoor" parent="Doors" instance=ExtResource("3_smmkp")]
-position = Vector2(531, 413)
-target_room = 1
-room_name = "To Bathroom"
+[node name="Door" parent="Doors" instance=ExtResource("3_pptsr")]
+position = Vector2(363, 431)
+room_name = "To Inside"
 
-[node name="SideDoor" parent="Doors" instance=ExtResource("3_smmkp")]
-position = Vector2(1032, 406)
-target_room = 2
-room_name = "To Balcony"
-
-[node name="PlayerCharacter" parent="." instance=ExtResource("2_eeyvi")]
+[node name="PlayerCharacter" parent="." instance=ExtResource("4_qmgak")]
 position = Vector2(152, 549)
 
 [node name="Camera2D" type="Camera2D" parent="."]
