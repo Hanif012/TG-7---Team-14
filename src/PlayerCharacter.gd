@@ -45,7 +45,7 @@ func _physics_process(_delta):
 func _movement_handler() -> void:
 	var direction = Input.get_axis("ui_left", "ui_right")
 	if direction:
-		if Input.is_action_pressed("ui_down"):
+		if Input.is_action_pressed("crouch"):
 			velocity.x = direction * SPEED / 2
 			PlayerState.movement_state = PlayerState.MovementState.CROUCHING
 		elif Input.is_action_pressed("sprint"):
@@ -59,7 +59,7 @@ func _movement_handler() -> void:
 			PlayerState.movement_state = PlayerState.MovementState.WALKING
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
-		if Input.is_action_pressed("ui_down"):
+		if Input.is_action_pressed("crouch"):
 			PlayerState.movement_state = PlayerState.MovementState.CROUCHING
 		else:
 			PlayerState.movement_state = PlayerState.MovementState.IDLE
