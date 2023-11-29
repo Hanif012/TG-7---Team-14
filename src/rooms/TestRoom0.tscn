@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=3 uid="uid://meme1d3mxvwx"]
+
+[ext_resource type="PackedScene" uid="uid://dltnr2rc0tcal" path="res://src/Room.tscn" id="1_htxbb"]
+[ext_resource type="Texture2D" uid="uid://dqx0nh56lsn2o" path="res://assets/test-room-0.bmp" id="2_17hj4"]
+[ext_resource type="PackedScene" uid="uid://dcxwu8pgdyd7l" path="res://src/Interactible.tscn" id="3_ihlr2"]
+
+[node name="TestRoom0" instance=ExtResource("1_htxbb")]
+
+[node name="Background" parent="." index="0"]
+scale = Vector2(1.22, 1.22)
+texture = ExtResource("2_17hj4")
+
+[node name="Door1" parent="Interactibles" index="0" instance=ExtResource("3_ihlr2")]
+position = Vector2(530, 500)
+scale = Vector2(1.5, 2)
+label = "To Outside"
+target_room = "TestRoom1"
+coords = 450
+
+[node name="Door2" parent="Interactibles" index="1" instance=ExtResource("3_ihlr2")]
+position = Vector2(1000, 500)
+scale = Vector2(1.5, 2)
+label = "To Secondary Room"
+target_room = "TestRoom2"
+coords = -556
+room_name = "To Outside"
+
+[node name="Bed" parent="Interactibles" index="2" instance=ExtResource("3_ihlr2")]
+position = Vector2(-525, 500)
+scale = Vector2(3.5, 2)
+interactible_type = 1
+label = "Hide under Bed"
+
+[node name="Desk" parent="Interactibles" index="3" instance=ExtResource("3_ihlr2")]
+position = Vector2(40, 500)
+scale = Vector2(2.5, 2)
+interactible_type = 2
+label = "Search Desk"

@@ -1,13 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://dltnr2rc0tcal"]
+[gd_scene load_steps=5 format=3 uid="uid://dltnr2rc0tcal"]
 
 [ext_resource type="Script" path="res://src/Room.gd" id="1_6p7ka"]
-[ext_resource type="Texture2D" uid="uid://dqx0nh56lsn2o" path="res://assets/test-room-0.bmp" id="2_vihup"]
-[ext_resource type="PackedScene" uid="uid://le2tdlm8njnf" path="res://src/Door.tscn" id="3_tf1tu"]
 [ext_resource type="PackedScene" uid="uid://chjam1dcabmk5" path="res://src/PlayerCharacter.tscn" id="4_c3yxc"]
-[ext_resource type="PackedScene" uid="uid://c8fv6e4amkw5r" path="res://src/HidingSpot.tscn" id="4_havie"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_b7kxq"]
-font_size = 32
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_sic8f"]
 normal = Vector2(1, 0)
@@ -19,28 +13,8 @@ normal = Vector2(-1, 0)
 process_mode = 1
 script = ExtResource("1_6p7ka")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer"]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -0.5
-offset_right = 0.5
-offset_bottom = 45.0
-grow_horizontal = 2
-size_flags_horizontal = 4
-
-[node name="CameraLabel" type="Label" parent="CanvasLayer/HBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 0
-label_settings = SubResource("LabelSettings_b7kxq")
-horizontal_alignment = 1
-
 [node name="Background" type="Sprite2D" parent="."]
 position = Vector2(0, 360)
-scale = Vector2(1.22, 1.22)
-texture = ExtResource("2_vihup")
 
 [node name="Borders" type="Node2D" parent="."]
 position = Vector2(0, 360)
@@ -48,25 +22,19 @@ scale = Vector2(1.22, 1.22)
 
 [node name="LetBorder" type="StaticBody2D" parent="Borders"]
 position = Vector2(-800, 0)
+metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/LetBorder"]
 shape = SubResource("WorldBoundaryShape2D_sic8f")
 
 [node name="RightBorder" type="StaticBody2D" parent="Borders"]
 position = Vector2(800, 0)
+metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/RightBorder"]
 shape = SubResource("WorldBoundaryShape2D_lylfe")
 
-[node name="Doors" type="Node2D" parent="."]
-
-[node name="Door" parent="Doors" instance=ExtResource("3_tf1tu")]
-position = Vector2(530, 400)
-
-[node name="HidingSpots" type="Node2D" parent="."]
-
-[node name="HidingSpot" parent="HidingSpots" instance=ExtResource("4_havie")]
-position = Vector2(-500, 500)
+[node name="Interactibles" type="Node2D" parent="."]
 
 [node name="PlayerCharacter" parent="." instance=ExtResource("4_c3yxc")]
 position = Vector2(0, 560)
