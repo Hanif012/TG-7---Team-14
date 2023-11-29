@@ -63,8 +63,6 @@ func _movement_handler() -> void:
 			PlayerState.movement_state = PlayerState.MovementState.CROUCHING
 		else:
 			PlayerState.movement_state = PlayerState.MovementState.IDLE
-		
-		# TEST
 	
 func _stamina_handler() -> void:
 	match (PlayerState.movement_state):

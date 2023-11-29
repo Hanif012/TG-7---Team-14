@@ -10,7 +10,7 @@ var interactible := false
 
 
 func _input(_event):
-	if interactible and Input.is_action_pressed("interact"):
+	if interactible and Input.is_action_pressed("interact") and !PlayerState.transition_state:
 		print("Interacted with door ", name)
 		PlayerState.position_in_room = coords
 		SceneTransition.change_screen(target_room)

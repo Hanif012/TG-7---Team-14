@@ -2,6 +2,7 @@ extends Node
 
 enum MovementState {IDLE, WALKING, SPRINTING, CROUCHING, TIRED}
 
+var transition_state := false
 var movement_state := MovementState.IDLE
 var tired_flag := false
 
