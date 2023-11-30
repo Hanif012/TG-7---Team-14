@@ -23,7 +23,6 @@ scale = Vector2(1.5, 2)
 label = "To Secondary Room"
 target_room = "TestRoom2"
 coords = -556
-room_name = "To Outside"
 
 [node name="Bed" parent="Interactibles" index="2" instance=ExtResource("3_ihlr2")]
 position = Vector2(-525, 500)

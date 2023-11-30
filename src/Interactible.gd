@@ -6,10 +6,10 @@ enum ItemContained {KEY, HEAL, STIM}
 
 @export var interactible_type : InteractibleType
 @export var label : String
+
 @export_category("Door Type")
 @export var target_room : String
 @export var coords : int
-@export var room_name : String
 
 @export_category("Stealth Type")
 @export var hiding_spot_type : HidingSpotType
@@ -18,17 +18,15 @@ enum ItemContained {KEY, HEAL, STIM}
 @export var spot_name : String = "Desk"
 @export var item_here : ItemContained
 
-@onready var canvas_layer = get_node("/root/SceneTransition")
 
 var is_interactible := false
 
 
 func _input(_event):
-	if is_interactible and Input.is_action_pressed("interact") and !PlayerState.transition_state:
+	if is_interactible and Input.is_action_pressed("interact") and !GameState.transition_state:
 		match (interactible_type):
 			InteractibleType.DOOR:
-				PlayerState.position_in_room = coords
-				SceneTransition.change_scene(target_room)
+				_change_scene()
 			InteractibleType.STEALTH:
 				_enter_hiding_spot()
 			InteractibleType.STORAGE:
@@ -38,13 +36,17 @@ func _input(_event):
 func _on_body_entered(body):
 	if body.name == "PlayerCharacter":
 		
-		canvas_layer.get_node("HBoxContainer/InteractLabel").set_text(label)
+		UI.get_node("HBoxContainer/InteractLabel").set_text(label)
 		is_interactible = true
 
 func _on_body_exited(body):
 	if body.name == "PlayerCharacter":
-		canvas_layer.get_node("HBoxContainer/InteractLabel").set_text("")
+		UI.get_node("HBoxContainer/InteractLabel").set_text("")
 		is_interactible = false
+	
+func _change_scene():
+	GameState.position_in_room = coords
+	get_tree().change_scene_to_file("res://src/rooms/" + target_room + ".tscn")
 	
 func _enter_hiding_spot():
 	print("Hiding in ", HidingSpotType.keys()[hiding_spot_type])
