@@ -2,7 +2,6 @@ extends Area2D
 
 enum InteractibleType {DOOR, STEALTH, STORAGE}
 enum HidingSpotType {BED, WARDROBE}
-enum ItemContained {KEY, HEAL, STIM}
 
 @export var interactible_type : InteractibleType
 @export var label : String
@@ -16,7 +15,7 @@ enum ItemContained {KEY, HEAL, STIM}
 
 @export_category("Storage Type")
 @export var spot_name : String = "Desk"
-@export var item_here : ItemContained
+@export var item_here : GameState.Item
 
 
 var is_interactible := false
@@ -52,4 +51,16 @@ func _enter_hiding_spot():
 	print("Hiding in ", HidingSpotType.keys()[hiding_spot_type])
 
 func _pick_up_item():
-	print("Picked up ", ItemContained.keys()[item_here])
+	if item_here == GameState.Item.KEY:
+		GameState.key_couter += 1
+	else:
+		if GameState.inventory[0] != -1:
+			GameState.inventory[0] = item_here
+		elif GameState.inventory[1] != -1:
+			GameState.inventory[1] = item_here
+		elif GameState.inventory[2] != -1:
+			GameState.inventory[2] = item_here
+		else:
+			print("Inventory Full")
+	
+	print("[" , GameState.inventory[0], ", ", GameState.inventory[1], ", ", GameState.inventory[2] ,"] Key Found: ", GameState.key_couter)
