@@ -22,11 +22,12 @@ func  _ready():
 	position.x = GameState.position_in_room
 
 func _physics_process(_delta):
-	# Handle Tiredness
-	if GameState.tired_flag:
+	if GameState.hiding_state:
+		velocity.x = 0
+	elif GameState.tired_state:
 		if GameState.stamina > TIRED_TRESHOLD:
 			sprite.modulate = (Color(1, 1, 1, 1))
-			GameState.tired_flag = false
+			GameState.tired_state = false
 		else:
 			sprite.modulate = (Color(1, 1, 1, 0.5))
 			velocity.x = move_toward(velocity.x, 0, SPEED / 3)
@@ -36,7 +37,7 @@ func _physics_process(_delta):
 	_stamina_handler()
 	
 	# Debug
-	debug_output = str("Stamina: ",GameState.stamina, "/ ", GameState.max_stamina, "\nVelocity:", velocity.x, "\nGameState:", GameState.movement_state)
+	debug_output = str("Stamina: ",GameState.stamina, "/ ", GameState.MAX_STAMINA, "\nVelocity:", velocity.x, "\nGameState:", GameState.movement_state)
 	
 	debug_label.set_text(debug_output)
 	
@@ -65,17 +66,21 @@ func _movement_handler() -> void:
 			GameState.movement_state = GameState.MovementState.IDLE
 	
 func _stamina_handler() -> void:
-	match (GameState.movement_state):
-		GameState.MovementState.IDLE:
-			GameState.stamina = min(GameState.max_stamina, GameState.stamina + STAMINA_REGEN_IDLE)
-		GameState.MovementState.WALKING:
-			if GameState.stamina < STAMINA_CAP:
-				GameState.stamina = min(STAMINA_CAP, GameState.stamina + STAMINA_REGEN_WALKING)
-		GameState.MovementState.SPRINTING:
-			GameState.stamina = max(0, GameState.stamina - STAMINA_DRAIN)
-			GameState.tired_flag = !GameState.stamina
-		GameState.MovementState.CROUCHING:
-			if GameState.stamina < STAMINA_CAP:
-				GameState.stamina = min(STAMINA_CAP, GameState.stamina + STAMINA_REGEN_CROUCHING)
-		GameState.MovementState.TIRED:
-			GameState.stamina = min(GameState.max_stamina, GameState.stamina + STAMINA_REGEN_TIRED)
+	if GameState.hiding_state:
+		if GameState.stamina < STAMINA_CAP:
+			GameState.stamina = min(GameState.MAX_STAMINA, GameState.stamina + STAMINA_REGEN_CROUCHING)
+	else: 
+		match (GameState.movement_state):
+			GameState.MovementState.IDLE:
+				GameState.stamina = min(GameState.MAX_STAMINA, GameState.stamina + STAMINA_REGEN_IDLE)
+			GameState.MovementState.WALKING:
+				if GameState.stamina < STAMINA_CAP:
+					GameState.stamina = min(STAMINA_CAP, GameState.stamina + STAMINA_REGEN_WALKING)
+			GameState.MovementState.SPRINTING:
+				GameState.stamina = max(0, GameState.stamina - STAMINA_DRAIN)
+				GameState.tired_state = !GameState.stamina
+			GameState.MovementState.CROUCHING:
+				if GameState.stamina < STAMINA_CAP:
+					GameState.stamina = min(STAMINA_CAP, GameState.stamina + STAMINA_REGEN_CROUCHING)
+			GameState.MovementState.TIRED:
+				GameState.stamina = min(GameState.MAX_STAMINA, GameState.stamina + STAMINA_REGEN_TIRED)

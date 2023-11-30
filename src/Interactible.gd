@@ -48,7 +48,11 @@ func _change_scene():
 	get_tree().change_scene_to_file("res://src/rooms/" + target_room + ".tscn")
 	
 func _enter_hiding_spot():
-	print("Hiding in ", HidingSpotType.keys()[hiding_spot_type])
+	GameState.hiding_state = !GameState.hiding_state
+	if GameState.hiding_state:
+		print("Hiding in ", HidingSpotType.keys()[hiding_spot_type])
+	else:
+		print("Came out from ", HidingSpotType.keys()[hiding_spot_type])
 
 func _pick_up_item():
 	if item_here == GameState.Item.KEY:
