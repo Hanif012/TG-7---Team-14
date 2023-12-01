@@ -32,32 +32,32 @@ func _input(_event):
 				_pick_up_item()
 		
 
-func _on_body_entered(body):
+func _on_body_entered(body) -> void:
 	if body.name == "PlayerCharacter":
 		
 		UI.get_node("HBoxContainer/InteractLabel").set_text(label)
 		is_interactible = true
 
-func _on_body_exited(body):
+func _on_body_exited(body) -> void:
 	if body.name == "PlayerCharacter":
 		UI.get_node("HBoxContainer/InteractLabel").set_text("")
 		is_interactible = false
 	
-func _change_scene():
+func _change_scene() -> void:
 	GameState.position_in_room = coords
 	get_tree().change_scene_to_file("res://src/rooms/" + target_room + ".tscn")
 	
-func _enter_hiding_spot():
+func _enter_hiding_spot() -> void:
 	GameState.hiding_state = !GameState.hiding_state
 	if GameState.hiding_state:
 		print("Hiding in ", HidingSpotType.keys()[hiding_spot_type])
 	else:
 		print("Came out from ", HidingSpotType.keys()[hiding_spot_type])
 
-func _pick_up_item():
+func _pick_up_item() -> void:
 	if item_here == GameState.Item.KEY:
 		GameState.key_couter += 1
-	else:
+	elif item_here != -1:
 		if GameState.inventory[0] != -1:
 			GameState.inventory[0] = item_here
 		elif GameState.inventory[1] != -1:
@@ -67,4 +67,5 @@ func _pick_up_item():
 		else:
 			print("Inventory Full")
 	
+	item_here = -1
 	print("[" , GameState.inventory[0], ", ", GameState.inventory[1], ", ", GameState.inventory[2] ,"] Key Found: ", GameState.key_couter)
