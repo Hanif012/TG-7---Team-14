@@ -16,15 +16,19 @@ script = ExtResource("1_6p7ka")
 [node name="Background" type="Sprite2D" parent="."]
 position = Vector2(0, 360)
 
+[node name="Lighting" type="Node2D" parent="."]
+position = Vector2(0, 360)
+scale = Vector2(1.22, 1.22)
+
 [node name="Borders" type="Node2D" parent="."]
 position = Vector2(0, 360)
 scale = Vector2(1.22, 1.22)
 
-[node name="LetBorder" type="StaticBody2D" parent="Borders"]
+[node name="LeftBorder" type="StaticBody2D" parent="Borders"]
 position = Vector2(-800, 0)
 metadata/_edit_group_ = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/LetBorder"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/LeftBorder"]
 shape = SubResource("WorldBoundaryShape2D_sic8f")
 
 [node name="RightBorder" type="StaticBody2D" parent="Borders"]

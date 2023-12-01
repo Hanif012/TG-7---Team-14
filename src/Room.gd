@@ -4,7 +4,7 @@ const EDGE_ZONE = int(1280/4.0)
 @onready var player_character = $PlayerCharacter
 @onready var camera = $Camera2D
 
-@onready var left_border = $Borders/LetBorder
+@onready var left_border = $Borders/LeftBorder
 @onready var right_border = $Borders/RightBorder
 @onready var fade_out_mask = UI.get_node("FadeOut")
 func _ready() -> void:
