@@ -13,6 +13,8 @@ const STAMINA_REGEN_TIRED = 2
 
 var state = 0
 
+@onready var metal_pipe = $MetalPipeSoundQueue
+
 # Debug
 var debug_output
 @onready var debug_label = $DebugLabel
@@ -20,6 +22,10 @@ var debug_output
 
 func  _ready():
 	position.x = GameState.position_in_room
+
+func _input(event):
+	if event.is_action_pressed("interact"):
+		metal_pipe.play_sound()
 
 func _physics_process(_delta):
 	if GameState.hiding_state:

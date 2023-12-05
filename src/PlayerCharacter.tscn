@@ -1,7 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://chjam1dcabmk5"]
+[gd_scene load_steps=6 format=3 uid="uid://chjam1dcabmk5"]
 
 [ext_resource type="Script" path="res://src/PlayerCharacter.gd" id="1_1p5c6"]
 [ext_resource type="Texture2D" uid="uid://bhkxtrj54pfj4" path="res://assets/icon.svg" id="2_fy5mc"]
+[ext_resource type="PackedScene" uid="uid://bsjf1lr440lo0" path="res://src/SoundQueue.tscn" id="3_icehy"]
+[ext_resource type="AudioStream" uid="uid://dnj2wm4mreme3" path="res://assets/audio/metal-pipe.mp3" id="4_pcowe"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ayapy"]
 size = Vector2(128, 128)
@@ -29,3 +31,10 @@ offset_bottom = 130.0
 grow_horizontal = 2
 grow_vertical = 2
 horizontal_alignment = 1
+
+[node name="MetalPipeSoundQueue" parent="." instance=ExtResource("3_icehy")]
+COUNT = 20
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="MetalPipeSoundQueue"]
+stream = ExtResource("4_pcowe")
+bus = &"SFX"

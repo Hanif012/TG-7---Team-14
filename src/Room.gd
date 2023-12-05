@@ -7,6 +7,7 @@ const EDGE_ZONE = int(1280/4.0)
 @onready var left_border = $Borders/LeftBorder
 @onready var right_border = $Borders/RightBorder
 @onready var fade_out_mask = $UI/Control/FadeOut
+
 func _ready() -> void:
 	GameState.transition_state = true
 	fade_out_mask.color = Color(0,0,0,1)

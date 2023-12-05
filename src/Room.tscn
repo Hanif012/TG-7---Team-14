@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://dltnr2rc0tcal"]
+[gd_scene load_steps=8 format=3 uid="uid://dltnr2rc0tcal"]
 
 [ext_resource type="Script" path="res://src/Room.gd" id="1_6p7ka"]
 [ext_resource type="PackedScene" uid="uid://c17jc5h2fylaa" path="res://src/UI.tscn" id="2_nkud2"]
+[ext_resource type="PackedScene" uid="uid://bsjf1lr440lo0" path="res://src/SoundQueue.tscn" id="3_8dkhu"]
 [ext_resource type="PackedScene" uid="uid://chjam1dcabmk5" path="res://src/PlayerCharacter.tscn" id="4_c3yxc"]
+[ext_resource type="AudioStream" uid="uid://dnj2wm4mreme3" path="res://assets/audio/metal-pipe.mp3" id="4_t7j2r"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_sic8f"]
 normal = Vector2(1, 0)
@@ -47,5 +49,11 @@ position = Vector2(0, 560)
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(0, 560)
 offset = Vector2(0, -200)
+
+[node name="SoundQueue" parent="." instance=ExtResource("3_8dkhu")]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="SoundQueue"]
+stream = ExtResource("4_t7j2r")
+bus = &"SFX"
 
 [node name="UI" parent="." instance=ExtResource("2_nkud2")]
