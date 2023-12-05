@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://dltnr2rc0tcal"]
+[gd_scene load_steps=6 format=3 uid="uid://dltnr2rc0tcal"]
 
 [ext_resource type="Script" path="res://src/Room.gd" id="1_6p7ka"]
+[ext_resource type="PackedScene" uid="uid://c17jc5h2fylaa" path="res://src/UI.tscn" id="2_nkud2"]
 [ext_resource type="PackedScene" uid="uid://chjam1dcabmk5" path="res://src/PlayerCharacter.tscn" id="4_c3yxc"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_sic8f"]
@@ -46,3 +47,5 @@ position = Vector2(0, 560)
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(0, 560)
 offset = Vector2(0, -200)
+
+[node name="UI" parent="." instance=ExtResource("2_nkud2")]

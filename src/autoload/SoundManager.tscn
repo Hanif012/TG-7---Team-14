@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://c2hbkln4av7j4"]
+
+[ext_resource type="Script" path="res://src/autoload/SoundManager.gd" id="1_e63sn"]
+[ext_resource type="AudioStream" uid="uid://bd6bx01cywstx" path="res://assets/audio/yt1s.com - Music Disc  11 Minecraft C418.mp3" id="2_f72oi"]
+
+[node name="SoundManager" type="Node"]
+script = ExtResource("1_e63sn")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_f72oi")
+volume_db = -20.0
+autoplay = true
+bus = &"Music"

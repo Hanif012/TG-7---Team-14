@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://1aeo0gxj2nko"]
+
+[ext_resource type="PackedScene" uid="uid://dltnr2rc0tcal" path="res://src/Room.tscn" id="1_6kbmm"]
+[ext_resource type="Texture2D" uid="uid://dytqprykbyxtx" path="res://assets/rooms/bedroom.png" id="2_k56an"]
+
+[node name="Room" instance=ExtResource("1_6kbmm")]
+
+[node name="Background" parent="." index="0"]
+scale = Vector2(0.37, 0.37)
+texture = ExtResource("2_k56an")
+
+[node name="LeftBorder" parent="Borders" index="0"]
+position = Vector2(-600, 0)
+
+[node name="RightBorder" parent="Borders" index="1"]
+position = Vector2(600, 0)

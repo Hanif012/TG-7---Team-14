@@ -17,6 +17,7 @@ enum HidingSpotType {BED, WARDROBE}
 @export var spot_name : String = "Desk"
 @export var item_here : GameState.Item
 
+@onready var interact_label = get_parent().get_parent().get_node("UI/Control/VBoxContainer/InteractLabel")
 
 var is_interactible := false
 
@@ -35,12 +36,12 @@ func _input(_event):
 func _on_body_entered(body) -> void:
 	if body.name == "PlayerCharacter":
 		
-		UI.get_node("HBoxContainer/InteractLabel").set_text(label)
+		interact_label.set_text(label)
 		is_interactible = true
 
 func _on_body_exited(body) -> void:
 	if body.name == "PlayerCharacter":
-		UI.get_node("HBoxContainer/InteractLabel").set_text("")
+		interact_label.set_text("")
 		is_interactible = false
 	
 func _change_scene() -> void:
