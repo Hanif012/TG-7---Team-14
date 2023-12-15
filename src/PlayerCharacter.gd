@@ -20,22 +20,25 @@ var debug_output
 @onready var debug_label = $DebugLabel
 @onready var sprite = $Sprite2D
 
+# On ready, set position to starting position or door position
 func  _ready():
 	position.x = GameState.position_in_room
 
+# Placeholder sound from input
 func _input(event):
 	if event.is_action_pressed("interact"):
 		metal_pipe.play_sound()
 
+
 func _physics_process(_delta):
-	if GameState.hiding_state:
+	if GameState.hiding_state: # ignore movement if hiding 
 		velocity.x = 0
 	elif GameState.tired_state:
-		if GameState.stamina > TIRED_TRESHOLD:
+		if GameState.stamina > TIRED_TRESHOLD: # If no longer tired, reset tired_state and sprite
 			sprite.modulate = (Color(1, 1, 1, 1))
 			GameState.tired_state = false
 		else:
-			sprite.modulate = (Color(1, 1, 1, 0.5))
+			sprite.modulate = (Color(1, 1, 1, 0.5)) # Decelerate and handle stamina recovery when tired
 			velocity.x = move_toward(velocity.x, 0, SPEED / 3)
 			GameState.movement_state = GameState.MovementState.TIRED
 	else:
@@ -44,7 +47,6 @@ func _physics_process(_delta):
 	
 	# Debug
 	debug_output = str("Stamina: ",GameState.stamina, "/ ", GameState.MAX_STAMINA, "\nVelocity:", velocity.x, "\nGameState:", GameState.movement_state)
-	
 	debug_label.set_text(debug_output)
 	
 	move_and_slide()
@@ -71,6 +73,9 @@ func _movement_handler() -> void:
 		else:
 			GameState.movement_state = GameState.MovementState.IDLE
 	
+	if velocity != Vector2.ZERO:
+		$AnimationTree.set("parameters/Idle/blend_position", velocity)
+	
 func _stamina_handler() -> void:
 	if GameState.hiding_state:
 		if GameState.stamina < STAMINA_CAP:
@@ -84,7 +89,9 @@ func _stamina_handler() -> void:
 					GameState.stamina = min(STAMINA_CAP, GameState.stamina + STAMINA_REGEN_WALKING)
 			GameState.MovementState.SPRINTING:
 				GameState.stamina = max(0, GameState.stamina - STAMINA_DRAIN)
-				GameState.tired_state = !GameState.stamina
+				if GameState.stamina == 0:
+					GameState.tired_state = true
+					sprite.modulate = (Color(1, 1, 1, 0.5))
 			GameState.MovementState.CROUCHING:
 				if GameState.stamina < STAMINA_CAP:
 					GameState.stamina = min(STAMINA_CAP, GameState.stamina + STAMINA_REGEN_CROUCHING)
