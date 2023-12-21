@@ -39,7 +39,7 @@ func _physics_process(_delta):
 			GameState.tired_state = false
 		else:
 			sprite.modulate = (Color(1, 1, 1, 0.5)) # Decelerate and handle stamina recovery when tired
-			velocity.x = move_toward(velocity.x, 0, SPEED / 3)
+			velocity.x = 0
 			GameState.movement_state = GameState.MovementState.TIRED
 	else:
 		_movement_handler()
@@ -61,20 +61,32 @@ func _movement_handler() -> void:
 			if GameState.stamina > 0:
 				velocity.x = direction * SPEED * 2
 			else:
-				velocity.x = move_toward(velocity.x, 0, SPEED)
+				velocity.x = 0
 			GameState.movement_state = GameState.MovementState.SPRINTING
 		else:
 			velocity.x = direction * SPEED
 			GameState.movement_state = GameState.MovementState.WALKING
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
+		velocity.x = 0
 		if Input.is_action_pressed("crouch"):
 			GameState.movement_state = GameState.MovementState.CROUCHING
 		else:
 			GameState.movement_state = GameState.MovementState.IDLE
 	
-	if velocity != Vector2.ZERO:
-		$AnimationTree.set("parameters/Idle/blend_position", velocity)
+	match GameState.movement_state:
+		GameState.MovementState.IDLE, GameState.MovementState.TIRED:
+			$AnimationPlayer.play("RESET")
+		GameState.MovementState.WALKING:
+			$AnimationPlayer.play("walk")
+		GameState.MovementState.SPRINTING:
+			$AnimationPlayer.play("run")
+	
+	if velocity.x != 0:
+		if velocity.x > 0:
+			$Sprite2D.flip_h = false
+		else:
+			$Sprite2D.flip_h = true
+			
 	
 func _stamina_handler() -> void:
 	if GameState.hiding_state:
