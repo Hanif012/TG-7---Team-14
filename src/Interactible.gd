@@ -1,4 +1,5 @@
 extends Area2D
+class_name Interactible
 
 enum InteractibleType {DOOR, STEALTH, STORAGE}
 enum HidingSpotType {BED, WARDROBE}

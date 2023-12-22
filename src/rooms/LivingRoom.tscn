@@ -1,0 +1,55 @@
+[gd_scene load_steps=5 format=3 uid="uid://v2dogyonhag4"]
+
+[ext_resource type="PackedScene" uid="uid://dltnr2rc0tcal" path="res://src/Room.tscn" id="1_cqubk"]
+[ext_resource type="Texture2D" uid="uid://d2skye07gx5nr" path="res://assets/rooms/bedroom/door.png" id="2_7r1io"]
+[ext_resource type="PackedScene" uid="uid://dcxwu8pgdyd7l" path="res://src/Interactible.tscn" id="3_avk5t"]
+[ext_resource type="Texture2D" uid="uid://ddua3pawa6um1" path="res://assets/rooms/living-room.png" id="4_vyl3v"]
+
+[node name="Room" instance=ExtResource("1_cqubk")]
+
+[node name="Door" type="Sprite2D" parent="EnvironmentBackground" index="0"]
+position = Vector2(180, 350)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("2_7r1io")
+
+[node name="Door2" type="Sprite2D" parent="EnvironmentBackground" index="1"]
+position = Vector2(-900, 350)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("2_7r1io")
+
+[node name="Door3" type="Sprite2D" parent="EnvironmentBackground" index="2"]
+position = Vector2(1300, 350)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("2_7r1io")
+
+[node name="LeftBorder" parent="Borders" index="0"]
+position = Vector2(-865, 0)
+
+[node name="RightBorder" parent="Borders" index="1"]
+position = Vector2(1150, 0)
+
+[node name="BedroomDoor" parent="Interactibles" index="0" instance=ExtResource("3_avk5t")]
+position = Vector2(-925, 485)
+scale = Vector2(0.2, 1)
+label = "To Bedroom"
+target_room = "Bedroom"
+coords = 155
+
+[node name="HallwayDoor" parent="Interactibles" index="1" instance=ExtResource("3_avk5t")]
+position = Vector2(155, 485)
+scale = Vector2(0.2, 1)
+label = "To Hallway"
+target_room = "Hallway"
+coords = -850
+
+[node name="KitchenDoor" parent="Interactibles" index="2" instance=ExtResource("3_avk5t")]
+position = Vector2(1275, 485)
+scale = Vector2(0.2, 1)
+label = "To Kitchen"
+target_room = "Kitchen"
+coords = -835
+
+[node name="Living-room" type="Sprite2D" parent="." index="8"]
+position = Vector2(157, 1418)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("4_vyl3v")

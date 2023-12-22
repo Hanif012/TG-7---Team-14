@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://b3wxsqaib56up" path="res://assets/character/walk.png" id="5_3n2mq"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2shc0"]
-radius = 75.5
+radius = 60.0
 height = 295.0
 
 [sub_resource type="Animation" id="Animation_2bgue"]
