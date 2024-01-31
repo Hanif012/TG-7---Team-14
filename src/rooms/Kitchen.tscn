@@ -1,37 +1,107 @@
-[gd_scene load_steps=5 format=3 uid="uid://c7mslunjmk80m"]
+[gd_scene load_steps=13 format=3 uid="uid://c7mslunjmk80m"]
 
 [ext_resource type="PackedScene" uid="uid://dltnr2rc0tcal" path="res://src/Room.tscn" id="1_teevp"]
-[ext_resource type="Texture2D" uid="uid://d2skye07gx5nr" path="res://assets/rooms/bedroom/door.png" id="2_vsvlu"]
+[ext_resource type="Texture2D" uid="uid://de1x4sctv63vf" path="res://assets/rooms/door.png" id="2_vsvlu"]
 [ext_resource type="PackedScene" uid="uid://dcxwu8pgdyd7l" path="res://src/Interactible.tscn" id="3_rktyx"]
-[ext_resource type="Texture2D" uid="uid://seufjv1y45t4" path="res://assets/rooms/kitchen.png" id="4_b66ty"]
+[ext_resource type="Texture2D" uid="uid://7rgprfiil5ah" path="res://assets/rooms/kitchen/oven.png" id="4_4hyb4"]
+[ext_resource type="Texture2D" uid="uid://dl3ew0kybuhln" path="res://assets/rooms/bathroom/sink.png" id="5_wgyit"]
+[ext_resource type="Texture2D" uid="uid://c0i8teyci4ecm" path="res://assets/rooms/bathroom/cabinet.png" id="6_ghk8a"]
+[ext_resource type="Texture2D" uid="uid://8cb2vfhl6ygk" path="res://assets/rooms/kitchen/wallmounted cabinet.png" id="7_cbkfx"]
+[ext_resource type="Texture2D" uid="uid://k1ycj662d6e4" path="res://assets/rooms/kitchen/trashbin.png" id="8_pbyxd"]
+[ext_resource type="Texture2D" uid="uid://dd5n5w73bk364" path="res://assets/rooms/kitchen/refrigerator.png" id="9_e2tx1"]
+[ext_resource type="Texture2D" uid="uid://dvam36t5vtnlu" path="res://assets/rooms/kitchen/table.png" id="10_uuvl1"]
+[ext_resource type="Texture2D" uid="uid://dgwfr8rasv3vd" path="res://assets/rooms/kitchen/chair.png" id="11_7to02"]
+[ext_resource type="Texture2D" uid="uid://y7n06dr6hnjn" path="res://assets/rooms/kitchen/Window.png" id="12_wagi3"]
 
 [node name="Room" instance=ExtResource("1_teevp")]
 
+[node name="Background" parent="." index="0"]
+scale = Vector2(0.62, 0.81)
+
 [node name="Door" type="Sprite2D" parent="EnvironmentBackground" index="0"]
-position = Vector2(-810, 350)
-scale = Vector2(0.15, 0.15)
+position = Vector2(-618.568, 365.338)
+scale = Vector2(0.143, 0.143)
 texture = ExtResource("2_vsvlu")
 
 [node name="Door2" type="Sprite2D" parent="EnvironmentBackground" index="1"]
-position = Vector2(350, 350)
-scale = Vector2(0.15, 0.15)
+position = Vector2(206.432, 365.338)
+scale = Vector2(0.143, 0.143)
 texture = ExtResource("2_vsvlu")
 
+[node name="Oven" type="Sprite2D" parent="EnvironmentBackground" index="2"]
+position = Vector2(-445.648, 475.258)
+scale = Vector2(0.08, 0.08)
+texture = ExtResource("4_4hyb4")
+
+[node name="Sink" type="Sprite2D" parent="EnvironmentBackground" index="3"]
+position = Vector2(-285.648, 454.258)
+scale = Vector2(0.06, 0.06)
+texture = ExtResource("5_wgyit")
+metadata/_edit_group_ = true
+
+[node name="Cabinet" type="Sprite2D" parent="EnvironmentBackground/Sink" index="0"]
+position = Vector2(16.666, 333.333)
+scale = Vector2(1.33333, 1.33333)
+texture = ExtResource("6_ghk8a")
+
+[node name="OverheadCabinet" type="Sprite2D" parent="EnvironmentBackground" index="4"]
+position = Vector2(-285.648, 253.258)
+scale = Vector2(0.08, 0.08)
+texture = ExtResource("7_cbkfx")
+
+[node name="Bin" type="Sprite2D" parent="EnvironmentBackground" index="5"]
+position = Vector2(-166.648, 518.258)
+scale = Vector2(0.035, 0.035)
+texture = ExtResource("8_pbyxd")
+
+[node name="Fridge" type="Sprite2D" parent="EnvironmentBackground" index="6"]
+position = Vector2(-14.6483, 391.258)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("9_e2tx1")
+
+[node name="Table2" type="Sprite2D" parent="EnvironmentBackground" index="7"]
+visible = false
+position = Vector2(370, 529)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("10_uuvl1")
+
+[node name="Chair1" type="Sprite2D" parent="EnvironmentBackground" index="8"]
+position = Vector2(671.232, 479.788)
+scale = Vector2(0.075, 0.075)
+texture = ExtResource("11_7to02")
+
+[node name="Chair2" type="Sprite2D" parent="EnvironmentBackground" index="9"]
+position = Vector2(361.232, 476.788)
+scale = Vector2(0.075, 0.075)
+texture = ExtResource("11_7to02")
+flip_h = true
+
+[node name="Table" type="Sprite2D" parent="EnvironmentBackground" index="10"]
+position = Vector2(517.232, 514.788)
+scale = Vector2(0.113, 0.113)
+texture = ExtResource("10_uuvl1")
+
+[node name="Window" type="Sprite2D" parent="EnvironmentBackground" index="11"]
+position = Vector2(513.432, 302.338)
+scale = Vector2(0.113, 0.113)
+texture = ExtResource("12_wagi3")
+
+[node name="LeftBorder" parent="Borders" index="0"]
+position = Vector2(-590, 0)
+
+[node name="RightBorder" parent="Borders" index="1"]
+position = Vector2(590, 0)
+
 [node name="LivingRoomDoor" parent="Interactibles" index="0" instance=ExtResource("3_rktyx")]
-position = Vector2(-835, 485)
+position = Vector2(-643, 559)
 scale = Vector2(0.2, 1)
 label = "To Living Room"
 target_room = "LivingRoom"
-coords = 1275
+coords = 1029
 
 [node name="GarageDoor" parent="Interactibles" index="1" instance=ExtResource("3_rktyx")]
-position = Vector2(325, 485)
+position = Vector2(182, 555)
 scale = Vector2(0.2, 1)
 label = "To Garage"
 target_room = "Garage"
-coords = -625
-
-[node name="Kitchen" type="Sprite2D" parent="." index="8"]
-position = Vector2(0, 1417)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("4_b66ty")
+coords = -604

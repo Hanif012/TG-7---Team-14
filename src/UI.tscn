@@ -1,9 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://c17jc5h2fylaa"]
+[gd_scene load_steps=5 format=3 uid="uid://c17jc5h2fylaa"]
 
 [ext_resource type="Script" path="res://src/UI.gd" id="1_07pr5"]
+[ext_resource type="Texture2D" uid="uid://cw3qgbjanc2xg" path="res://assets/items/key.png" id="2_mh8jp"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_7g8v1"]
 font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_4lsgs"]
+font_size = 40
 
 [node name="UI" type="CanvasLayer"]
 process_mode = 3
@@ -43,30 +47,54 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0)
 
-[node name="MarginContainer" type="MarginContainer" parent="Control"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="Control"]
 layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
+anchors_preset = 15
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -40.0
-offset_right = 40.0
-grow_vertical = 0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="Control/VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
 theme_override_constants/margin_left = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Control/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/VBoxContainer2/MarginContainer2"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Control/VBoxContainer2/MarginContainer2/HBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("2_mh8jp")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="Control/VBoxContainer2/MarginContainer2/HBoxContainer"]
+layout_mode = 2
+text = "0/3"
+label_settings = SubResource("LabelSettings_4lsgs")
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/VBoxContainer2"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/VBoxContainer2/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="Panel" type="Panel" parent="Control/MarginContainer/HBoxContainer"]
+[node name="Panel" type="Panel" parent="Control/VBoxContainer2/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 
-[node name="Panel2" type="Panel" parent="Control/MarginContainer/HBoxContainer"]
+[node name="Panel2" type="Panel" parent="Control/VBoxContainer2/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 
-[node name="Panel3" type="Panel" parent="Control/MarginContainer/HBoxContainer"]
+[node name="Panel3" type="Panel" parent="Control/VBoxContainer2/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 

@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://dltnr2rc0tcal"]
+[gd_scene load_steps=7 format=3 uid="uid://dltnr2rc0tcal"]
 
 [ext_resource type="Script" path="res://src/Room.gd" id="1_6p7ka"]
+[ext_resource type="Texture2D" uid="uid://bsp3yk8mcio7l" path="res://assets/rooms/background.png" id="2_hw2cj"]
 [ext_resource type="PackedScene" uid="uid://c17jc5h2fylaa" path="res://src/UI.tscn" id="2_nkud2"]
 [ext_resource type="PackedScene" uid="uid://chjam1dcabmk5" path="res://src/PlayerCharacter.tscn" id="4_c3yxc"]
 
@@ -15,9 +16,14 @@ process_mode = 1
 script = ExtResource("1_6p7ka")
 
 [node name="Background" type="Sprite2D" parent="."]
+texture_filter = 1
+texture_repeat = 1
 position = Vector2(0, 360)
+scale = Vector2(1, 0.81)
+texture = ExtResource("2_hw2cj")
 
 [node name="EnvironmentBackground" type="Node2D" parent="."]
+position = Vector2(0, 68)
 
 [node name="Lighting" type="Node2D" parent="."]
 position = Vector2(0, 360)
@@ -44,7 +50,7 @@ shape = SubResource("WorldBoundaryShape2D_lylfe")
 [node name="Interactibles" type="Node2D" parent="."]
 
 [node name="PlayerCharacter" parent="." instance=ExtResource("4_c3yxc")]
-position = Vector2(0, 450)
+position = Vector2(0, 525)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(0, 560)

@@ -1,49 +1,82 @@
-[gd_scene load_steps=5 format=3 uid="uid://dip10wy2elfnj"]
+[gd_scene load_steps=10 format=3 uid="uid://dip10wy2elfnj"]
 
 [ext_resource type="PackedScene" uid="uid://dltnr2rc0tcal" path="res://src/Room.tscn" id="1_i08ix"]
-[ext_resource type="Texture2D" uid="uid://d2skye07gx5nr" path="res://assets/rooms/bedroom/door.png" id="2_n1suu"]
+[ext_resource type="Texture2D" uid="uid://de1x4sctv63vf" path="res://assets/rooms/door.png" id="2_n1suu"]
 [ext_resource type="PackedScene" uid="uid://dcxwu8pgdyd7l" path="res://src/Interactible.tscn" id="3_gf3sh"]
-[ext_resource type="Texture2D" uid="uid://bvgpvoi1undrm" path="res://assets/rooms/hallway.png" id="4_p4snd"]
+[ext_resource type="Texture2D" uid="uid://cvb04brsgcnyh" path="res://assets/rooms/hallway/lamp.png" id="3_s0nhv"]
+[ext_resource type="Texture2D" uid="uid://drimtgnwyx78m" path="res://assets/rooms/living-room/desk.png" id="4_flbdp"]
+[ext_resource type="Texture2D" uid="uid://bvgpvoi1undrm" path="res://assets/rooms/blueprint/hallway.png" id="4_p4snd"]
+[ext_resource type="Texture2D" uid="uid://cvijyen7fryjb" path="res://assets/rooms/hallway/painting5.png" id="5_bpa6e"]
+[ext_resource type="Texture2D" uid="uid://dvam36t5vtnlu" path="res://assets/rooms/kitchen/table.png" id="6_5t2pg"]
+[ext_resource type="Texture2D" uid="uid://c2cnkfaxtuep5" path="res://assets/rooms/hallway/painting4.png" id="7_4w84q"]
 
 [node name="Room" instance=ExtResource("1_i08ix")]
 
-[node name="Door" type="Sprite2D" parent="EnvironmentBackground" index="0"]
-position = Vector2(-10, 350)
-scale = Vector2(0.15, 0.15)
+[node name="Background" parent="." index="0"]
+scale = Vector2(0.65, 0.81)
+
+[node name="Door1" type="Sprite2D" parent="EnvironmentBackground" index="0"]
+position = Vector2(-608.568, 364)
+scale = Vector2(0.143, 0.143)
 texture = ExtResource("2_n1suu")
 
 [node name="Door2" type="Sprite2D" parent="EnvironmentBackground" index="1"]
-position = Vector2(-825, 350)
-scale = Vector2(0.15, 0.15)
+position = Vector2(82.4321, 364)
+scale = Vector2(0.143, 0.143)
 texture = ExtResource("2_n1suu")
 
 [node name="Door3" type="Sprite2D" parent="EnvironmentBackground" index="2"]
-position = Vector2(860, 350)
-scale = Vector2(0.15, 0.15)
+position = Vector2(654, 364)
+scale = Vector2(0.143, 0.143)
 texture = ExtResource("2_n1suu")
 
+[node name="Lamp" type="Sprite2D" parent="EnvironmentBackground" index="3"]
+position = Vector2(-442, 416)
+scale = Vector2(0.13, 0.13)
+texture = ExtResource("3_s0nhv")
+
+[node name="Desk" type="Sprite2D" parent="EnvironmentBackground" index="4"]
+position = Vector2(-212.568, 512.6)
+scale = Vector2(0.11, 0.11)
+texture = ExtResource("4_flbdp")
+
+[node name="Painting1" type="Sprite2D" parent="EnvironmentBackground" index="5"]
+position = Vector2(-205, 234)
+scale = Vector2(0.13, 0.13)
+texture = ExtResource("5_bpa6e")
+
+[node name="Table" type="Sprite2D" parent="EnvironmentBackground" index="6"]
+position = Vector2(347.232, 514.788)
+scale = Vector2(0.113, 0.113)
+texture = ExtResource("6_5t2pg")
+
+[node name="Painting2" type="Sprite2D" parent="EnvironmentBackground" index="7"]
+position = Vector2(338, 234)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("7_4w84q")
+
 [node name="LeftBorder" parent="Borders" index="0"]
-position = Vector2(-805, 0)
+position = Vector2(-580, 0)
 
 [node name="RightBorder" parent="Borders" index="1"]
-position = Vector2(775, 0)
+position = Vector2(580, 0)
 
 [node name="LivingRoomDoor" parent="Interactibles" index="0" instance=ExtResource("3_gf3sh")]
-position = Vector2(-850, 485)
+position = Vector2(-633, 558)
 scale = Vector2(0.2, 1)
 label = "To Living Room"
 target_room = "LivingRoom"
-coords = 155
+coords = -78
 
 [node name="AtticDoor" parent="Interactibles" index="1" instance=ExtResource("3_gf3sh")]
-position = Vector2(-35, 485)
+position = Vector2(58, 557)
 scale = Vector2(0.2, 1)
 label = "To Attic"
 target_room = "Attic"
-coords = -625
+coords = -600
 
 [node name="ExitDoor" parent="Interactibles" index="2" instance=ExtResource("3_gf3sh")]
-position = Vector2(835, 485)
+position = Vector2(630, 560)
 scale = Vector2(0.2, 1)
 label = "To Outside"
 target_room = "Outside"

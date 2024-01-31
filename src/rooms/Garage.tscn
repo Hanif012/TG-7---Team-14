@@ -1,31 +1,54 @@
-[gd_scene load_steps=5 format=3 uid="uid://cpv844mjr71nn"]
+[gd_scene load_steps=7 format=3 uid="uid://cpv844mjr71nn"]
 
 [ext_resource type="PackedScene" uid="uid://dltnr2rc0tcal" path="res://src/Room.tscn" id="1_c74n5"]
-[ext_resource type="Texture2D" uid="uid://d2skye07gx5nr" path="res://assets/rooms/bedroom/door.png" id="2_tdj0d"]
+[ext_resource type="Texture2D" uid="uid://de1x4sctv63vf" path="res://assets/rooms/door.png" id="2_tdj0d"]
 [ext_resource type="PackedScene" uid="uid://dcxwu8pgdyd7l" path="res://src/Interactible.tscn" id="3_2j5cr"]
-[ext_resource type="Texture2D" uid="uid://e72gawe4o7hf" path="res://assets/rooms/garage.png" id="4_ximup"]
+[ext_resource type="Texture2D" uid="uid://c0i8teyci4ecm" path="res://assets/rooms/bathroom/cabinet.png" id="3_p64n6"]
+[ext_resource type="Texture2D" uid="uid://dvam36t5vtnlu" path="res://assets/rooms/kitchen/table.png" id="4_afu13"]
+[ext_resource type="Texture2D" uid="uid://djpvvaxngksk0" path="res://assets/rooms/garage/car.png" id="5_iv7o8"]
 
 [node name="Room" instance=ExtResource("1_c74n5")]
 
+[node name="Background" parent="." index="0"]
+scale = Vector2(0.615, 0.81)
+
 [node name="Door" type="Sprite2D" parent="EnvironmentBackground" index="0"]
-position = Vector2(-600, 350)
-scale = Vector2(0.15, 0.15)
+position = Vector2(-592, 364)
+scale = Vector2(0.143, 0.143)
 texture = ExtResource("2_tdj0d")
 
+[node name="Cabinet" type="Sprite2D" parent="EnvironmentBackground" index="1"]
+position = Vector2(588.58, 451.6)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("3_p64n6")
+
+[node name="Table" type="Sprite2D" parent="EnvironmentBackground" index="2"]
+position = Vector2(373.58, 513.2)
+scale = Vector2(0.13, 0.13)
+texture = ExtResource("4_afu13")
+
+[node name="Cabinet2" type="Sprite2D" parent="EnvironmentBackground" index="3"]
+position = Vector2(-275, 447)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("3_p64n6")
+
+[node name="Car" type="Sprite2D" parent="EnvironmentBackground" index="4"]
+position = Vector2(-118, 451)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("5_iv7o8")
+
+[node name="Lighting" parent="." index="2"]
+position = Vector2(-82, 360)
+
 [node name="LeftBorder" parent="Borders" index="0"]
-position = Vector2(-600, 0)
+position = Vector2(-570, 0)
 
 [node name="RightBorder" parent="Borders" index="1"]
-position = Vector2(600, 0)
+position = Vector2(570, 0)
 
 [node name="KitchenDoor" parent="Interactibles" index="0" instance=ExtResource("3_2j5cr")]
-position = Vector2(-625, 485)
+position = Vector2(-604, 558)
 scale = Vector2(0.2, 1)
 label = "To Kitchen"
 target_room = "Kitchen"
-coords = 325
-
-[node name="Garage" type="Sprite2D" parent="." index="8"]
-position = Vector2(0, 1419)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("4_ximup")
+coords = 182

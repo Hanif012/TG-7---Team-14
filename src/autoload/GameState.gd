@@ -8,7 +8,7 @@ var hiding_state := false
 var movement_state := MovementState.IDLE
 var tired_state := false
 
-var position_in_room := 0.0
+var position_in_room := -360.0
 var current_room := 0
 
 const MAX_STAMINA := 600

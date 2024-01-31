@@ -1,55 +1,108 @@
-[gd_scene load_steps=5 format=3 uid="uid://v2dogyonhag4"]
+[gd_scene load_steps=13 format=3 uid="uid://v2dogyonhag4"]
 
 [ext_resource type="PackedScene" uid="uid://dltnr2rc0tcal" path="res://src/Room.tscn" id="1_cqubk"]
-[ext_resource type="Texture2D" uid="uid://d2skye07gx5nr" path="res://assets/rooms/bedroom/door.png" id="2_7r1io"]
+[ext_resource type="Texture2D" uid="uid://de1x4sctv63vf" path="res://assets/rooms/door.png" id="2_7r1io"]
 [ext_resource type="PackedScene" uid="uid://dcxwu8pgdyd7l" path="res://src/Interactible.tscn" id="3_avk5t"]
-[ext_resource type="Texture2D" uid="uid://ddua3pawa6um1" path="res://assets/rooms/living-room.png" id="4_vyl3v"]
+[ext_resource type="Texture2D" uid="uid://m5tcitvuww53" path="res://assets/rooms/living-room/tv.png" id="4_hm7wo"]
+[ext_resource type="Texture2D" uid="uid://bn7w0ta5480g2" path="res://assets/rooms/living-room/sofa.png" id="5_77jpt"]
+[ext_resource type="Texture2D" uid="uid://sng5w4y8opgx" path="res://assets/rooms/living-room/lamp.png" id="6_253b8"]
+[ext_resource type="Texture2D" uid="uid://drimtgnwyx78m" path="res://assets/rooms/living-room/desk.png" id="7_otkid"]
+[ext_resource type="Texture2D" uid="uid://42mvx3bvwv3a" path="res://assets/rooms/living-room/fireplac.png" id="8_i6iv3"]
+[ext_resource type="Texture2D" uid="uid://c0i8teyci4ecm" path="res://assets/rooms/bathroom/cabinet.png" id="9_lp6ql"]
+[ext_resource type="Texture2D" uid="uid://c18bu4sb3cs61" path="res://assets/rooms/living-room/painting3.png" id="10_uu1ix"]
+[ext_resource type="Texture2D" uid="uid://dgwfr8rasv3vd" path="res://assets/rooms/kitchen/chair.png" id="11_1h4o7"]
+[ext_resource type="Texture2D" uid="uid://dvam36t5vtnlu" path="res://assets/rooms/kitchen/table.png" id="12_lgnu2"]
 
 [node name="Room" instance=ExtResource("1_cqubk")]
 
-[node name="Door" type="Sprite2D" parent="EnvironmentBackground" index="0"]
-position = Vector2(180, 350)
-scale = Vector2(0.15, 0.15)
+[node name="Background" parent="." index="0"]
+scale = Vector2(0.93, 0.81)
+
+[node name="Door1" type="Sprite2D" parent="EnvironmentBackground" index="0"]
+position = Vector2(-1003.57, 364)
+scale = Vector2(0.143, 0.143)
 texture = ExtResource("2_7r1io")
 
 [node name="Door2" type="Sprite2D" parent="EnvironmentBackground" index="1"]
-position = Vector2(-900, 350)
-scale = Vector2(0.15, 0.15)
+position = Vector2(-53.568, 364)
+scale = Vector2(0.143, 0.143)
 texture = ExtResource("2_7r1io")
 
 [node name="Door3" type="Sprite2D" parent="EnvironmentBackground" index="2"]
-position = Vector2(1300, 350)
-scale = Vector2(0.15, 0.15)
+position = Vector2(1054, 364)
+scale = Vector2(0.143, 0.143)
 texture = ExtResource("2_7r1io")
 
+[node name="TV" type="Sprite2D" parent="EnvironmentBackground" index="3"]
+position = Vector2(-712.568, 435.6)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("4_hm7wo")
+metadata/_edit_group_ = true
+
+[node name="Sofa" type="Sprite2D" parent="EnvironmentBackground/TV" index="0"]
+position = Vector2(0, 840)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("5_77jpt")
+
+[node name="Lamp" type="Sprite2D" parent="EnvironmentBackground" index="4"]
+position = Vector2(-408.568, 408.6)
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("6_253b8")
+
+[node name="Desk" type="Sprite2D" parent="EnvironmentBackground" index="5"]
+position = Vector2(-324.568, 512.6)
+scale = Vector2(0.11, 0.11)
+texture = ExtResource("7_otkid")
+
+[node name="Fireplace" type="Sprite2D" parent="EnvironmentBackground" index="6"]
+position = Vector2(169.432, 467.6)
+scale = Vector2(0.11, 0.11)
+texture = ExtResource("8_i6iv3")
+
+[node name="Cabinet" type="Sprite2D" parent="EnvironmentBackground" index="7"]
+position = Vector2(396.432, 447.6)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("9_lp6ql")
+
+[node name="Painting" type="Sprite2D" parent="EnvironmentBackground" index="8"]
+position = Vector2(169.432, 215.6)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("10_uu1ix")
+
+[node name="Chair2" type="Sprite2D" parent="EnvironmentBackground" index="9"]
+position = Vector2(586.232, 481.05)
+scale = Vector2(0.075, 0.075)
+texture = ExtResource("11_1h4o7")
+flip_h = true
+
+[node name="Table" type="Sprite2D" parent="EnvironmentBackground" index="10"]
+position = Vector2(742.232, 519.05)
+scale = Vector2(0.113, 0.113)
+texture = ExtResource("12_lgnu2")
+
 [node name="LeftBorder" parent="Borders" index="0"]
-position = Vector2(-865, 0)
+position = Vector2(-910, 0)
 
 [node name="RightBorder" parent="Borders" index="1"]
-position = Vector2(1150, 0)
+position = Vector2(910, 0)
 
 [node name="BedroomDoor" parent="Interactibles" index="0" instance=ExtResource("3_avk5t")]
-position = Vector2(-925, 485)
+position = Vector2(-1028, 560)
 scale = Vector2(0.2, 1)
 label = "To Bedroom"
-target_room = "Bedroom"
-coords = 155
+target_room = "BedroomOld"
+coords = 285
 
 [node name="HallwayDoor" parent="Interactibles" index="1" instance=ExtResource("3_avk5t")]
-position = Vector2(155, 485)
+position = Vector2(-78, 557)
 scale = Vector2(0.2, 1)
 label = "To Hallway"
 target_room = "Hallway"
-coords = -850
+coords = -633
 
 [node name="KitchenDoor" parent="Interactibles" index="2" instance=ExtResource("3_avk5t")]
-position = Vector2(1275, 485)
+position = Vector2(1029, 557)
 scale = Vector2(0.2, 1)
 label = "To Kitchen"
 target_room = "Kitchen"
-coords = -835
-
-[node name="Living-room" type="Sprite2D" parent="." index="8"]
-position = Vector2(157, 1418)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("4_vyl3v")
+coords = -643
