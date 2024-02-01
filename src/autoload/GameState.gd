@@ -23,7 +23,8 @@ var item_index = {
 	2: Item.BANDAGE,
 	3: Item.MEDKIT,
 	4: Item.KEY,
-	5: Item.STIM
+	5: Item.KEY,
+	6: Item.KEY
 }
 
 var inventory : Array[Item] = [Item.NOTHING, Item.NOTHING, Item.NOTHING]

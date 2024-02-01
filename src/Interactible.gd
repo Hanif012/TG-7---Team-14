@@ -19,7 +19,8 @@ enum HidingSpotType {BED, WARDROBE}
 var item_here : GameState.Item
 
 @onready var ui = get_parent().get_parent().get_node("UI")
-@onready var interact_label = ui.get_node("Control/InteractLabel")
+@onready var interact = ui.get_node("Control/InteractBG")
+@onready var interact_label = interact.get_node("InteractLabel")
 @onready var contextual = ui.get_node("Control/ContextualBG")
 @onready var contextual_label = contextual.get_node("ContextualLabel")
 
@@ -45,11 +46,12 @@ func _on_body_entered(body) -> void:
 	if body.name == "PlayerCharacter":
 		
 		interact_label.set_text(label)
+		interact.show()
 		is_interactible = true
 
 func _on_body_exited(body) -> void:
 	if body.name == "PlayerCharacter":
-		interact_label.set_text("")
+		interact.hide()
 		contextual.hide()
 		is_interactible = false
 	
@@ -61,7 +63,7 @@ func _change_scene() -> void:
 		if GameState.keys == 3:
 			get_tree().change_scene_to_file("res://src/rooms/Ending.tscn")
 		else:
-			contextual_label.set_text("Not Enough Keys to Escape")
+			contextual_label.set_text("The Key is Incomplete")
 			contextual.show()
 	
 func _enter_hiding_spot() -> void:
@@ -75,6 +77,8 @@ func _pick_up_item() -> void:
 	GameState.search.emit()
 	if item_here == GameState.Item.KEY:
 		GameState.keys += 1
+		contextual_label.set_text("Found a Piece of the Key")
+		contextual.show()
 	elif item_here != GameState.Item.NOTHING:
 		if GameState.inventory[0] == GameState.Item.NOTHING:
 			GameState.inventory[0] = item_here
@@ -90,5 +94,11 @@ func _pick_up_item() -> void:
 			contextual.show()
 			return
 	
+		match (item_here):
+			GameState.Item.STIM: contextual_label.set_text("Found an Energy Drink")
+			GameState.Item.BANDAGE: contextual_label.set_text("Found Bandages")
+			GameState.Item.MEDKIT: contextual_label.set_text("Found a Medkit")
+		contextual.show()
+		
 	GameState.item_index[storage_index] = -1
 	item_here = GameState.Item.NOTHING
