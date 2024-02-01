@@ -30,7 +30,6 @@ texture = ExtResource("10_24smy")
 
 [node name="Desk" type="Sprite2D" parent="EnvironmentBackground" index="1"]
 position = Vector2(284.234, 362.284)
-scale = Vector2(1, 1)
 texture = ExtResource("8_f2r2a")
 
 [node name="Door1" type="Sprite2D" parent="EnvironmentBackground" index="2"]
@@ -56,7 +55,6 @@ texture = ExtResource("4_y7la3")
 
 [node name="Bed" type="Sprite2D" parent="EnvironmentBackground" index="7"]
 position = Vector2(284.234, 362.284)
-scale = Vector2(1, 1)
 texture = ExtResource("5_0pjjq")
 
 [node name="Mirror" type="Sprite2D" parent="EnvironmentBackground" index="8"]
@@ -92,3 +90,22 @@ scale = Vector2(0.2, 1)
 label = "To Bathroom"
 target_room = "Bathroom"
 coords = -580
+
+[node name="Cabinet" parent="Interactibles" index="2" instance=ExtResource("12_obei6")]
+position = Vector2(26, 572)
+scale = Vector2(1.75, 1)
+priority = 1
+interactible_type = 2
+label = "Search Desk"
+target_room = "LivingRoom"
+coords = -1028
+storage_index = 1
+
+[node name="Cabinet2" parent="Interactibles" index="3" instance=ExtResource("12_obei6")]
+position = Vector2(580, 572)
+scale = Vector2(1.5, 1)
+interactible_type = 2
+label = "Search Table"
+target_room = "LivingRoom"
+coords = -1028
+storage_index = 2

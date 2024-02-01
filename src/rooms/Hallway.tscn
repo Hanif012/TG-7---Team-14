@@ -79,7 +79,7 @@ coords = -600
 position = Vector2(630, 560)
 scale = Vector2(0.2, 1)
 label = "To Outside"
-target_room = "Outside"
+target_room = "Exit"
 
 [node name="Hallway" type="Sprite2D" parent="." index="8"]
 position = Vector2(0, 1314)

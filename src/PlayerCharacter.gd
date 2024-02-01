@@ -4,7 +4,7 @@ signal player_moves
 
 const SPEED = 300.0
 const TIRED_TRESHOLD = 200
-const STAMINA_CAP = 400
+const STAMINA_CAP = 300
 const STAMINA_DRAIN = 4
 const STAMINA_REGEN_IDLE = 8
 const STAMINA_REGEN_WALKING = 4
@@ -22,13 +22,12 @@ var debug_output
 
 # On ready, set position to starting position or door position
 func  _ready():
+	GameState.search.connect(play_search_sound)
 	position.x = GameState.position_in_room
 
-# Placeholder sound from input
-func _input(event):
-	if event.is_action_pressed("interact"):
+func play_search_sound():
 		metal_pipe.play_sound()
-
+	
 
 func _physics_process(_delta):
 	if GameState.hiding_state: # ignore movement if hiding 
@@ -97,8 +96,7 @@ func _stamina_handler() -> void:
 			GameState.MovementState.IDLE:
 				GameState.stamina = min(GameState.MAX_STAMINA, GameState.stamina + STAMINA_REGEN_IDLE)
 			GameState.MovementState.WALKING:
-				if GameState.stamina < STAMINA_CAP:
-					GameState.stamina = min(STAMINA_CAP, GameState.stamina + STAMINA_REGEN_WALKING)
+					GameState.stamina = min(GameState.MAX_STAMINA, GameState.stamina + STAMINA_REGEN_WALKING)
 			GameState.MovementState.SPRINTING:
 				GameState.stamina = max(0, GameState.stamina - STAMINA_DRAIN)
 				if GameState.stamina == 0:

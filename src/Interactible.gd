@@ -15,13 +15,20 @@ enum HidingSpotType {BED, WARDROBE}
 @export var hiding_spot_type : HidingSpotType
 
 @export_category("Storage Type")
-@export var spot_name : String = "Desk"
-@export var item_here : GameState.Item
+@export var storage_index : int
+var item_here : GameState.Item
 
-@onready var interact_label = get_parent().get_parent().get_node("UI/Control/VBoxContainer/InteractLabel")
+@onready var ui = get_parent().get_parent().get_node("UI")
+@onready var interact_label = ui.get_node("Control/InteractLabel")
+@onready var contextual = ui.get_node("Control/ContextualBG")
+@onready var contextual_label = contextual.get_node("ContextualLabel")
+
 
 var is_interactible := false
 
+func _ready():
+	if interactible_type == InteractibleType.STORAGE:
+		item_here = GameState.item_index[storage_index]
 
 func _input(_event):
 	if is_interactible and Input.is_action_pressed("interact") and !GameState.transition_state:
@@ -43,11 +50,19 @@ func _on_body_entered(body) -> void:
 func _on_body_exited(body) -> void:
 	if body.name == "PlayerCharacter":
 		interact_label.set_text("")
+		contextual.hide()
 		is_interactible = false
 	
 func _change_scene() -> void:
 	GameState.position_in_room = coords
-	get_tree().change_scene_to_file("res://src/rooms/" + target_room + ".tscn")
+	if target_room != "Exit":
+		get_tree().change_scene_to_file("res://src/rooms/" + target_room + ".tscn")
+	else:
+		if GameState.keys == 3:
+			get_tree().change_scene_to_file("res://src/rooms/Ending.tscn")
+		else:
+			contextual_label.set_text("Not Enough Keys to Escape")
+			contextual.show()
 	
 func _enter_hiding_spot() -> void:
 	GameState.hiding_state = !GameState.hiding_state
@@ -57,17 +72,23 @@ func _enter_hiding_spot() -> void:
 		print("Came out from ", HidingSpotType.keys()[hiding_spot_type])
 
 func _pick_up_item() -> void:
+	GameState.search.emit()
 	if item_here == GameState.Item.KEY:
-		GameState.key_couter += 1
-	elif item_here != -1:
-		if GameState.inventory[0] != -1:
+		GameState.keys += 1
+	elif item_here != GameState.Item.NOTHING:
+		if GameState.inventory[0] == GameState.Item.NOTHING:
 			GameState.inventory[0] = item_here
-		elif GameState.inventory[1] != -1:
+			GameState.found_an_item.emit(int(item_here), 0)
+		elif GameState.inventory[1] == GameState.Item.NOTHING:
 			GameState.inventory[1] = item_here
-		elif GameState.inventory[2] != -1:
+			GameState.found_an_item.emit(int(item_here), 1)
+		elif GameState.inventory[2] == GameState.Item.NOTHING:
 			GameState.inventory[2] = item_here
+			GameState.found_an_item.emit(int(item_here), 2)
 		else:
-			print("Inventory Full")
+			contextual_label.set_text("Inventory is Full")
+			contextual.show()
+			return
 	
-	item_here = -1
-	print("[" , GameState.inventory[0], ", ", GameState.inventory[1], ", ", GameState.inventory[2] ,"] Key Found: ", GameState.key_couter)
+	GameState.item_index[storage_index] = -1
+	item_here = GameState.Item.NOTHING

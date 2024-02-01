@@ -16,9 +16,9 @@ func _ready():
 	if (child is AudioStreamPlayer):
 		_audio_stream_players.append(child)
 		for n in range(COUNT-1):
-			var duplicate = child.duplicate()
-			add_child(duplicate)
-			_audio_stream_players.append(duplicate)
+			var duplicated_node = child.duplicate()
+			add_child(duplicated_node)
+			_audio_stream_players.append(duplicated_node)
 
 
 func _get_configuration_warnings():

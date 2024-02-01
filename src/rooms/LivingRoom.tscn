@@ -90,7 +90,7 @@ position = Vector2(910, 0)
 position = Vector2(-1028, 560)
 scale = Vector2(0.2, 1)
 label = "To Bedroom"
-target_room = "BedroomOld"
+target_room = "Bedroom"
 coords = 285
 
 [node name="HallwayDoor" parent="Interactibles" index="1" instance=ExtResource("3_avk5t")]
@@ -106,3 +106,11 @@ scale = Vector2(0.2, 1)
 label = "To Kitchen"
 target_room = "Kitchen"
 coords = -643
+
+[node name="Cabinet1" parent="Interactibles" index="3" instance=ExtResource("3_avk5t")]
+position = Vector2(399, 572)
+interactible_type = 2
+label = "Search Cabinet"
+target_room = "LivingRoom"
+coords = -1028
+storage_index = 5
