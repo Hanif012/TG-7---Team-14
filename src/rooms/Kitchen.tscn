@@ -105,3 +105,24 @@ scale = Vector2(0.2, 1)
 label = "To Garage"
 target_room = "Garage"
 coords = -604
+
+[node name="Cabinet" parent="Interactibles" index="2" instance=ExtResource("3_rktyx")]
+position = Vector2(-281, 572)
+interactible_type = 2
+label = "Search Cabinet"
+storage_index = 9
+
+[node name="Fridge" parent="Interactibles" index="3" instance=ExtResource("3_rktyx")]
+position = Vector2(-17, 572)
+scale = Vector2(0.75, 1)
+interactible_type = 2
+label = "Search Fridge"
+storage_index = 10
+
+[node name="Table" parent="Interactibles" index="4" instance=ExtResource("3_rktyx")]
+position = Vector2(515, 572)
+scale = Vector2(1.5, 1)
+priority = 1
+interactible_type = 2
+label = "Search Table"
+storage_index = 11

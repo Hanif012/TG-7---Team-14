@@ -60,7 +60,7 @@ func _change_scene() -> void:
 	if target_room != "Exit":
 		get_tree().change_scene_to_file("res://src/rooms/" + target_room + ".tscn")
 	else:
-		if GameState.keys == 3:
+		if GameState.keys == GameState.NUM_OF_KEYS:
 			get_tree().change_scene_to_file("res://src/rooms/Ending.tscn")
 		else:
 			contextual_label.set_text("The Key is Incomplete")
@@ -99,6 +99,9 @@ func _pick_up_item() -> void:
 			GameState.Item.BANDAGE: contextual_label.set_text("Found Bandages")
 			GameState.Item.MEDKIT: contextual_label.set_text("Found a Medkit")
 		contextual.show()
+	else:
+		contextual_label.set_text("Nothing Was Found")
+		contextual.show()
 		
-	GameState.item_index[storage_index] = -1
+	GameState.item_index[storage_index] = GameState.Item.NOTHING
 	item_here = GameState.Item.NOTHING

@@ -66,6 +66,34 @@ label = "To Hallway"
 target_room = "Hallway"
 coords = 58
 
+[node name="Boxes1" parent="Interactibles" index="1" instance=ExtResource("3_livvt")]
+position = Vector2(-304, 572)
+scale = Vector2(1.25, 1)
+interactible_type = 2
+label = "Search Boxes"
+storage_index = 16
+
+[node name="Cabinet" parent="Interactibles" index="2" instance=ExtResource("3_livvt")]
+position = Vector2(-8, 572)
+scale = Vector2(1.25, 1)
+interactible_type = 2
+label = "Search Cabinet"
+storage_index = 17
+
+[node name="Chest2" parent="Interactibles" index="3" instance=ExtResource("3_livvt")]
+position = Vector2(339, 571)
+scale = Vector2(1.5, 1)
+interactible_type = 2
+label = "Search Boxes"
+storage_index = 18
+
+[node name="Chest" parent="Interactibles" index="4" instance=ExtResource("3_livvt")]
+position = Vector2(605, 569)
+scale = Vector2(0.5, 1)
+interactible_type = 2
+label = "Search Chest"
+storage_index = 19
+
 [node name="Attic" type="Sprite2D" parent="." index="8"]
 position = Vector2(0, 1334)
 scale = Vector2(0.5, 0.5)

@@ -3,6 +3,11 @@ extends Node
 enum MovementState {IDLE, WALKING, SPRINTING, CROUCHING, TIRED}
 enum Item {STIM, BANDAGE, MEDKIT, KEY, NOTHING = -1}
 
+const NUM_OF_KEYS = 5
+const NUM_OF_STIM = 2
+const NUM_OF_BANDAGE = 1
+const NUM_OF_MEDKIT = 2
+
 var transition_state := false
 var hiding_state := false
 var movement_state := MovementState.IDLE
@@ -14,18 +19,37 @@ var current_room := 0
 const MAX_STAMINA := 600
 var stamina := 600
 
+const MAX_HP := 3
+var hp := 3 :
+	set(value):
+		hp = min(MAX_HP, value)
+
 signal search
 signal found_a_key
 signal found_an_item(item_type: Item, slot: int)
 
-var item_index = {
-	1: Item.STIM,
-	2: Item.BANDAGE,
-	3: Item.MEDKIT,
-	4: Item.KEY,
-	5: Item.KEY,
-	6: Item.KEY
-}
+var item_index : Array[Item] = [
+	Item.STIM,
+	Item.BANDAGE,
+	Item.NOTHING,
+	Item.NOTHING,
+	Item.NOTHING,
+	Item.NOTHING,
+	Item.NOTHING,
+	Item.NOTHING,
+	Item.NOTHING,
+		Item.NOTHING,
+	Item.NOTHING,
+	Item.NOTHING,
+	Item.NOTHING,
+	Item.NOTHING,
+	Item.NOTHING,
+	Item.NOTHING,
+	Item.NOTHING,
+	Item.NOTHING,
+	Item.NOTHING,
+	Item.NOTHING
+]
 
 var inventory : Array[Item] = [Item.NOTHING, Item.NOTHING, Item.NOTHING]
 
@@ -33,6 +57,36 @@ var keys := 0:
 	set(value):
 		keys = value
 		found_a_key.emit()
-		
+
 func _ready():
 	stamina = MAX_STAMINA
+	distribute_items()
+
+func distribute_items() -> void :
+	var possible_locations = range(2, len(item_index))
+	
+	possible_locations = randomize_location(NUM_OF_KEYS, Item.KEY, possible_locations)
+	print(item_index)
+	possible_locations = randomize_location(NUM_OF_STIM, Item.STIM, possible_locations)
+	print(item_index)
+	possible_locations = randomize_location(NUM_OF_BANDAGE, Item.BANDAGE, possible_locations)
+	print(item_index)
+	possible_locations = randomize_location(NUM_OF_MEDKIT, Item.MEDKIT, possible_locations)	
+	print(item_index)
+ 
+func randomize_location(instances: int, item_type: Item, locations: Array) -> Array:
+	var idx
+	for i in range(instances):
+		idx = randi() % len(locations)
+		item_index[locations[idx]] = item_type
+		print(str("Put item type ", item_type, " in ", locations[idx]))
+		locations.remove_at(idx)
+		
+	return locations
+
+func item_consumption(index: int):
+	match (inventory[index]):
+		Item.STIM: stamina = 600
+		Item.BANDAGE: hp += 1
+		Item.MEDKIT: hp = MAX_HP
+	inventory[index] = Item.NOTHING

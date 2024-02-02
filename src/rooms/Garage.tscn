@@ -52,3 +52,31 @@ scale = Vector2(0.2, 1)
 label = "To Kitchen"
 target_room = "Kitchen"
 coords = 182
+
+[node name="Cabinet" parent="Interactibles" index="1" instance=ExtResource("3_2j5cr")]
+position = Vector2(-272, 572)
+interactible_type = 2
+label = "Search Tool Cabinet"
+storage_index = 12
+
+[node name="CarTrunk" parent="Interactibles" index="2" instance=ExtResource("3_2j5cr")]
+position = Vector2(73, 572)
+scale = Vector2(0.75, 1)
+interactible_type = 2
+label = "Search Car Trunk"
+storage_index = 13
+
+[node name="Table" parent="Interactibles" index="3" instance=ExtResource("3_2j5cr")]
+position = Vector2(350, 572)
+scale = Vector2(1.25, 1)
+priority = 1
+interactible_type = 2
+label = "Search Table"
+storage_index = 14
+
+[node name="Cabinet2" parent="Interactibles" index="4" instance=ExtResource("3_2j5cr")]
+position = Vector2(616, 572)
+scale = Vector2(0.75, 1)
+interactible_type = 2
+label = "Search Cabinet"
+storage_index = 15
