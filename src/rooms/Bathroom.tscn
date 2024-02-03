@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://de4ogfmj2rnyu" path="res://assets/rooms/bathroom/Towel.png" id="10_71lw5"]
 
 [node name="Room" instance=ExtResource("1_pgbvm")]
+room_id = 1
 
 [node name="Background" parent="." index="0"]
 scale = Vector2(0.6, 0.81)

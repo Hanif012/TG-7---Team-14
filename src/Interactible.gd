@@ -24,6 +24,7 @@ var item_here : GameState.Item
 @onready var contextual = ui.get_node("Control/ContextualBG")
 @onready var contextual_label = contextual.get_node("ContextualLabel")
 
+@onready var enemy_handler = get_parent().get_parent().get_node("EnemyHandler")
 
 var is_interactible := false
 
@@ -58,6 +59,7 @@ func _on_body_exited(body) -> void:
 func _change_scene() -> void:
 	GameState.position_in_room = coords
 	if target_room != "Exit":
+		GameState.remaining_time = enemy_handler.get_node("EnemyMovementTimer").time_left
 		get_tree().change_scene_to_file("res://src/rooms/" + target_room + ".tscn")
 	else:
 		if GameState.keys == GameState.NUM_OF_KEYS:

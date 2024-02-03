@@ -1,7 +1,10 @@
 extends Node2D
 
 const EDGE_ZONE = int(1280/4.0)
-@onready var player_character = $PlayerCharacter
+
+@export var room_id := GameState.Room.ATTIC
+
+@onready var player_character = %PlayerCharacter
 @onready var camera = $Camera2D
 
 @onready var left_border = $Borders/LeftBorder
@@ -11,11 +14,14 @@ const EDGE_ZONE = int(1280/4.0)
 func _ready() -> void:
 	GameState.transition_state = true
 	fade_out_mask.color = Color(0,0,0,1)
+	
 	var tween = get_tree().create_tween()
 	tween.tween_property(fade_out_mask, "color", Color(0,0,0,0), 0.5)
 	await tween.finished
 	
 	GameState.transition_state = false
+	GameState.current_room = room_id
+	
 
 func _process(_delta) -> void:
 	if player_character.position.x >= 0:

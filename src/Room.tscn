@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bsp3yk8mcio7l" path="res://assets/rooms/background.png" id="2_hw2cj"]
 [ext_resource type="PackedScene" uid="uid://c17jc5h2fylaa" path="res://src/UI.tscn" id="2_nkud2"]
 [ext_resource type="PackedScene" uid="uid://chjam1dcabmk5" path="res://src/PlayerCharacter.tscn" id="4_c3yxc"]
-[ext_resource type="Script" path="res://src/EnemyTeleporter.gd" id="5_1k11p"]
+[ext_resource type="Script" path="res://src/EnemyHandler.gd" id="5_b6txj"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_sic8f"]
 normal = Vector2(1, 0)
@@ -50,7 +50,10 @@ shape = SubResource("WorldBoundaryShape2D_lylfe")
 
 [node name="Interactibles" type="Node2D" parent="."]
 
-[node name="PlayerCharacter" parent="." instance=ExtResource("4_c3yxc")]
+[node name="Characters" type="Node" parent="."]
+
+[node name="PlayerCharacter" parent="Characters" instance=ExtResource("4_c3yxc")]
+unique_name_in_owner = true
 position = Vector2(0, 525)
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -59,5 +62,12 @@ offset = Vector2(0, -200)
 
 [node name="UI" parent="." instance=ExtResource("2_nkud2")]
 
-[node name="EnemyTeleporter" type="Node" parent="."]
-script = ExtResource("5_1k11p")
+[node name="EnemyHandler" type="Node" parent="."]
+script = ExtResource("5_b6txj")
+
+[node name="EnemyMovementTimer" type="Timer" parent="EnemyHandler"]
+unique_name_in_owner = true
+wait_time = 5.0
+one_shot = true
+
+[connection signal="timeout" from="EnemyHandler/EnemyMovementTimer" to="EnemyHandler" method="_on_enemy_movement_timer_timeout"]
