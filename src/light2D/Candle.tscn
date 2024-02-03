@@ -1,0 +1,48 @@
+[gd_scene load_steps=6 format=3 uid="uid://dcx6410y7h3gq"]
+
+[ext_resource type="Script" path="res://src/light2D/Candle.gd" id="1_42q5p"]
+[ext_resource type="Texture2D" uid="uid://c4att4l6dxw2a" path="res://assets/rooms/bedroom/candles.png" id="1_xogi2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2k7wn"]
+atlas = ExtResource("1_xogi2")
+region = Rect2(1578.11, 480.317, 72.4729, 162.661)
+
+[sub_resource type="Gradient" id="Gradient_hk4hb"]
+interpolation_color_space = 2
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_t7ure"]
+gradient = SubResource("Gradient_hk4hb")
+width = 540
+height = 540
+fill = 1
+fill_from = Vector2(0.536697, 0.490826)
+fill_to = Vector2(0.752294, 0.165138)
+
+[node name="Candle" type="Node2D"]
+position = Vector2(-690.984, -45.082)
+script = ExtResource("1_42q5p")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 1
+position = Vector2(0.820068, 22.9508)
+scale = Vector2(0.644686, 0.644686)
+texture = SubResource("AtlasTexture_2k7wn")
+
+[node name="Light" type="Node2D" parent="."]
+
+[node name="PointLight2D" type="PointLight2D" parent="Light"]
+position = Vector2(-1.63934, 2.45901)
+color = Color(0.952941, 0.709804, 0.384314, 1)
+shadow_enabled = true
+shadow_filter_smooth = 10.3
+texture = SubResource("GradientTexture2D_t7ure")
+
+[node name="PointLight2D2" type="PointLight2D" parent="Light"]
+position = Vector2(-9.01649, -36.8852)
+color = Color(0.952941, 0.709804, 0.384314, 1)
+energy = 2.0
+shadow_enabled = true
+shadow_item_cull_mask = 2
+texture = SubResource("GradientTexture2D_t7ure")
+texture_scale = 0.5

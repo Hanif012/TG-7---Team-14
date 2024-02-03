@@ -64,6 +64,12 @@ crouch={
 ]
 }
 
+[layer_names]
+
+2d_render/layer_1="Lamp"
+2d_render/layer_2="BedLamp"
+2d_render/layer_3="Shape"
+
 [rendering]
 
 renderer/rendering_method="mobile"

@@ -1,0 +1,68 @@
+[gd_scene load_steps=9 format=3 uid="uid://bd1isyepaod6n"]
+
+[ext_resource type="PackedScene" uid="uid://dltnr2rc0tcal" path="res://src/Room.tscn" id="1_oq0ve"]
+[ext_resource type="PackedScene" uid="uid://cq8lo7hied5xs" path="res://src/light2D/lamp.tscn" id="2_vpf1p"]
+[ext_resource type="PackedScene" uid="uid://brq606f7n6bjg" path="res://src/light2D/BedLamp.tscn" id="3_cdppr"]
+[ext_resource type="Texture2D" uid="uid://c4att4l6dxw2a" path="res://assets/rooms/bedroom/candles.png" id="4_3ihm5"]
+[ext_resource type="Script" path="res://src/light2D/Candle.gd" id="4_66t8o"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2k7wn"]
+atlas = ExtResource("4_3ihm5")
+region = Rect2(1578.11, 480.317, 72.4729, 162.661)
+
+[sub_resource type="Gradient" id="Gradient_hk4hb"]
+interpolation_color_space = 2
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_t7ure"]
+gradient = SubResource("Gradient_hk4hb")
+width = 540
+height = 540
+fill = 1
+fill_from = Vector2(0.536697, 0.490826)
+fill_to = Vector2(0.752294, 0.165138)
+
+[node name="Room" instance=ExtResource("1_oq0ve")]
+
+[node name="DarkCanvas" type="CanvasModulate" parent="Lighting" index="0"]
+editor_description = "for creating night effect"
+color = Color(0.0784314, 0.0352941, 0.168627, 1)
+
+[node name="Lamp" parent="Lighting" index="1" instance=ExtResource("2_vpf1p")]
+position = Vector2(155.738, -99.1803)
+
+[node name="Candle" type="Node2D" parent="Lighting" index="2"]
+position = Vector2(-690.984, -45.082)
+script = ExtResource("4_66t8o")
+
+[node name="Sprite2D" type="Sprite2D" parent="Lighting/Candle" index="0"]
+z_index = 1
+scale = Vector2(0.644686, 0.644686)
+texture = SubResource("AtlasTexture_2k7wn")
+
+[node name="Light" type="Node2D" parent="Lighting/Candle" index="1"]
+skew = 0.118682
+
+[node name="PointLight2D" type="PointLight2D" parent="Lighting/Candle/Light" index="0"]
+position = Vector2(-1.63934, 2.45901)
+color = Color(0.952941, 0.709804, 0.384314, 1)
+shadow_enabled = true
+shadow_filter_smooth = 10.3
+texture = SubResource("GradientTexture2D_t7ure")
+
+[node name="PointLight2D2" type="PointLight2D" parent="Lighting/Candle/Light" index="1"]
+position = Vector2(-9.01649, -36.8852)
+color = Color(0.952941, 0.709804, 0.384314, 1)
+energy = 2.0
+shadow_enabled = true
+shadow_item_cull_mask = 2
+texture = SubResource("GradientTexture2D_t7ure")
+texture_scale = 0.5
+
+[node name="BedLamp" parent="Lighting" index="3" instance=ExtResource("3_cdppr")]
+position = Vector2(-113.115, 49.1803)
+
+[node name="Room" parent="." index="9" instance=ExtResource("1_oq0ve")]
+
+[editable path="Lighting/Lamp"]
+[editable path="Lighting/BedLamp"]
