@@ -13,6 +13,8 @@ const EDGE_ZONE = int(1280/4.0)
 
 func _ready() -> void:
 	GameState.transition_state = true
+
+	GameState.current_room = room_id
 	fade_out_mask.color = Color(0,0,0,1)
 	
 	var tween = get_tree().create_tween()
@@ -20,7 +22,6 @@ func _ready() -> void:
 	await tween.finished
 	
 	GameState.transition_state = false
-	GameState.current_room = room_id
 	
 
 func _process(_delta) -> void:

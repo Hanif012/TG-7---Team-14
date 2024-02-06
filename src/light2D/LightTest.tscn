@@ -7,17 +7,13 @@
 
 [node name="Room" instance=ExtResource("1_oq0ve")]
 
-[node name="DarkCanvas" type="CanvasModulate" parent="Lighting" index="0"]
-editor_description = "for creating night effect"
-color = Color(0.0784314, 0.0352941, 0.168627, 1)
-
-[node name="Lamp" parent="Lighting" index="1" instance=ExtResource("2_vpf1p")]
+[node name="Lamp" parent="Lighting" index="0" instance=ExtResource("2_vpf1p")]
 position = Vector2(155.738, -99.1803)
 
-[node name="Candle" parent="Lighting" index="2" instance=ExtResource("3_3xovu")]
+[node name="Candle" parent="Lighting" index="1" instance=ExtResource("3_3xovu")]
 position = Vector2(-303.279, -60.6557)
 
-[node name="BedLamp" parent="Lighting" index="3" instance=ExtResource("3_cdppr")]
+[node name="BedLamp" parent="Lighting" index="2" instance=ExtResource("3_cdppr")]
 position = Vector2(-113.115, 49.1803)
 
 [node name="Room" parent="." index="9" instance=ExtResource("1_oq0ve")]

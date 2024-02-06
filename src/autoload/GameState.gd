@@ -2,7 +2,8 @@ extends Node
 
 enum MovementState {IDLE, WALKING, SPRINTING, CROUCHING, TIRED}
 enum Item {STIM, BANDAGE, MEDKIT, KEY, NOTHING = -1}
-enum Room {ATTIC, BATHROOM, BEDROOM, ENDING, GARAGE, HALLWAY, KITCHEN, LIVINGROOM}
+enum Room {ATTIC, BATHROOM, BEDROOM, GARAGE, HALLWAY, KITCHEN, LIVINGROOM}
+enum MonsterState {ROAMING, CHASE}
 
 const NUM_OF_KEYS = 5
 const NUM_OF_STIM = 2
@@ -25,7 +26,10 @@ var enemy_location := Room.ATTIC :
 		check_if_meet_up()
 
 const DEFAULT_MONSTER_TIMER := 5.0
-var remaining_time := DEFAULT_MONSTER_TIMER
+var time_left := DEFAULT_MONSTER_TIMER
+
+var monster_state := MonsterState.ROAMING
+
 
 const MAX_STAMINA := 600
 var stamina := MAX_STAMINA

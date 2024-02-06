@@ -1,9 +1,8 @@
-[gd_scene load_steps=15 format=3 uid="uid://b3jq0wly8t2j4"]
+[gd_scene load_steps=16 format=3 uid="uid://b3jq0wly8t2j4"]
 
 [ext_resource type="PackedScene" uid="uid://dltnr2rc0tcal" path="res://src/Room.tscn" id="1_6kbmm"]
 [ext_resource type="Texture2D" uid="uid://da25fr886gse8" path="res://assets/rooms/bedroom/bg w light.png" id="2_mqig3"]
-[ext_resource type="Texture2D" uid="uid://bljimk7484l1d" path="res://assets/rooms/bedroom/lamp.png" id="4_y7la3"]
-[ext_resource type="Texture2D" uid="uid://chawt2104ug1k" path="res://assets/rooms/bedroom/bed.PNG" id="5_0pjjq"]
+[ext_resource type="Texture2D" uid="uid://chawt2104ug1k" path="res://assets/rooms/bedroom/bed.png" id="5_0pjjq"]
 [ext_resource type="Texture2D" uid="uid://cpt0yda2rjlm0" path="res://assets/rooms/bedroom/wardrobe.png" id="6_8irfk"]
 [ext_resource type="Texture2D" uid="uid://bu6n8vl1v2btr" path="res://assets/rooms/bedroom/door1.png" id="6_q4h5y"]
 [ext_resource type="Texture2D" uid="uid://c7gcxx0tyfl0b" path="res://assets/rooms/bedroom/mirror.png" id="7_pvvtk"]
@@ -11,9 +10,11 @@
 [ext_resource type="Texture2D" uid="uid://b1u0rrnkopcq7" path="res://assets/rooms/bedroom/desk.png" id="8_f2r2a"]
 [ext_resource type="Texture2D" uid="uid://c4att4l6dxw2a" path="res://assets/rooms/bedroom/candles.png" id="10_24smy"]
 [ext_resource type="Texture2D" uid="uid://dj8sp4r3p0rwv" path="res://assets/rooms/bedroom/painting1.png" id="10_dfvgu"]
+[ext_resource type="PackedScene" uid="uid://brq606f7n6bjg" path="res://src/light2D/BedLamp.tscn" id="11_mxxk5"]
 [ext_resource type="Texture2D" uid="uid://dgr20ljtu7mcl" path="res://assets/rooms/bedroom/window.png" id="12_jdeq5"]
 [ext_resource type="PackedScene" uid="uid://dcxwu8pgdyd7l" path="res://src/Interactible.tscn" id="12_obei6"]
 [ext_resource type="Texture2D" uid="uid://bplmi61i61ue" path="res://assets/rooms/bedroom/table.png" id="14_0bxkt"]
+[ext_resource type="PackedScene" uid="uid://dcx6410y7h3gq" path="res://src/light2D/Candle.tscn" id="15_r8awr"]
 
 [node name="Room" instance=ExtResource("1_6kbmm")]
 room_id = 2
@@ -49,23 +50,22 @@ texture = ExtResource("10_dfvgu")
 position = Vector2(284.234, 362.284)
 texture = ExtResource("12_jdeq5")
 
-[node name="Lamp" type="Sprite2D" parent="EnvironmentBackground" index="6"]
-position = Vector2(-665.148, 488.704)
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("4_y7la3")
-
-[node name="Bed" type="Sprite2D" parent="EnvironmentBackground" index="7"]
-position = Vector2(284.234, 362.284)
-texture = ExtResource("5_0pjjq")
-
-[node name="Mirror" type="Sprite2D" parent="EnvironmentBackground" index="8"]
+[node name="Mirror" type="Sprite2D" parent="EnvironmentBackground" index="6"]
 position = Vector2(49.6667, 365.247)
 scale = Vector2(0.143, 0.143)
 texture = ExtResource("7_pvvtk")
 
-[node name="Table" type="Sprite2D" parent="EnvironmentBackground" index="9"]
+[node name="Table" type="Sprite2D" parent="EnvironmentBackground" index="7"]
 position = Vector2(284.234, 362.284)
 texture = ExtResource("14_0bxkt")
+
+[node name="BedLamp" parent="EnvironmentBackground" index="8" instance=ExtResource("11_mxxk5")]
+position = Vector2(-671.605, 433.333)
+scale = Vector2(1.50617, 1.50617)
+
+[node name="Bed" type="Sprite2D" parent="EnvironmentBackground" index="9"]
+position = Vector2(284.234, 362.284)
+texture = ExtResource("5_0pjjq")
 
 [node name="Wardrobe" type="Sprite2D" parent="EnvironmentBackground" index="10"]
 position = Vector2(-964.673, 486.42)
@@ -105,3 +105,6 @@ scale = Vector2(1.5, 1)
 interactible_type = 2
 label = "Search Table"
 storage_index = 1
+
+[node name="Candle" parent="." index="9" instance=ExtResource("15_r8awr")]
+position = Vector2(493, 437)
