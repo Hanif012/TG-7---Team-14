@@ -13,8 +13,9 @@ const EDGE_ZONE = int(1280/4.0)
 
 func _ready() -> void:
 	GameState.transition_state = true
-
-	GameState.current_room = room_id
+	GameState.player_location = room_id
+	GameState.check_if_meet_up()
+	$EnemyHandler.run_enemy_handler()
 	fade_out_mask.color = Color(0,0,0,1)
 	
 	var tween = get_tree().create_tween()

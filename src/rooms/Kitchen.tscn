@@ -14,7 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://y7n06dr6hnjn" path="res://assets/rooms/kitchen/Window.png" id="12_wagi3"]
 
 [node name="Room" instance=ExtResource("1_teevp")]
-room_id = 6
+room_id = 5
 
 [node name="Background" parent="." index="0"]
 scale = Vector2(0.62, 0.81)

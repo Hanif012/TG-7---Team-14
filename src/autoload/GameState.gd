@@ -16,20 +16,13 @@ var movement_state := MovementState.IDLE
 var tired_state := false
 
 var position_in_room := -360.0
-var current_room := Room.BEDROOM :
-	set(value):
-		current_room = value
-		check_if_meet_up()
-var enemy_location := Room.ATTIC :
-	set(value):
-		enemy_location = value
-		check_if_meet_up()
+var player_location := Room.BEDROOM
+var enemy_location := Room.ATTIC
 
 const DEFAULT_MONSTER_TIMER := 5.0
 var time_left := DEFAULT_MONSTER_TIMER
 
 var monster_state := MonsterState.ROAMING
-
 
 const MAX_STAMINA := 600
 var stamina := MAX_STAMINA
@@ -100,5 +93,8 @@ func item_consumption(index: int):
 	inventory[index] = Item.NOTHING
 
 func check_if_meet_up() -> void:
-	if current_room == enemy_location:
+	print(Room.keys()[enemy_location], Room.keys()[player_location])
+	if player_location == enemy_location:
+		monster_state = MonsterState.CHASE
+		print("now start chase")
 		enemy_meet_up.emit()

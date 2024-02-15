@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://djpvvaxngksk0" path="res://assets/rooms/garage/car.png" id="5_iv7o8"]
 
 [node name="Room" instance=ExtResource("1_c74n5")]
-room_id = 4
+room_id = 3
 
 [node name="Background" parent="." index="0"]
 scale = Vector2(0.615, 0.81)
