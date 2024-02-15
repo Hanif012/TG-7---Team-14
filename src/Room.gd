@@ -16,8 +16,8 @@ func _ready() -> void:
 	GameState.player_location = room_id
 	GameState.check_if_meet_up()
 	$EnemyHandler.run_enemy_handler()
-	fade_out_mask.color = Color(0,0,0,1)
 	
+	fade_out_mask.color = Color(0,0,0,1)
 	var tween = get_tree().create_tween()
 	tween.tween_property(fade_out_mask, "color", Color(0,0,0,0), 0.5)
 	await tween.finished

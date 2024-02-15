@@ -57,7 +57,11 @@ func _on_body_exited(body) -> void:
 		is_interactible = false
 	
 func _change_scene() -> void:
-	GameState.position_in_room = coords
+	GameState.player_position = coords
+	var characters := get_parent().get_parent().get_node("Characters")
+	if characters.get_child_count() > 1:
+		GameState.enemy_position = characters.get_node("Enemy").position.x
+		
 	if target_room != "Exit":
 		GameState.time_left = enemy_handler.get_node("EnemyMovementTimer").time_left
 		get_tree().change_scene_to_file("res://src/rooms/" + target_room + ".tscn")

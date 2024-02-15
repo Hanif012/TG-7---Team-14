@@ -16,3 +16,7 @@ func _physics_process(_delta):
 		velocity.x = 0
 	
 	move_and_slide()
+
+	for i in get_slide_collision_count():
+		print("COLLIDE")
+		self.queue_free()

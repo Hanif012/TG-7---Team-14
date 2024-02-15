@@ -23,7 +23,7 @@ var debug_output
 # On ready, set position to starting position or door position
 func  _ready():
 	GameState.search.connect(play_search_sound)
-	position.x = GameState.position_in_room
+	position.x = GameState.player_position
 
 func play_search_sound():
 		metal_pipe.play_sound()

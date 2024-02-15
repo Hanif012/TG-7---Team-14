@@ -3,7 +3,7 @@ extends Node
 enum MovementState {IDLE, WALKING, SPRINTING, CROUCHING, TIRED}
 enum Item {STIM, BANDAGE, MEDKIT, KEY, NOTHING = -1}
 enum Room {ATTIC, BATHROOM, BEDROOM, GARAGE, HALLWAY, KITCHEN, LIVINGROOM}
-enum MonsterState {ROAMING, CHASE}
+enum MonsterState {ROAMING, CHASING}
 
 const NUM_OF_KEYS = 5
 const NUM_OF_STIM = 2
@@ -15,7 +15,8 @@ var hiding_state := false
 var movement_state := MovementState.IDLE
 var tired_state := false
 
-var position_in_room := -360.0
+var player_position := -360.0
+var enemy_position := 0.0
 var player_location := Room.BEDROOM
 var enemy_location := Room.ATTIC
 
@@ -35,7 +36,7 @@ var hp := 3 :
 signal search
 signal found_a_key
 signal found_an_item(item_type: Item, slot: int)
-signal enemy_meet_up()
+signal enemy_meet_up(spawn_position: int)
 
 var item_index : Array[Item] = [
 	Item.STIM,
@@ -95,6 +96,8 @@ func item_consumption(index: int):
 func check_if_meet_up() -> void:
 	print(Room.keys()[enemy_location], Room.keys()[player_location])
 	if player_location == enemy_location:
-		monster_state = MonsterState.CHASE
-		print("now start chase")
-		enemy_meet_up.emit()
+		if monster_state == MonsterState.ROAMING:
+			enemy_meet_up.emit(-get_node("/root/Room/Characters/PlayerCharacter").position.x)
+		else:
+			enemy_meet_up.emit(enemy_position)
+		monster_state = MonsterState.CHASING
