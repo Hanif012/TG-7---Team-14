@@ -4,7 +4,7 @@ const EDGE_ZONE = int(1280/4.0)
 
 @export var room_id := GameState.Room.ATTIC
 
-@onready var player_character = %PlayerCharacter
+@onready var player_character = %Player
 @onready var camera = $Camera2D
 
 @onready var left_border = $Borders/LeftBorder

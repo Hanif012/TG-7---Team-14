@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 signal player_moves
 
-const SPEED = 300.0
+
 const TIRED_TRESHOLD = 200
 const STAMINA_CAP = 300
 const STAMINA_DRAIN = 4
@@ -10,6 +10,7 @@ const STAMINA_REGEN_IDLE = 8
 const STAMINA_REGEN_WALKING = 4
 const STAMINA_REGEN_CROUCHING = 1
 const STAMINA_REGEN_TIRED = 2
+
 
 var state = 0
 
@@ -27,7 +28,7 @@ func  _ready():
 
 func play_search_sound():
 		metal_pipe.play_sound()
-	
+
 
 func _physics_process(_delta):
 	if GameState.hiding_state: # ignore movement if hiding 
@@ -45,7 +46,7 @@ func _physics_process(_delta):
 	_stamina_handler()
 	
 	# Debug
-	debug_output = str("Stamina: ",GameState.stamina, "/ ", GameState.MAX_STAMINA, "\nVelocity:", velocity.x, "\nGameState:", GameState.movement_state)
+	debug_output = str("Stamina: ",GameState.stamina, "/ ", GameState.MAX_STAMINA, "\nVelocity:", velocity.x, "\nGameState:", GameState.movement_state, "\nPosition:", position.x)
 	debug_label.set_text(debug_output)
 	
 	move_and_slide()
@@ -54,16 +55,16 @@ func _movement_handler() -> void:
 	var direction = Input.get_axis("ui_left", "ui_right")
 	if direction:
 		if Input.is_action_pressed("crouch"):
-			velocity.x = direction * SPEED / 2
+			velocity.x = direction * GameState.speed / 2
 			GameState.movement_state = GameState.MovementState.CROUCHING
 		elif Input.is_action_pressed("sprint"):
 			if GameState.stamina > 0:
-				velocity.x = direction * SPEED * 2
+				velocity.x = direction * GameState.speed * 2
 			else:
 				velocity.x = 0
 			GameState.movement_state = GameState.MovementState.SPRINTING
 		else:
-			velocity.x = direction * SPEED
+			velocity.x = direction * GameState.speed
 			GameState.movement_state = GameState.MovementState.WALKING
 	else:
 		velocity.x = 0
@@ -85,8 +86,7 @@ func _movement_handler() -> void:
 			$Sprite2D.flip_h = false
 		else:
 			$Sprite2D.flip_h = true
-			
-	
+
 func _stamina_handler() -> void:
 	if GameState.hiding_state:
 		if GameState.stamina < STAMINA_CAP:

@@ -3,7 +3,7 @@ extends Node
 enum MovementState {IDLE, WALKING, SPRINTING, CROUCHING, TIRED}
 enum Item {STIM, BANDAGE, MEDKIT, KEY, NOTHING = -1}
 enum Room {ATTIC, BATHROOM, BEDROOM, GARAGE, HALLWAY, KITCHEN, LIVINGROOM}
-enum MonsterState {ROAMING, CHASING}
+enum EnemyState {ROAMING, CHASING, LOSTTRACK}
 
 const NUM_OF_KEYS = 5
 const NUM_OF_STIM = 2
@@ -17,21 +17,38 @@ var tired_state := false
 
 var player_position := -360.0
 var enemy_position := 0.0
-var player_location := Room.BEDROOM
+var player_location := Room.BEDROOM:
+	set(value):
+		last_player_location = player_location
+		player_location = value
+var last_player_location := Room.BEDROOM
 var enemy_location := Room.ATTIC
+var enemy_distance := 0
+
+const ENEMY_SPEED = 450.0
 
 const DEFAULT_MONSTER_TIMER := 5.0
 var time_left := DEFAULT_MONSTER_TIMER
 
-var monster_state := MonsterState.ROAMING
+var enemy_state := EnemyState.ROAMING
 
-const MAX_STAMINA := 600
+const MAX_STAMINA := 5000
 var stamina := MAX_STAMINA
 
 const MAX_HP := 3
 var hp := 3 :
 	set(value):
-		hp = min(MAX_HP, value)
+		hp = clamp(value, 0, MAX_HP)
+		if hp == 0:
+			get_tree().change_scene_to_file("res://src/rooms/GameOver.tscn")
+		else:
+			adrenaline_rush()
+
+const DEFAULT_SPEED := 300.0
+var speed := DEFAULT_SPEED
+
+const WIND_UP_DISTANCE = 200
+const STRIKE_DISTANCE = WIND_UP_DISTANCE*1.5
 
 signal search
 signal found_a_key
@@ -94,10 +111,14 @@ func item_consumption(index: int):
 	inventory[index] = Item.NOTHING
 
 func check_if_meet_up() -> void:
-	print(Room.keys()[enemy_location], Room.keys()[player_location])
 	if player_location == enemy_location:
-		if monster_state == MonsterState.ROAMING:
-			enemy_meet_up.emit(-get_node("/root/Room/Characters/PlayerCharacter").position.x)
+		if enemy_state == EnemyState.ROAMING:
+			enemy_meet_up.emit(-get_node("/root/Room/Characters/Player").position.x)
 		else:
 			enemy_meet_up.emit(enemy_position)
-		monster_state = MonsterState.CHASING
+		enemy_state = EnemyState.CHASING
+
+func adrenaline_rush() -> void:
+	speed = DEFAULT_SPEED * 1.5
+	await get_tree().create_timer(5).timeout
+	speed = DEFAULT_SPEED

@@ -7,6 +7,12 @@ size = Vector2(128, 128)
 
 [node name="Interactible" type="Area2D"]
 script = ExtResource("1_xcqw4")
+interactible_type = null
+label = null
+target_room = null
+coords = null
+hiding_spot_type = null
+storage_index = null
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

@@ -44,14 +44,14 @@ func _input(_event):
 		
 
 func _on_body_entered(body) -> void:
-	if body.name == "PlayerCharacter":
+	if body.name == "Player":
 		
 		interact_label.set_text(label)
 		interact.show()
 		is_interactible = true
 
 func _on_body_exited(body) -> void:
-	if body.name == "PlayerCharacter":
+	if body.name == "Player":
 		interact.hide()
 		contextual.hide()
 		is_interactible = false
@@ -61,6 +61,11 @@ func _change_scene() -> void:
 	var characters := get_parent().get_parent().get_node("Characters")
 	if characters.get_child_count() > 1:
 		GameState.enemy_position = characters.get_node("Enemy").position.x
+		GameState.enemy_distance = abs(characters.get_node("Player").position.x - GameState.enemy_position)
+		print("Enemy Distance: ", GameState.enemy_distance)
+	else:
+		if GameState.enemy_state == GameState.EnemyState.CHASING:
+			GameState.enemy_state = GameState.EnemyState.LOSTTRACK
 		
 	if target_room != "Exit":
 		GameState.time_left = enemy_handler.get_node("EnemyMovementTimer").time_left
