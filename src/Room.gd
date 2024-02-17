@@ -3,6 +3,7 @@ extends Node2D
 const EDGE_ZONE = int(1280/4.0)
 
 @export var room_id := GameState.Room.ATTIC
+@export var door_positions : Array[float] = []
 
 @onready var player_character = %Player
 @onready var camera = $Camera2D
@@ -10,6 +11,8 @@ const EDGE_ZONE = int(1280/4.0)
 @onready var left_border = $Borders/LeftBorder
 @onready var right_border = $Borders/RightBorder
 @onready var fade_out_mask = $UI/Control/FadeOut
+
+
 
 func _ready() -> void:
 	GameState.transition_state = true

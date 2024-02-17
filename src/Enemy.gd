@@ -25,8 +25,8 @@ func _physics_process(_delta):
 func commence_attack():
 	in_attack_animation = true 
 	
-	$AttackTimer.start()
-	await $AttackTimer.timeout   # Attacking Charging time
+	$StrikeTimer.start()
+	await $StrikeTimer.timeout   # Attacking Charging time
 	
 	$Sprite2D.flip_v = true
 	var distance = player_character.position.x - position.x
@@ -37,8 +37,8 @@ func commence_attack():
 	
 	print(GameState.hp, "/", GameState.MAX_HP)
 	
-	$AttackTimer.start()
-	await $AttackTimer.timeout   # Recovery time
+	$CooldownTimer.start()
+	await $CooldownTimer.timeout   # Recovery time
 
 	$Sprite2D.flip_v = false
 	in_attack_animation = false

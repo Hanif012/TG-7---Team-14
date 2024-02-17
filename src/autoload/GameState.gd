@@ -39,6 +39,7 @@ const MAX_HP := 3
 var hp := 3 :
 	set(value):
 		hp = clamp(value, 0, MAX_HP)
+		hp_changed.emit()
 		if hp == 0:
 			get_tree().change_scene_to_file("res://src/rooms/GameOver.tscn")
 		else:
@@ -52,6 +53,7 @@ const STRIKE_DISTANCE = WIND_UP_DISTANCE*1.5
 
 signal search
 signal found_a_key
+signal hp_changed
 signal found_an_item(item_type: Item, slot: int)
 signal enemy_meet_up(spawn_position: int)
 
@@ -105,7 +107,9 @@ func randomize_location(instances: int, item_type: Item, locations: Array) -> Ar
 
 func item_consumption(index: int):
 	match (inventory[index]):
-		Item.STIM: stamina = 600
+		Item.STIM: 
+			stamina = 600
+			adrenaline_rush()
 		Item.BANDAGE: hp += 1
 		Item.MEDKIT: hp = MAX_HP
 	inventory[index] = Item.NOTHING
@@ -113,7 +117,7 @@ func item_consumption(index: int):
 func check_if_meet_up() -> void:
 	if player_location == enemy_location:
 		if enemy_state == EnemyState.ROAMING:
-			enemy_meet_up.emit(-get_node("/root/Room/Characters/Player").position.x)
+			enemy_meet_up.emit()
 		else:
 			enemy_meet_up.emit(enemy_position)
 		enemy_state = EnemyState.CHASING

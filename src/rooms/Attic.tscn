@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://y7n06dr6hnjn" path="res://assets/rooms/kitchen/Window.png" id="7_htpx5"]
 
 [node name="Room" instance=ExtResource("1_fquxp")]
+door_positions = Array[int]([-600])
 
 [node name="Background" parent="." index="0"]
 position = Vector2(-23, 277)

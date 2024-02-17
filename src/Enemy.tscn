@@ -29,6 +29,10 @@ COUNT = 20
 stream = ExtResource("4_6t3fk")
 bus = &"SFX"
 
-[node name="AttackTimer" type="Timer" parent="."]
-wait_time = 0.5
+[node name="StrikeTimer" type="Timer" parent="."]
+wait_time = 0.25
+one_shot = true
+
+[node name="CooldownTimer" type="Timer" parent="."]
+wait_time = 0.75
 one_shot = true

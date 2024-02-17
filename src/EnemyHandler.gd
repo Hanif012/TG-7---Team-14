@@ -1,6 +1,7 @@
 extends Node
 
 @onready var characters = get_parent().get_node("Characters")
+@onready var room = get_parent()
 
 var enemy = preload("res://src/Enemy.tscn")
 
@@ -34,16 +35,18 @@ func enemy_roaming():
 
 func enemy_chasing():
 	if GameState.enemy_location != GameState.player_location:
-		await get_tree().create_timer(GameState.enemy_distance/450).timeout
+		await get_tree().create_timer(GameState.enemy_distance/300).timeout
 		spawn_enemy_in_room(GameState.player_position)
 
 func _on_enemy_movement_timer_timeout():
-	GameState.enemy_location = (randi() % len(GameState.Room)) as GameState.Room
+	GameState.enemy_location = randi_range(0, len(GameState.Room)-1) as GameState.Room
 	print(GameState.Room.keys()[GameState.enemy_location])
 	GameState.check_if_meet_up()
 	
-func spawn_enemy_in_room(spawn_position: float):
-	%EnemyMovementTimer.stop()
+func spawn_enemy_in_room(spawn_position: float = 0):
+	if GameState.enemy_state == GameState.EnemyState.ROAMING:
+		%EnemyMovementTimer.stop()
+		spawn_position = room.door_positions[randi_range(0,len(room.door_positions)-1)]
 	
 	GameState.enemy_location = GameState.player_location
 	var enemy_node = enemy.instantiate()

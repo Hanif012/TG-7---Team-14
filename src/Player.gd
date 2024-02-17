@@ -29,7 +29,6 @@ func  _ready():
 func play_search_sound():
 		metal_pipe.play_sound()
 
-
 func _physics_process(_delta):
 	if GameState.hiding_state: # ignore movement if hiding 
 		velocity.x = 0

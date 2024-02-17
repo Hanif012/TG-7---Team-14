@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://c17jc5h2fylaa"]
+[gd_scene load_steps=6 format=3 uid="uid://c17jc5h2fylaa"]
 
 [ext_resource type="Script" path="res://src/UI.gd" id="1_07pr5"]
+[ext_resource type="Texture2D" uid="uid://bhkxtrj54pfj4" path="res://assets/icon.svg" id="2_2yj7k"]
 [ext_resource type="Texture2D" uid="uid://cw3qgbjanc2xg" path="res://assets/items/key.png" id="2_mh8jp"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_7g8v1"]
@@ -113,43 +114,65 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 2
 
-[node name="MarginContainer2" type="MarginContainer" parent="Control/VBoxContainer2"]
+[node name="MarginContainer3" type="MarginContainer" parent="Control/VBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
 theme_override_constants/margin_left = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Control/VBoxContainer2/MarginContainer2"]
+[node name="HPCounterContainer" type="HBoxContainer" parent="Control/VBoxContainer2/MarginContainer3"]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="Control/VBoxContainer2/MarginContainer2/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="Control/VBoxContainer2/MarginContainer3/HPCounterContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("2_2yj7k")
+expand_mode = 1
+
+[node name="HPCounter" type="Label" parent="Control/VBoxContainer2/MarginContainer3/HPCounterContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "3/3"
+label_settings = SubResource("LabelSettings_4lsgs")
+
+[node name="KeyCounterContainer" type="MarginContainer" parent="Control/VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/VBoxContainer2/KeyCounterContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Control/VBoxContainer2/KeyCounterContainer/HBoxContainer"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 texture = ExtResource("2_mh8jp")
 expand_mode = 1
 
-[node name="KeyCounter" type="Label" parent="Control/VBoxContainer2/MarginContainer2/HBoxContainer"]
+[node name="KeyCounter" type="Label" parent="Control/VBoxContainer2/KeyCounterContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "0/5"
 label_settings = SubResource("LabelSettings_4lsgs")
 
-[node name="MarginContainer" type="MarginContainer" parent="Control/VBoxContainer2"]
+[node name="InventoryContainer" type="MarginContainer" parent="Control/VBoxContainer2"]
 layout_mode = 2
 theme_override_constants/margin_left = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="Inventory" type="HBoxContainer" parent="Control/VBoxContainer2/MarginContainer"]
+[node name="Inventory" type="HBoxContainer" parent="Control/VBoxContainer2/InventoryContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="Slot1" type="Panel" parent="Control/VBoxContainer2/MarginContainer/Inventory"]
+[node name="Slot1" type="Panel" parent="Control/VBoxContainer2/InventoryContainer/Inventory"]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="Control/VBoxContainer2/MarginContainer/Inventory/Slot1"]
+[node name="TextureRect" type="TextureRect" parent="Control/VBoxContainer2/InventoryContainer/Inventory/Slot1"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -158,11 +181,11 @@ grow_horizontal = 2
 grow_vertical = 2
 expand_mode = 2
 
-[node name="Slot2" type="Panel" parent="Control/VBoxContainer2/MarginContainer/Inventory"]
+[node name="Slot2" type="Panel" parent="Control/VBoxContainer2/InventoryContainer/Inventory"]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="Control/VBoxContainer2/MarginContainer/Inventory/Slot2"]
+[node name="TextureRect" type="TextureRect" parent="Control/VBoxContainer2/InventoryContainer/Inventory/Slot2"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -171,11 +194,11 @@ grow_horizontal = 2
 grow_vertical = 2
 expand_mode = 2
 
-[node name="Slot3" type="Panel" parent="Control/VBoxContainer2/MarginContainer/Inventory"]
+[node name="Slot3" type="Panel" parent="Control/VBoxContainer2/InventoryContainer/Inventory"]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="Control/VBoxContainer2/MarginContainer/Inventory/Slot3"]
+[node name="TextureRect" type="TextureRect" parent="Control/VBoxContainer2/InventoryContainer/Inventory/Slot3"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -250,8 +273,8 @@ value = 1.0
 
 [node name="Timer" type="Timer" parent="."]
 
-[connection signal="gui_input" from="Control/VBoxContainer2/MarginContainer/Inventory/Slot1" to="." method="_on_slot_1_gui_input"]
-[connection signal="gui_input" from="Control/VBoxContainer2/MarginContainer/Inventory/Slot2" to="." method="_on_slot_2_gui_input"]
-[connection signal="gui_input" from="Control/VBoxContainer2/MarginContainer/Inventory/Slot3" to="." method="_on_slot_3_gui_input"]
+[connection signal="gui_input" from="Control/VBoxContainer2/InventoryContainer/Inventory/Slot1" to="." method="_on_slot_1_gui_input"]
+[connection signal="gui_input" from="Control/VBoxContainer2/InventoryContainer/Inventory/Slot2" to="." method="_on_slot_2_gui_input"]
+[connection signal="gui_input" from="Control/VBoxContainer2/InventoryContainer/Inventory/Slot3" to="." method="_on_slot_3_gui_input"]
 [connection signal="value_changed" from="Menu/MarginContainer/VBoxContainer/GridContainer/MusicSlider" to="." method="_on_music_slider_value_changed"]
 [connection signal="value_changed" from="Menu/MarginContainer/VBoxContainer/GridContainer/SFXSlider" to="." method="_on_sfx_slider_value_changed"]

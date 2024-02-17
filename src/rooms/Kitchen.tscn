@@ -15,6 +15,7 @@
 
 [node name="Room" instance=ExtResource("1_teevp")]
 room_id = 5
+door_positions = Array[float]([-643.0, 182.0])
 
 [node name="Background" parent="." index="0"]
 scale = Vector2(0.62, 0.81)

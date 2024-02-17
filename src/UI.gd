@@ -12,6 +12,7 @@ const ITEM_IMAGE_PATH = [
 ]
 func _ready():
 	GameState.found_a_key.connect(update_key_counter)
+	GameState.hp_changed.connect(update_hp_counter)
 	GameState.found_an_item.connect(update_inventory_panel)
 	item_consumed.connect(GameState.item_consumption)
 	
@@ -21,8 +22,10 @@ func _ready():
 			update_inventory_panel(int(GameState.inventory[i]), i)
 
 func _input(event):
-	if event.is_action_pressed("ui_cancel"):
-		%Menu.visible = !%Menu.visible
+	if event.is_action_pressed("ui_cancel"): %Menu.visible = !%Menu.visible
+	elif event.is_action_pressed("inventory_1"): use_item(0)
+	elif event.is_action_pressed("inventory_2"): use_item(1)
+	elif event.is_action_pressed("inventory_3"): use_item(2)
 
 func _on_music_slider_value_changed(value):
 	AudioServer.set_bus_volume_db(MUSIC_BUS_ID, linear_to_db(value))
@@ -38,21 +41,27 @@ func update_key_counter():
 func update_inventory_panel(item_type: int, slot: int):
 	%Inventory.get_child(slot).get_child(0).texture = ITEM_IMAGE_PATH[item_type]
 
+func update_hp_counter():
+	%HPCounter.text = str(GameState.hp, "/", GameState.MAX_HP)
+
 func _on_slot_1_gui_input(event):
-	use_item(event, 0)
+	verify_input(event, 0)
 
 func _on_slot_2_gui_input(event):
-	use_item(event, 1)
+	verify_input(event, 1)
 
 func _on_slot_3_gui_input(event):
-	use_item(event, 2)
+	verify_input(event, 2)
 
-func use_item(event, index: int):
+func verify_input(event, index: int):
 	if event is InputEventMouseButton and event.button_index == 1 and !event.pressed and GameState.inventory[index] != GameState.Item.NOTHING:
-		%Inventory.get_child(index).get_child(0).texture = null
-		item_consumed.emit(index)
-		%ContextualBG.show()
-		%ContextualBG/ContextualLabel.text = str("Used an Item in Slot ", index)
-		$Timer.start()
-		await $Timer.timeout
-		%ContextualBG.hide()
+		use_item(index)
+
+func use_item(index: int):
+	%Inventory.get_child(index).get_child(0).texture = null
+	item_consumed.emit(index)
+	%ContextualBG.show()
+	%ContextualBG/ContextualLabel.text = str("Used an Item in Slot ", index)
+	$Timer.start()
+	await $Timer.timeout
+	%ContextualBG.hide()
