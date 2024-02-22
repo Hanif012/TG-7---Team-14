@@ -60,18 +60,22 @@ texture = ExtResource("7_pvvtk")
 position = Vector2(284.234, 362.284)
 texture = ExtResource("14_0bxkt")
 
-[node name="BedLamp" parent="EnvironmentBackground" index="8" instance=ExtResource("11_mxxk5")]
-position = Vector2(-671.605, 433.333)
-scale = Vector2(1.50617, 1.50617)
-
-[node name="Bed" type="Sprite2D" parent="EnvironmentBackground" index="9"]
+[node name="Bed" type="Sprite2D" parent="EnvironmentBackground" index="8"]
 position = Vector2(284.234, 362.284)
 texture = ExtResource("5_0pjjq")
 
-[node name="Wardrobe" type="Sprite2D" parent="EnvironmentBackground" index="10"]
+[node name="Wardrobe" type="Sprite2D" parent="EnvironmentBackground" index="9"]
 position = Vector2(-964.673, 486.42)
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("6_8irfk")
+
+[node name="BedLamp" parent="Lighting" index="1" instance=ExtResource("11_mxxk5")]
+position = Vector2(-445.902, 48.3604)
+scale = Vector2(0.999998, 0.999998)
+
+[node name="Candle" parent="Lighting" index="2" instance=ExtResource("15_r8awr")]
+position = Vector2(404.098, 63.1147)
+scale = Vector2(0.819672, 0.819672)
 
 [node name="LeftBorder" parent="Borders" index="0"]
 position = Vector2(-760, 0)
@@ -107,5 +111,8 @@ interactible_type = 2
 label = "Search Table"
 storage_index = 1
 
-[node name="Candle" parent="." index="9" instance=ExtResource("15_r8awr")]
-position = Vector2(493, 437)
+[node name="Wardrobe" parent="Interactibles" index="4" instance=ExtResource("12_obei6")]
+position = Vector2(-782, 572)
+scale = Vector2(1.5, 1)
+interactible_type = 1
+label = "Hide in Wardrobe"

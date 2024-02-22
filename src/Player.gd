@@ -45,7 +45,7 @@ func _physics_process(_delta):
 	_stamina_handler()
 	
 	# Debug
-	debug_output = str("Stamina: ",GameState.stamina, "/ ", GameState.MAX_STAMINA, "\nVelocity:", velocity.x, "\nGameState:", GameState.movement_state, "\nPosition:", position.x)
+	debug_output = str("Stamina: ",GameState.stamina)
 	debug_label.set_text(debug_output)
 	
 	move_and_slide()
@@ -53,15 +53,16 @@ func _physics_process(_delta):
 func _movement_handler() -> void:
 	var direction = Input.get_axis("ui_left", "ui_right")
 	if direction:
-		if Input.is_action_pressed("crouch"):
+		if Input.is_action_pressed("crouch"): #Crouching
 			velocity.x = direction * GameState.speed / 2
 			GameState.movement_state = GameState.MovementState.CROUCHING
 		elif Input.is_action_pressed("sprint"):
 			if GameState.stamina > 0:
+				GameState.movement_state = GameState.MovementState.SPRINTING
 				velocity.x = direction * GameState.speed * 2
 			else:
+				GameState.movement_state = GameState.MovementState.TIRED
 				velocity.x = 0
-			GameState.movement_state = GameState.MovementState.SPRINTING
 		else:
 			velocity.x = direction * GameState.speed
 			GameState.movement_state = GameState.MovementState.WALKING
@@ -73,7 +74,11 @@ func _movement_handler() -> void:
 			GameState.movement_state = GameState.MovementState.IDLE
 	
 	match GameState.movement_state:
-		GameState.MovementState.IDLE, GameState.MovementState.TIRED:
+		GameState.MovementState.IDLE:
+			$AnimationPlayer.play("RESET")
+		GameState.MovementState.TIRED:
+			$AnimationPlayer.play("RESET")
+		GameState.MovementState.CROUCHING:
 			$AnimationPlayer.play("RESET")
 		GameState.MovementState.WALKING:
 			$AnimationPlayer.play("walk")

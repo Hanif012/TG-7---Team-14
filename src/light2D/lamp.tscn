@@ -17,7 +17,6 @@ fill_to = Vector2(0.752294, 0.165138)
 [node name="lamp" type="Node2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-z_index = 1
 position = Vector2(-3.27869, 112.295)
 scale = Vector2(0.117924, 0.117924)
 texture = ExtResource("1_e8up7")

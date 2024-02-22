@@ -41,7 +41,6 @@ func _input(_event):
 				_enter_hiding_spot()
 			InteractibleType.STORAGE:
 				_pick_up_item()
-		
 
 func _on_body_entered(body) -> void:
 	if body.name == "Player":
@@ -82,6 +81,10 @@ func _enter_hiding_spot() -> void:
 	if GameState.hiding_state:
 		print("Hiding in ", HidingSpotType.keys()[hiding_spot_type])
 	else:
+		var characters := get_parent().get_parent().get_node("Characters")
+		if characters.get_child_count() > 1:
+			characters.get_node("Enemy").saw_player_when_entering_room = true
+			GameState.enemy_state = GameState.EnemyState.ROAMING
 		print("Came out from ", HidingSpotType.keys()[hiding_spot_type])
 
 func _pick_up_item() -> void:

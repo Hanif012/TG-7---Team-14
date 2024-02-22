@@ -13,7 +13,7 @@
 
 [node name="Room" instance=ExtResource("1_pgbvm")]
 room_id = 1
-door_positions = Array[int]([-580])
+door_positions = Array[float]([-580.0])
 
 [node name="Background" parent="." index="0"]
 scale = Vector2(0.6, 0.81)

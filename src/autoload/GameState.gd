@@ -25,14 +25,14 @@ var last_player_location := Room.BEDROOM
 var enemy_location := Room.ATTIC
 var enemy_distance := 0
 
-const ENEMY_SPEED = 450.0
+const ENEMY_SPEED = 375.0
 
 const DEFAULT_MONSTER_TIMER := 5.0
 var time_left := DEFAULT_MONSTER_TIMER
 
 var enemy_state := EnemyState.ROAMING
 
-const MAX_STAMINA := 5000
+const MAX_STAMINA := 600
 var stamina := MAX_STAMINA
 
 const MAX_HP := 3
@@ -42,8 +42,6 @@ var hp := 3 :
 		hp_changed.emit()
 		if hp == 0:
 			get_tree().change_scene_to_file("res://src/rooms/GameOver.tscn")
-		else:
-			adrenaline_rush()
 
 const DEFAULT_SPEED := 300.0
 var speed := DEFAULT_SPEED
@@ -115,12 +113,16 @@ func item_consumption(index: int):
 	inventory[index] = Item.NOTHING
 
 func check_if_meet_up() -> void:
+	var characters = get_tree().get_node("Characters")	
 	if player_location == enemy_location:
 		if enemy_state == EnemyState.ROAMING:
 			enemy_meet_up.emit()
 		else:
 			enemy_meet_up.emit(enemy_position)
 		enemy_state = EnemyState.CHASING
+	else:
+		if characters.get_child_count() > 1: 
+			characters.get_node("Enemy").queue_free()
 
 func adrenaline_rush() -> void:
 	speed = DEFAULT_SPEED * 1.5

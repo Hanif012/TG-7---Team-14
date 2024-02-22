@@ -16,13 +16,16 @@ func _ready():
 	GameState.found_an_item.connect(update_inventory_panel)
 	item_consumed.connect(GameState.item_consumption)
 	
+	update_hp_counter()
 	update_key_counter()
 	for i in len(GameState.inventory):
 		if GameState.inventory[i] != GameState.Item.NOTHING:
 			update_inventory_panel(int(GameState.inventory[i]), i)
-
+	
 func _input(event):
-	if event.is_action_pressed("ui_cancel"): %Menu.visible = !%Menu.visible
+	if event.is_action_pressed("ui_cancel"): 
+		%Menu.visible = !%Menu.visible
+		get_tree().paused = !get_tree().paused
 	elif event.is_action_pressed("inventory_1"): use_item(0)
 	elif event.is_action_pressed("inventory_2"): use_item(1)
 	elif event.is_action_pressed("inventory_3"): use_item(2)
