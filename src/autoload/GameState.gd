@@ -113,7 +113,7 @@ func item_consumption(index: int):
 	inventory[index] = Item.NOTHING
 
 func check_if_meet_up() -> void:
-	var characters = get_tree().get_node("Characters")	
+	var characters = get_node("/root/Room/Characters")
 	if player_location == enemy_location:
 		if enemy_state == EnemyState.ROAMING:
 			enemy_meet_up.emit()
