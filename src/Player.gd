@@ -81,15 +81,24 @@ func _movement_handler() -> void:
 		GameState.MovementState.CROUCHING:
 			$AnimationPlayer.play("RESET")
 		GameState.MovementState.WALKING:
-			$AnimationPlayer.play("walk")
+			$Sprite2D.flip_h = false
+			if velocity.x > 0:
+				$AnimationPlayer.play("walk_right")
+			else:
+				$AnimationPlayer.play("walk_left")
 		GameState.MovementState.SPRINTING:
-			$AnimationPlayer.play("run")
+			$Sprite2D.flip_h = false
+			if velocity.x > 0:
+				$AnimationPlayer.play("run_right")
+			else:
+				$AnimationPlayer.play("run_left")
+			
 	
 	if velocity.x != 0:
 		if velocity.x > 0:
-			$Sprite2D.flip_h = false
+			if GameState.movement_state != GameState.MovementState.IDLE: $Sprite2D.flip_h = false
 		else:
-			$Sprite2D.flip_h = true
+			if GameState.movement_state != GameState.MovementState.IDLE:$Sprite2D.flip_h = true
 
 func _stamina_handler() -> void:
 	if GameState.hiding_state:
