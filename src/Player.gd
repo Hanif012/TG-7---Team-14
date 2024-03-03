@@ -11,7 +11,6 @@ const STAMINA_REGEN_WALKING = 4
 const STAMINA_REGEN_CROUCHING = 1
 const STAMINA_REGEN_TIRED = 2
 
-
 var state = 0
 
 @onready var metal_pipe = $MetalPipeSoundQueue
@@ -25,6 +24,7 @@ var debug_output
 func  _ready():
 	GameState.search.connect(play_search_sound)
 	position.x = GameState.player_position
+#	_play_anim()
 
 func play_search_sound():
 		metal_pipe.play_sound()
@@ -32,7 +32,6 @@ func play_search_sound():
 func _physics_process(_delta):
 	if GameState.hiding_state: # ignore movement if hiding 
 		velocity.x = 0
-		$AnimationPlayer.play("RESET")
 	elif GameState.tired_state:
 		if GameState.stamina > TIRED_TRESHOLD: # If no longer tired, reset tired_state and sprite
 			sprite.modulate = (Color(1, 1, 1, 1))
@@ -41,7 +40,6 @@ func _physics_process(_delta):
 			sprite.modulate = (Color(1, 1, 1, 0.5)) # Decelerate and handle stamina recovery when tired
 			velocity.x = 0
 			GameState.movement_state = GameState.MovementState.TIRED
-		$AnimationPlayer.play("RESET")
 		
 	else:
 		_movement_handler()
@@ -51,6 +49,7 @@ func _physics_process(_delta):
 	debug_output = str("Stamina: ",GameState.stamina)
 	debug_label.set_text(debug_output)
 	
+	_play_anim()
 	move_and_slide()
 
 func _movement_handler() -> void:
@@ -76,6 +75,29 @@ func _movement_handler() -> void:
 		else:
 			GameState.movement_state = GameState.MovementState.IDLE
 	
+
+func _stamina_handler() -> void:
+	if GameState.hiding_state:
+		if GameState.stamina < STAMINA_CAP:
+			GameState.stamina = min(GameState.MAX_STAMINA, GameState.stamina + STAMINA_REGEN_CROUCHING)
+	else: 
+		match (GameState.movement_state):
+			GameState.MovementState.IDLE:
+				GameState.stamina = min(GameState.MAX_STAMINA, GameState.stamina + STAMINA_REGEN_IDLE)
+			GameState.MovementState.WALKING:
+					GameState.stamina = min(GameState.MAX_STAMINA, GameState.stamina + STAMINA_REGEN_WALKING)
+			GameState.MovementState.SPRINTING:
+				GameState.stamina = max(0, GameState.stamina - STAMINA_DRAIN)
+				if GameState.stamina == 0:
+					GameState.tired_state = true
+					sprite.modulate = (Color(1, 1, 1, 0.5))
+			GameState.MovementState.CROUCHING:
+				if GameState.stamina < STAMINA_CAP:
+					GameState.stamina = min(STAMINA_CAP, GameState.stamina + STAMINA_REGEN_CROUCHING)
+			GameState.MovementState.TIRED:
+				GameState.stamina = min(GameState.MAX_STAMINA, GameState.stamina + STAMINA_REGEN_TIRED)
+
+func _play_anim() -> void:
 	match GameState.movement_state:
 		GameState.MovementState.IDLE:
 			$AnimationPlayer.play("RESET")
@@ -100,24 +122,3 @@ func _movement_handler() -> void:
 			$Sprite2D.flip_h = false
 		else:
 			$Sprite2D.flip_h = true
-
-func _stamina_handler() -> void:
-	if GameState.hiding_state:
-		if GameState.stamina < STAMINA_CAP:
-			GameState.stamina = min(GameState.MAX_STAMINA, GameState.stamina + STAMINA_REGEN_CROUCHING)
-	else: 
-		match (GameState.movement_state):
-			GameState.MovementState.IDLE:
-				GameState.stamina = min(GameState.MAX_STAMINA, GameState.stamina + STAMINA_REGEN_IDLE)
-			GameState.MovementState.WALKING:
-					GameState.stamina = min(GameState.MAX_STAMINA, GameState.stamina + STAMINA_REGEN_WALKING)
-			GameState.MovementState.SPRINTING:
-				GameState.stamina = max(0, GameState.stamina - STAMINA_DRAIN)
-				if GameState.stamina == 0:
-					GameState.tired_state = true
-					sprite.modulate = (Color(1, 1, 1, 0.5))
-			GameState.MovementState.CROUCHING:
-				if GameState.stamina < STAMINA_CAP:
-					GameState.stamina = min(STAMINA_CAP, GameState.stamina + STAMINA_REGEN_CROUCHING)
-			GameState.MovementState.TIRED:
-				GameState.stamina = min(GameState.MAX_STAMINA, GameState.stamina + STAMINA_REGEN_TIRED)

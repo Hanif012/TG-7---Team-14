@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dubuqxhwa0ubd"
-path="res://.godot/imported/walk-right.png-f4a46a307787bce5e7d379c90da75e4b.ctex"
+uid="uid://b1ilp0gbixrlt"
+path="res://.godot/imported/ghost-right.png-14f1d33e41830d5367a6f1fed11d6d6e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/temp/walk-right.png"
-dest_files=["res://.godot/imported/walk-right.png-f4a46a307787bce5e7d379c90da75e4b.ctex"]
+source_file="res://assets/character/ghost-right.png"
+dest_files=["res://.godot/imported/ghost-right.png-14f1d33e41830d5367a6f1fed11d6d6e.ctex"]
 
 [params]
 

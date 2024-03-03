@@ -23,10 +23,15 @@ func _physics_process(_delta):
 		else:
 			if player_character.position.x > position.x:
 				velocity.x = 1 * GameState.ENEMY_SPEED
+				$AnimationPlayer.play("move_right")
 				$Sprite2D.flip_h = false
+				$Sprite2D/PointLight2D.position.x = 308
 			elif player_character.position.x < position.x:
 				velocity.x = -1 * GameState.ENEMY_SPEED
+				$AnimationPlayer.play("move_left")
 				$Sprite2D.flip_h = true
+				$Sprite2D/PointLight2D.position.x = -308
+				
 			else:
 				velocity.x = 0
 			move_and_slide()

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bfey1xhqcmae8"
-path="res://.godot/imported/walk-left.png-aec703a18a90603a3624db47f660de6e.ctex"
+uid="uid://bsv5hnd6pvj6f"
+path="res://.godot/imported/ghost-left.png-726686f1e504a03da512c313dd421988.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/temp/walk-left.png"
-dest_files=["res://.godot/imported/walk-left.png-aec703a18a90603a3624db47f660de6e.ctex"]
+source_file="res://assets/character/ghost-left.png"
+dest_files=["res://.godot/imported/ghost-left.png-726686f1e504a03da512c313dd421988.ctex"]
 
 [params]
 
