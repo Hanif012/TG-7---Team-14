@@ -1,0 +1,122 @@
+[gd_scene load_steps=9 format=3 uid="uid://b47lvs3ytpt4t"]
+
+[ext_resource type="Script" path="res://src/menu/MainMenu.gd" id="1_unyei"]
+[ext_resource type="Texture2D" uid="uid://bvqvwj65svb7v" path="res://src/menu/Screenshot_20240314_160219.png" id="2_x2m4r"]
+[ext_resource type="FontFile" uid="uid://dy58wm81l37t" path="res://assets/fonts/Creepster-Regular.ttf" id="3_imwec"]
+[ext_resource type="PackedScene" uid="uid://b3jq0wly8t2j4" path="res://src/rooms/Bedroom.tscn" id="3_lxnkv"]
+[ext_resource type="PackedScene" uid="uid://d28spfrf4kn87" path="res://src/menu/MenuButton.tscn" id="3_tf5xu"]
+[ext_resource type="StyleBox" uid="uid://dn3hyd3jlh5pi" path="res://assets/theme/ButtonWithoutBG.tres" id="4_3ctp3"]
+[ext_resource type="Script" path="res://src/menu/Menu.gd" id="4_vkemu"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_4kvms"]
+light_mode = 1
+
+[node name="MainMenu" type="Node"]
+script = ExtResource("1_unyei")
+
+[node name="FigmaMockUp" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(626, 367)
+scale = Vector2(2, 2)
+texture = ExtResource("2_x2m4r")
+
+[node name="Background" type="Node2D" parent="."]
+position = Vector2(283, 0)
+
+[node name="Room" parent="Background" instance=ExtResource("3_lxnkv")]
+script = null
+
+[node name="DarkCanvas" parent="Background/Room/Lighting" index="0"]
+visibility_layer = 2
+
+[node name="Interactibles" parent="Background/Room" index="4"]
+visible = false
+
+[node name="Characters" parent="Background/Room" index="5"]
+visible = false
+
+[node name="Camera2D" parent="Background/Room" index="6"]
+position = Vector2(350, 560)
+
+[node name="UI" parent="Background/Room" index="7"]
+visible = false
+
+[node name="Menu" type="Control" parent="."]
+material = SubResource("CanvasItemMaterial_4kvms")
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_vkemu")
+
+[node name="GameTitle" type="Label" parent="Menu"]
+use_parent_material = true
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -266.0
+offset_top = 50.0
+offset_right = 266.0
+offset_bottom = 203.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.823529, 0.0235294, 0.0235294, 1)
+theme_override_fonts/font = ExtResource("3_imwec")
+theme_override_font_sizes/font_size = 128
+text = "Nightmare"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu"]
+use_parent_material = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -111.0
+offset_top = -85.0
+offset_right = 95.0
+offset_bottom = 172.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+
+[node name="Play" parent="Menu/VBoxContainer" instance=ExtResource("3_tf5xu")]
+use_parent_material = true
+layout_mode = 2
+theme_override_styles/normal = ExtResource("4_3ctp3")
+theme_override_styles/hover = ExtResource("4_3ctp3")
+theme_override_styles/pressed = ExtResource("4_3ctp3")
+theme_override_styles/disabled = ExtResource("4_3ctp3")
+theme_override_styles/focus = ExtResource("4_3ctp3")
+
+[node name="Options" parent="Menu/VBoxContainer" instance=ExtResource("3_tf5xu")]
+use_parent_material = true
+layout_mode = 2
+theme_override_styles/normal = ExtResource("4_3ctp3")
+theme_override_styles/hover = ExtResource("4_3ctp3")
+theme_override_styles/pressed = ExtResource("4_3ctp3")
+theme_override_styles/disabled = ExtResource("4_3ctp3")
+theme_override_styles/focus = ExtResource("4_3ctp3")
+text = "Options"
+
+[node name="Quit" parent="Menu/VBoxContainer" instance=ExtResource("3_tf5xu")]
+use_parent_material = true
+layout_mode = 2
+theme_override_styles/normal = ExtResource("4_3ctp3")
+theme_override_styles/hover = ExtResource("4_3ctp3")
+theme_override_styles/pressed = ExtResource("4_3ctp3")
+theme_override_styles/disabled = ExtResource("4_3ctp3")
+theme_override_styles/focus = ExtResource("4_3ctp3")
+text = "Quit
+"
+
+[connection signal="pressed" from="Menu/VBoxContainer/Play" to="Menu" method="_on_play_pressed"]
+[connection signal="pressed" from="Menu/VBoxContainer/Options" to="Menu" method="_on_options_pressed"]
+[connection signal="pressed" from="Menu/VBoxContainer/Quit" to="Menu" method="_on_quit_pressed"]
+
+[editable path="Background/Room"]

@@ -13,7 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://dgwfr8rasv3vd" path="res://assets/rooms/kitchen/chair.png" id="11_1h4o7"]
 [ext_resource type="Texture2D" uid="uid://dvam36t5vtnlu" path="res://assets/rooms/kitchen/table.png" id="12_lgnu2"]
 
-[node name="Room" instance=ExtResource("1_cqubk")]
+[node name="Room2" instance=ExtResource("1_cqubk")]
 room_id = 6
 door_positions = Array[float]([-1028.0, -78.0, 1029.0])
 

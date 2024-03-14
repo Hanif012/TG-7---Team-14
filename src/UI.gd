@@ -64,7 +64,7 @@ func use_item(index: int):
 	%Inventory.get_child(index).get_child(0).texture = null
 	item_consumed.emit(index)
 	%ContextualBG.show()
-	%ContextualBG/ContextualLabel.text = str("Used an Item in Slot ", index)
+	%ContextualBG/ContextualLabel.text = str("Used an Item in Slot ", index+1)
 	$Timer.start()
 	await $Timer.timeout
 	%ContextualBG.hide()
