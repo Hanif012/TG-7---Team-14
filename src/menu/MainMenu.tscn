@@ -1,12 +1,29 @@
-[gd_scene load_steps=9 format=3 uid="uid://b47lvs3ytpt4t"]
+[gd_scene load_steps=22 format=3 uid="uid://b47lvs3ytpt4t"]
 
 [ext_resource type="Script" path="res://src/menu/MainMenu.gd" id="1_unyei"]
-[ext_resource type="Texture2D" uid="uid://bvqvwj65svb7v" path="res://src/menu/Screenshot_20240314_160219.png" id="2_x2m4r"]
+[ext_resource type="Texture2D" uid="uid://da25fr886gse8" path="res://assets/rooms/bedroom/bg w light.png" id="2_5vht4"]
+[ext_resource type="Texture2D" uid="uid://c4att4l6dxw2a" path="res://assets/rooms/bedroom/candles.png" id="3_7fhad"]
 [ext_resource type="FontFile" uid="uid://dy58wm81l37t" path="res://assets/fonts/Creepster-Regular.ttf" id="3_imwec"]
-[ext_resource type="PackedScene" uid="uid://b3jq0wly8t2j4" path="res://src/rooms/Bedroom.tscn" id="3_lxnkv"]
 [ext_resource type="PackedScene" uid="uid://d28spfrf4kn87" path="res://src/menu/MenuButton.tscn" id="3_tf5xu"]
 [ext_resource type="StyleBox" uid="uid://dn3hyd3jlh5pi" path="res://assets/theme/ButtonWithoutBG.tres" id="4_3ctp3"]
+[ext_resource type="Texture2D" uid="uid://b1u0rrnkopcq7" path="res://assets/rooms/bedroom/desk.png" id="4_mh6ti"]
 [ext_resource type="Script" path="res://src/menu/Menu.gd" id="4_vkemu"]
+[ext_resource type="Texture2D" uid="uid://bu6n8vl1v2btr" path="res://assets/rooms/bedroom/door1.png" id="5_wrtwr"]
+[ext_resource type="Texture2D" uid="uid://egvijwi8gajh" path="res://assets/rooms/bedroom/door2.png" id="6_5jrya"]
+[ext_resource type="Texture2D" uid="uid://dj8sp4r3p0rwv" path="res://assets/rooms/bedroom/painting1.png" id="7_qhyb3"]
+[ext_resource type="Texture2D" uid="uid://dgr20ljtu7mcl" path="res://assets/rooms/bedroom/window.png" id="8_rx8le"]
+[ext_resource type="Texture2D" uid="uid://c7gcxx0tyfl0b" path="res://assets/rooms/bedroom/mirror.png" id="9_qbbjv"]
+[ext_resource type="Texture2D" uid="uid://bplmi61i61ue" path="res://assets/rooms/bedroom/table.png" id="10_4m0dn"]
+[ext_resource type="Texture2D" uid="uid://chawt2104ug1k" path="res://assets/rooms/bedroom/bed.PNG" id="11_u2371"]
+[ext_resource type="Texture2D" uid="uid://cpt0yda2rjlm0" path="res://assets/rooms/bedroom/wardrobe.png" id="12_3lt04"]
+[ext_resource type="PackedScene" uid="uid://brq606f7n6bjg" path="res://src/light2D/BedLamp.tscn" id="13_xwfn8"]
+[ext_resource type="PackedScene" uid="uid://dcx6410y7h3gq" path="res://src/light2D/Candle.tscn" id="14_agy1m"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_sic8f"]
+normal = Vector2(1, 0)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_lylfe"]
+normal = Vector2(-1, 0)
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_4kvms"]
 light_mode = 1
@@ -14,32 +31,103 @@ light_mode = 1
 [node name="MainMenu" type="Node"]
 script = ExtResource("1_unyei")
 
-[node name="FigmaMockUp" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(626, 367)
-scale = Vector2(2, 2)
-texture = ExtResource("2_x2m4r")
-
 [node name="Background" type="Node2D" parent="."]
 position = Vector2(283, 0)
 
-[node name="Room" parent="Background" instance=ExtResource("3_lxnkv")]
-script = null
+[node name="Room" type="Node2D" parent="Background"]
+process_mode = 1
 
-[node name="DarkCanvas" parent="Background/Room/Lighting" index="0"]
+[node name="Background" type="Sprite2D" parent="Background/Room"]
+texture_filter = 1
+texture_repeat = 1
+position = Vector2(0, 360)
+scale = Vector2(0.77, 0.81)
+texture = ExtResource("2_5vht4")
+
+[node name="EnvironmentBackground" type="Node2D" parent="Background/Room"]
+position = Vector2(0, 68)
+scale = Vector2(0.81, 0.81)
+
+[node name="Candles" type="Sprite2D" parent="Background/Room/EnvironmentBackground"]
+position = Vector2(284.234, 362.284)
+texture = ExtResource("3_7fhad")
+
+[node name="Desk" type="Sprite2D" parent="Background/Room/EnvironmentBackground"]
+position = Vector2(284.234, 362.284)
+texture = ExtResource("4_mh6ti")
+
+[node name="Door1" type="Sprite2D" parent="Background/Room/EnvironmentBackground"]
+position = Vector2(284.234, 362.284)
+texture = ExtResource("5_wrtwr")
+
+[node name="Door2" type="Sprite2D" parent="Background/Room/EnvironmentBackground"]
+position = Vector2(284.234, 362.284)
+texture = ExtResource("6_5jrya")
+
+[node name="Painting1" type="Sprite2D" parent="Background/Room/EnvironmentBackground"]
+position = Vector2(284.234, 362.284)
+texture = ExtResource("7_qhyb3")
+
+[node name="Window" type="Sprite2D" parent="Background/Room/EnvironmentBackground"]
+position = Vector2(284.234, 362.284)
+texture = ExtResource("8_rx8le")
+
+[node name="Mirror" type="Sprite2D" parent="Background/Room/EnvironmentBackground"]
+position = Vector2(49.6667, 365.247)
+scale = Vector2(0.143, 0.143)
+texture = ExtResource("9_qbbjv")
+
+[node name="Table" type="Sprite2D" parent="Background/Room/EnvironmentBackground"]
+position = Vector2(284.234, 362.284)
+texture = ExtResource("10_4m0dn")
+
+[node name="Bed" type="Sprite2D" parent="Background/Room/EnvironmentBackground"]
+position = Vector2(284.234, 362.284)
+texture = ExtResource("11_u2371")
+
+[node name="Wardrobe" type="Sprite2D" parent="Background/Room/EnvironmentBackground"]
+position = Vector2(-964.673, 486.42)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("12_3lt04")
+
+[node name="Lighting" type="Node2D" parent="Background/Room"]
+position = Vector2(0, 360)
+scale = Vector2(1.22, 1.22)
+
+[node name="DarkCanvas" type="CanvasModulate" parent="Background/Room/Lighting"]
+editor_description = "for creating night effect"
 visibility_layer = 2
+color = Color(0.258824, 0.223529, 0.341176, 1)
 
-[node name="Interactibles" parent="Background/Room" index="4"]
-visible = false
+[node name="BedLamp" parent="Background/Room/Lighting" instance=ExtResource("13_xwfn8")]
+position = Vector2(-445.902, 48.3604)
+scale = Vector2(0.999998, 0.999998)
 
-[node name="Characters" parent="Background/Room" index="5"]
-visible = false
+[node name="Candle" parent="Background/Room/Lighting" instance=ExtResource("14_agy1m")]
+position = Vector2(404.098, 63.1147)
+scale = Vector2(0.819672, 0.819672)
 
-[node name="Camera2D" parent="Background/Room" index="6"]
+[node name="Borders" type="Node2D" parent="Background/Room"]
+position = Vector2(0, 360)
+scale = Vector2(1.22, 1.22)
+
+[node name="LeftBorder" type="StaticBody2D" parent="Background/Room/Borders"]
+position = Vector2(-760, 0)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Background/Room/Borders/LeftBorder"]
+shape = SubResource("WorldBoundaryShape2D_sic8f")
+
+[node name="RightBorder" type="StaticBody2D" parent="Background/Room/Borders"]
+position = Vector2(760, 0)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Background/Room/Borders/RightBorder"]
+shape = SubResource("WorldBoundaryShape2D_lylfe")
+
+[node name="Camera2D" type="Camera2D" parent="Background/Room"]
 position = Vector2(350, 560)
-
-[node name="UI" parent="Background/Room" index="7"]
-visible = false
+offset = Vector2(0, -200)
 
 [node name="Menu" type="Control" parent="."]
 material = SubResource("CanvasItemMaterial_4kvms")
@@ -118,5 +206,3 @@ text = "Quit
 [connection signal="pressed" from="Menu/VBoxContainer/Play" to="Menu" method="_on_play_pressed"]
 [connection signal="pressed" from="Menu/VBoxContainer/Options" to="Menu" method="_on_options_pressed"]
 [connection signal="pressed" from="Menu/VBoxContainer/Quit" to="Menu" method="_on_quit_pressed"]
-
-[editable path="Background/Room"]
