@@ -1,7 +1,7 @@
 [gd_scene load_steps=18 format=3 uid="uid://chjam1dcabmk5"]
 
 [ext_resource type="Script" path="res://src/Player.gd" id="1_gsgi2"]
-[ext_resource type="Texture2D" uid="uid://1s5kgod0epdv" path="res://assets/character/idle.png" id="2_dfmxh"]
+[ext_resource type="Texture2D" uid="uid://csnx2p6vv3q48" path="res://assets/character/idle.png" id="2_dfmxh"]
 [ext_resource type="PackedScene" uid="uid://bsjf1lr440lo0" path="res://src/SoundQueue.tscn" id="3_8kef6"]
 [ext_resource type="AudioStream" uid="uid://dnj2wm4mreme3" path="res://assets/audio/metal-pipe.mp3" id="4_eko47"]
 [ext_resource type="Texture2D" uid="uid://epq3km7e142a" path="res://assets/character/run-right.png" id="5_vsr3a"]
@@ -15,6 +15,7 @@ height = 295.0
 
 [sub_resource type="Animation" id="Animation_2bgue"]
 length = 0.001
+loop_mode = 2
 step = 0.0416667
 tracks/0/type = "value"
 tracks/0/imported = false

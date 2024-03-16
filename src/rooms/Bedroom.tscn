@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://dltnr2rc0tcal" path="res://src/Room.tscn" id="1_6kbmm"]
 [ext_resource type="Texture2D" uid="uid://da25fr886gse8" path="res://assets/rooms/bedroom/bg w light.png" id="2_mqig3"]
-[ext_resource type="Texture2D" uid="uid://chawt2104ug1k" path="res://assets/rooms/bedroom/bed.PNG" id="5_0pjjq"]
+[ext_resource type="Texture2D" uid="uid://chawt2104ug1k" path="res://assets/rooms/bedroom/bed.png" id="5_0pjjq"]
 [ext_resource type="Texture2D" uid="uid://cpt0yda2rjlm0" path="res://assets/rooms/bedroom/wardrobe.png" id="6_8irfk"]
 [ext_resource type="Texture2D" uid="uid://bu6n8vl1v2btr" path="res://assets/rooms/bedroom/door1.png" id="6_q4h5y"]
 [ext_resource type="Texture2D" uid="uid://c7gcxx0tyfl0b" path="res://assets/rooms/bedroom/mirror.png" id="7_pvvtk"]
@@ -60,22 +60,22 @@ texture = ExtResource("7_pvvtk")
 position = Vector2(284.234, 362.284)
 texture = ExtResource("14_0bxkt")
 
-[node name="Bed" type="Sprite2D" parent="EnvironmentBackground" index="8"]
+[node name="Candle" parent="EnvironmentBackground" index="8" instance=ExtResource("15_r8awr")]
+position = Vector2(608.642, 455.556)
+scale = Vector2(1.23457, 1.23457)
+
+[node name="BedLamp" parent="EnvironmentBackground" index="9" instance=ExtResource("11_mxxk5")]
+position = Vector2(-671.606, 433.333)
+scale = Vector2(1.50617, 1.50617)
+
+[node name="Bed" type="Sprite2D" parent="EnvironmentBackground" index="10"]
 position = Vector2(284.234, 362.284)
 texture = ExtResource("5_0pjjq")
 
-[node name="Wardrobe" type="Sprite2D" parent="EnvironmentBackground" index="9"]
+[node name="Wardrobe" type="Sprite2D" parent="EnvironmentBackground" index="11"]
 position = Vector2(-964.673, 486.42)
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("6_8irfk")
-
-[node name="BedLamp" parent="Lighting" index="1" instance=ExtResource("11_mxxk5")]
-position = Vector2(-445.902, 48.3604)
-scale = Vector2(0.999998, 0.999998)
-
-[node name="Candle" parent="Lighting" index="2" instance=ExtResource("15_r8awr")]
-position = Vector2(404.098, 63.1147)
-scale = Vector2(0.819672, 0.819672)
 
 [node name="LeftBorder" parent="Borders" index="0"]
 position = Vector2(-760, 0)
@@ -103,12 +103,14 @@ scale = Vector2(1.75, 1)
 priority = 1
 interactible_type = 2
 label = "Search Desk"
+emit_sound_type = "Desk"
 
 [node name="Cabinet2" parent="Interactibles" index="3" instance=ExtResource("12_obei6")]
 position = Vector2(580, 572)
 scale = Vector2(1.5, 1)
 interactible_type = 2
 label = "Search Table"
+emit_sound_type = "Desk"
 storage_index = 1
 
 [node name="Wardrobe" parent="Interactibles" index="4" instance=ExtResource("12_obei6")]

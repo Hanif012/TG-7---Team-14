@@ -14,7 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://dgr20ljtu7mcl" path="res://assets/rooms/bedroom/window.png" id="8_rx8le"]
 [ext_resource type="Texture2D" uid="uid://c7gcxx0tyfl0b" path="res://assets/rooms/bedroom/mirror.png" id="9_qbbjv"]
 [ext_resource type="Texture2D" uid="uid://bplmi61i61ue" path="res://assets/rooms/bedroom/table.png" id="10_4m0dn"]
-[ext_resource type="Texture2D" uid="uid://chawt2104ug1k" path="res://assets/rooms/bedroom/bed.PNG" id="11_u2371"]
+[ext_resource type="Texture2D" uid="uid://chawt2104ug1k" path="res://assets/rooms/bedroom/bed.png" id="11_u2371"]
 [ext_resource type="Texture2D" uid="uid://cpt0yda2rjlm0" path="res://assets/rooms/bedroom/wardrobe.png" id="12_3lt04"]
 [ext_resource type="PackedScene" uid="uid://brq606f7n6bjg" path="res://src/light2D/BedLamp.tscn" id="13_xwfn8"]
 [ext_resource type="PackedScene" uid="uid://dcx6410y7h3gq" path="res://src/light2D/Candle.tscn" id="14_agy1m"]

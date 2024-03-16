@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://dltnr2rc0tcal" path="res://src/Room.tscn" id="1_i08ix"]
 [ext_resource type="Texture2D" uid="uid://de1x4sctv63vf" path="res://assets/rooms/door.png" id="2_n1suu"]
 [ext_resource type="PackedScene" uid="uid://dcxwu8pgdyd7l" path="res://src/Interactible.tscn" id="3_gf3sh"]
-[ext_resource type="Texture2D" uid="uid://cvb04brsgcnyh" path="res://assets/rooms/hallway/lamp.png" id="3_s0nhv"]
+[ext_resource type="PackedScene" uid="uid://cq8lo7hied5xs" path="res://src/light2D/lamp.tscn" id="3_tf7cc"]
 [ext_resource type="Texture2D" uid="uid://drimtgnwyx78m" path="res://assets/rooms/living-room/desk.png" id="4_flbdp"]
 [ext_resource type="Texture2D" uid="uid://bvgpvoi1undrm" path="res://assets/rooms/blueprint/hallway.png" id="4_p4snd"]
 [ext_resource type="Texture2D" uid="uid://cvijyen7fryjb" path="res://assets/rooms/hallway/painting5.png" id="5_bpa6e"]
@@ -32,10 +32,8 @@ position = Vector2(654, 364)
 scale = Vector2(0.143, 0.143)
 texture = ExtResource("2_n1suu")
 
-[node name="Lamp" type="Sprite2D" parent="EnvironmentBackground" index="3"]
-position = Vector2(-442, 416)
-scale = Vector2(0.13, 0.13)
-texture = ExtResource("3_s0nhv")
+[node name="lamp" parent="EnvironmentBackground" index="3" instance=ExtResource("3_tf7cc")]
+position = Vector2(-442, 315)
 
 [node name="Desk" type="Sprite2D" parent="EnvironmentBackground" index="4"]
 position = Vector2(-212.568, 512.6)
@@ -89,6 +87,7 @@ scale = Vector2(1.5, 1)
 priority = 1
 interactible_type = 2
 label = "Search Desk"
+emit_sound_type = "Desk"
 storage_index = 7
 
 [node name="Table" parent="Interactibles" index="4" instance=ExtResource("3_gf3sh")]
@@ -97,6 +96,7 @@ scale = Vector2(1.5, 1)
 priority = 1
 interactible_type = 2
 label = "Search Table"
+emit_sound_type = "Desk"
 storage_index = 8
 
 [node name="Hallway" type="Sprite2D" parent="." index="8"]

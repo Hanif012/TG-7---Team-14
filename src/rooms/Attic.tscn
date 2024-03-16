@@ -11,7 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://y7n06dr6hnjn" path="res://assets/rooms/kitchen/Window.png" id="7_htpx5"]
 
 [node name="Room" instance=ExtResource("1_fquxp")]
-door_positions = Array[int]([-600])
+door_positions = Array[float]([-600.0])
 
 [node name="Background" parent="." index="0"]
 position = Vector2(-23, 277)
@@ -72,6 +72,7 @@ position = Vector2(-304, 572)
 scale = Vector2(1.25, 1)
 interactible_type = 2
 label = "Search Boxes"
+emit_sound_type = "Desk"
 storage_index = 16
 
 [node name="Cabinet" parent="Interactibles" index="2" instance=ExtResource("3_livvt")]
@@ -79,6 +80,7 @@ position = Vector2(-8, 572)
 scale = Vector2(1.25, 1)
 interactible_type = 2
 label = "Search Cabinet"
+emit_sound_type = "Cabinet"
 storage_index = 17
 
 [node name="Chest2" parent="Interactibles" index="3" instance=ExtResource("3_livvt")]
@@ -86,6 +88,7 @@ position = Vector2(339, 571)
 scale = Vector2(1.5, 1)
 interactible_type = 2
 label = "Search Boxes"
+emit_sound_type = "Desk"
 storage_index = 18
 
 [node name="Chest" parent="Interactibles" index="4" instance=ExtResource("3_livvt")]
@@ -93,6 +96,7 @@ position = Vector2(605, 569)
 scale = Vector2(0.5, 1)
 interactible_type = 2
 label = "Search Chest"
+emit_sound_type = "Cabinet"
 storage_index = 19
 
 [node name="Attic" type="Sprite2D" parent="." index="8"]

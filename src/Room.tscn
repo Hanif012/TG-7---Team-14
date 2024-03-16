@@ -1,10 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://dltnr2rc0tcal"]
+[gd_scene load_steps=11 format=3 uid="uid://dltnr2rc0tcal"]
 
 [ext_resource type="Script" path="res://src/Room.gd" id="1_6p7ka"]
 [ext_resource type="Texture2D" uid="uid://bsp3yk8mcio7l" path="res://assets/rooms/background.png" id="2_hw2cj"]
 [ext_resource type="PackedScene" uid="uid://c17jc5h2fylaa" path="res://src/UI.tscn" id="2_nkud2"]
 [ext_resource type="PackedScene" uid="uid://chjam1dcabmk5" path="res://src/Player.tscn" id="4_c3yxc"]
 [ext_resource type="Script" path="res://src/EnemyHandler.gd" id="5_b6txj"]
+[ext_resource type="Script" path="res://src/SoundQueue.gd" id="6_5usal"]
+[ext_resource type="AudioStream" uid="uid://dpx4n3787ceyw" path="res://assets/audio/sfx/SFX_Open_Desk.ogg" id="7_17ybg"]
+[ext_resource type="AudioStream" uid="uid://366cttv4ccx5" path="res://assets/audio/sfx/SFX_Open_Cabinet.ogg" id="8_qmlgo"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_sic8f"]
 normal = Vector2(1, 0)
@@ -77,5 +80,19 @@ one_shot = true
 [node name="LostTrackTimer" type="Timer" parent="EnemyHandler"]
 unique_name_in_owner = true
 one_shot = true
+
+[node name="OpenDeskQueue" type="Node" parent="."]
+script = ExtResource("6_5usal")
+COUNT = 5
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="OpenDeskQueue"]
+stream = ExtResource("7_17ybg")
+
+[node name="OpenCabinetQueue" type="Node" parent="."]
+script = ExtResource("6_5usal")
+COUNT = 5
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="OpenCabinetQueue"]
+stream = ExtResource("8_qmlgo")
 
 [connection signal="timeout" from="EnemyHandler/EnemyMovementTimer" to="EnemyHandler" method="_on_enemy_movement_timer_timeout"]

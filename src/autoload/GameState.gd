@@ -49,7 +49,7 @@ var speed := DEFAULT_SPEED
 const WIND_UP_DISTANCE = 200
 const STRIKE_DISTANCE = WIND_UP_DISTANCE*1.5
 
-signal search
+signal emit_sound(str: String)
 signal found_a_key
 signal hp_changed
 signal found_an_item(item_type: Item, slot: int)
@@ -113,7 +113,10 @@ func item_consumption(index: int):
 	inventory[index] = Item.NOTHING
 
 func check_if_meet_up() -> void:
+#	print_tree()
+#	return
 	var characters = get_node("/root/Room/Characters")
+#	print(characters)
 	if player_location == enemy_location:
 		if enemy_state == EnemyState.ROAMING:
 			enemy_meet_up.emit()

@@ -13,7 +13,6 @@ const STAMINA_REGEN_TIRED = 2
 
 var state = 0
 
-@onready var metal_pipe = $MetalPipeSoundQueue
 
 # Debug
 var debug_output
@@ -22,12 +21,9 @@ var debug_output
 
 # On ready, set position to starting position or door position
 func  _ready():
-	GameState.search.connect(play_search_sound)
 	position.x = GameState.player_position
 #	_play_anim()
 
-func play_search_sound():
-		metal_pipe.play_sound()
 
 func _physics_process(_delta):
 	if GameState.hiding_state: # ignore movement if hiding 

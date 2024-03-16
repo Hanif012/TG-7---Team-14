@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dcxwu8pgdyd7l" path="res://src/Interactible.tscn" id="3_avk5t"]
 [ext_resource type="Texture2D" uid="uid://m5tcitvuww53" path="res://assets/rooms/living-room/tv.png" id="4_hm7wo"]
 [ext_resource type="Texture2D" uid="uid://bn7w0ta5480g2" path="res://assets/rooms/living-room/sofa.png" id="5_77jpt"]
-[ext_resource type="Texture2D" uid="uid://sng5w4y8opgx" path="res://assets/rooms/living-room/lamp.png" id="6_253b8"]
+[ext_resource type="PackedScene" uid="uid://brq606f7n6bjg" path="res://src/light2D/BedLamp.tscn" id="5_uvqyb"]
 [ext_resource type="Texture2D" uid="uid://drimtgnwyx78m" path="res://assets/rooms/living-room/desk.png" id="7_otkid"]
 [ext_resource type="Texture2D" uid="uid://42mvx3bvwv3a" path="res://assets/rooms/living-room/fireplac.png" id="8_i6iv3"]
 [ext_resource type="Texture2D" uid="uid://c0i8teyci4ecm" path="res://assets/rooms/bathroom/cabinet.png" id="9_lp6ql"]
@@ -46,10 +46,9 @@ position = Vector2(0, 840)
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("5_77jpt")
 
-[node name="Lamp" type="Sprite2D" parent="EnvironmentBackground" index="4"]
-position = Vector2(-408.568, 408.6)
-scale = Vector2(0.05, 0.05)
-texture = ExtResource("6_253b8")
+[node name="BedLamp" parent="EnvironmentBackground" index="4" instance=ExtResource("5_uvqyb")]
+position = Vector2(-410, 389)
+scale = Vector2(0.8, 0.8)
 
 [node name="Desk" type="Sprite2D" parent="EnvironmentBackground" index="5"]
 position = Vector2(-324.568, 512.6)
@@ -114,12 +113,14 @@ position = Vector2(-322, 572)
 scale = Vector2(1.5, 1)
 interactible_type = 2
 label = "Search Desk"
+emit_sound_type = "Desk"
 storage_index = 4
 
 [node name="Cabinet" parent="Interactibles" index="4" instance=ExtResource("3_avk5t")]
 position = Vector2(399, 572)
 interactible_type = 2
 label = "Search Cabinet"
+emit_sound_type = "Cabinet"
 storage_index = 5
 
 [node name="Table" parent="Interactibles" index="5" instance=ExtResource("3_avk5t")]
@@ -128,4 +129,5 @@ scale = Vector2(1.5, 1)
 priority = 1
 interactible_type = 2
 label = "Search Table"
+emit_sound_type = "Desk"
 storage_index = 6

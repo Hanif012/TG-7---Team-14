@@ -6,6 +6,7 @@ enum HidingSpotType {BED, WARDROBE}
 
 @export var interactible_type : InteractibleType
 @export var label : String
+@export var emit_sound_type : String
 
 @export_category("Door Type")
 @export var target_room : String
@@ -88,7 +89,7 @@ func _enter_hiding_spot() -> void:
 		print("Came out from ", HidingSpotType.keys()[hiding_spot_type])
 
 func _pick_up_item() -> void:
-	GameState.search.emit()
+	GameState.emit_sound.emit(emit_sound_type)
 	if item_here == GameState.Item.KEY:
 		GameState.keys += 1
 		contextual_label.set_text("Found a Piece of the Key")

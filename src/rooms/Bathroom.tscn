@@ -80,10 +80,12 @@ coords = 830
 position = Vector2(-2, 572)
 interactible_type = 2
 label = "Search Medicine Cabinet"
+emit_sound_type = "Cabinet"
 storage_index = 2
 
 [node name="Cabinet2" parent="Interactibles" index="2" instance=ExtResource("3_hduuj")]
 position = Vector2(559, 572)
 interactible_type = 2
 label = "Search Towel Cabinet"
+emit_sound_type = "Cabinet"
 storage_index = 3

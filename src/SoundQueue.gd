@@ -1,5 +1,5 @@
 @tool
-extends Node
+class_name SoundQueue extends Node 
 
 var _next := 0
 var _audio_stream_players: Array[AudioStreamPlayer]
