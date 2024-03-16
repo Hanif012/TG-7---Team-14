@@ -118,3 +118,9 @@ position = Vector2(-782, 572)
 scale = Vector2(1.5, 1)
 interactible_type = 1
 label = "Hide in Wardrobe"
+
+[node name="AudioStreamPlayer" parent="OpenDeskQueue" index="0"]
+bus = &"SFX"
+
+[node name="AudioStreamPlayer" parent="OpenCabinetQueue" index="0"]
+bus = &"SFX"

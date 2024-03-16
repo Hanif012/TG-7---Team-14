@@ -43,7 +43,7 @@ func enemy_chasing():
 
 func _on_enemy_movement_timer_timeout():
 	GameState.enemy_location = randi_range(0, len(GameState.Room)-1) as GameState.Room
-	print(GameState.Room.keys()[GameState.enemy_location])
+#	print(GameState.Room.keys()[GameState.enem])
 	GameState.check_if_meet_up()
 	
 func spawn_enemy_in_room(spawn_position: float = 0):

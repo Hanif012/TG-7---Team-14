@@ -65,8 +65,8 @@ storage_index = 12
 [node name="CarTrunk" parent="Interactibles" index="2" instance=ExtResource("3_2j5cr")]
 position = Vector2(73, 572)
 scale = Vector2(0.75, 1)
-interactible_type = 2
-label = "Search Car Trunk"
+interactible_type = 1
+label = "Hide in Car Trunk"
 storage_index = 13
 
 [node name="Table" parent="Interactibles" index="3" instance=ExtResource("3_2j5cr")]
@@ -76,7 +76,7 @@ priority = 1
 interactible_type = 2
 label = "Search Table"
 emit_sound_type = "Desk"
-storage_index = 14
+storage_index = 13
 
 [node name="Cabinet2" parent="Interactibles" index="4" instance=ExtResource("3_2j5cr")]
 position = Vector2(616, 572)
@@ -84,4 +84,4 @@ scale = Vector2(0.75, 1)
 interactible_type = 2
 label = "Search Cabinet"
 emit_sound_type = "Cabinet"
-storage_index = 15
+storage_index = 14

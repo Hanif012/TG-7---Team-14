@@ -8,6 +8,7 @@ func _ready():
 
 
 func _on_play_pressed():
+	GameState.restart_game()
 	get_tree().change_scene_to_file("res://src/rooms/Bedroom.tscn")
 
 

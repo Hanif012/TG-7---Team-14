@@ -10,6 +10,7 @@ const NUM_OF_STIM = 2
 const NUM_OF_BANDAGE = 1
 const NUM_OF_MEDKIT = 2
 
+var game_start := true
 var transition_state := false
 var hiding_state := false
 var movement_state := MovementState.IDLE
@@ -74,7 +75,6 @@ var item_index : Array[Item] = [
 	Item.NOTHING,
 	Item.NOTHING,
 	Item.NOTHING,
-	Item.NOTHING,
 	Item.NOTHING]
 var inventory : Array[Item] = [Item.NOTHING, Item.NOTHING, Item.NOTHING]
 
@@ -83,8 +83,35 @@ var keys := 0:
 		keys = value
 		found_a_key.emit()
 
-func _ready():
+
+func restart_game():
+	game_start = true
+	transition_state = false
+	hiding_state = false
+	movement_state = MovementState.IDLE
+	tired_state = false
+	
+	hp = MAX_HP
 	stamina = MAX_STAMINA
+	
+	player_position = -360.0
+	enemy_position = 0.0
+	player_location = Room.BEDROOM
+	last_player_location = Room.BEDROOM
+	enemy_location = Room.ATTIC
+	enemy_distance = 0
+	
+	time_left = DEFAULT_MONSTER_TIMER
+
+	enemy_state = EnemyState.ROAMING
+	speed = DEFAULT_SPEED
+	
+	item_index = [
+		Item.STIM, Item.BANDAGE, Item.NOTHING, Item.NOTHING, Item.NOTHING, Item.NOTHING, Item.NOTHING, 
+		Item.NOTHING, Item.NOTHING, Item.NOTHING, Item.NOTHING, Item.NOTHING, Item.NOTHING, Item.NOTHING, 
+		Item.NOTHING, Item.NOTHING, Item.NOTHING, Item.NOTHING, Item.NOTHING
+	]
+	inventory = [Item.NOTHING, Item.NOTHING, Item.NOTHING]
 	distribute_items()
 
 func distribute_items() -> void :

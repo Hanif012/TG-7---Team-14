@@ -62,7 +62,7 @@ func _change_scene() -> void:
 	if characters.get_child_count() > 1:
 		GameState.enemy_position = characters.get_node("Enemy").position.x
 		GameState.enemy_distance = abs(characters.get_node("Player").position.x - GameState.enemy_position)
-		print("Enemy Distance: ", GameState.enemy_distance)
+#		print("Enemy Distance: ", GameState.enemy_distance)
 	else:
 		if GameState.enemy_state == GameState.EnemyState.CHASING:
 			GameState.enemy_state = GameState.EnemyState.LOSTTRACK
@@ -79,14 +79,17 @@ func _change_scene() -> void:
 	
 func _enter_hiding_spot() -> void:
 	GameState.hiding_state = !GameState.hiding_state
+	var characters := get_parent().get_parent().get_node("Characters")
 	if GameState.hiding_state:
-		print("Hiding in ", HidingSpotType.keys()[hiding_spot_type])
+		characters.get_node("Player/Sprite2D").hide()
+		contextual_label.set_text("You are hiding...")
+		contextual.show()
 	else:
-		var characters := get_parent().get_parent().get_node("Characters")
 		if characters.get_child_count() > 1:
 			characters.get_node("Enemy").saw_player_when_entering_room = true
 			GameState.enemy_state = GameState.EnemyState.ROAMING
-		print("Came out from ", HidingSpotType.keys()[hiding_spot_type])
+		characters.get_node("Player/Sprite2D").show()
+		contextual.hide()
 
 func _pick_up_item() -> void:
 	GameState.emit_sound.emit(emit_sound_type)

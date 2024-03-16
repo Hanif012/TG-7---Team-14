@@ -109,6 +109,7 @@ coords = 1029
 position = Vector2(182, 555)
 scale = Vector2(0.2, 1)
 label = "To Garage"
+emit_sound_type = "Door"
 target_room = "Garage"
 coords = -604
 

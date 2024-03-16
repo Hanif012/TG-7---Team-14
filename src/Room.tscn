@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dltnr2rc0tcal"]
+[gd_scene load_steps=12 format=3 uid="uid://dltnr2rc0tcal"]
 
 [ext_resource type="Script" path="res://src/Room.gd" id="1_6p7ka"]
 [ext_resource type="Texture2D" uid="uid://bsp3yk8mcio7l" path="res://assets/rooms/background.png" id="2_hw2cj"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://src/SoundQueue.gd" id="6_5usal"]
 [ext_resource type="AudioStream" uid="uid://dpx4n3787ceyw" path="res://assets/audio/sfx/SFX_Open_Desk.ogg" id="7_17ybg"]
 [ext_resource type="AudioStream" uid="uid://366cttv4ccx5" path="res://assets/audio/sfx/SFX_Open_Cabinet.ogg" id="8_qmlgo"]
+[ext_resource type="AudioStream" uid="uid://b6hkhmmtk0tm" path="res://assets/audio/sfx/SFX_Door_1.ogg" id="9_sbeb1"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_sic8f"]
 normal = Vector2(1, 0)
@@ -87,6 +88,7 @@ COUNT = 5
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="OpenDeskQueue"]
 stream = ExtResource("7_17ybg")
+bus = &"SFX"
 
 [node name="OpenCabinetQueue" type="Node" parent="."]
 script = ExtResource("6_5usal")
@@ -94,5 +96,10 @@ COUNT = 5
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="OpenCabinetQueue"]
 stream = ExtResource("8_qmlgo")
+bus = &"SFX"
+
+[node name="DoorAudioPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_sbeb1")
+bus = &"SFX"
 
 [connection signal="timeout" from="EnemyHandler/EnemyMovementTimer" to="EnemyHandler" method="_on_enemy_movement_timer_timeout"]

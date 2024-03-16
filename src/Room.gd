@@ -1,7 +1,11 @@
 extends Node2D
 
 const EDGE_ZONE = int(1280/4.0)
-
+const DOOR_AUDIO_PATH : Array[String] = [
+	"res://assets/audio/sfx/SFX_Door_1.ogg",
+	"res://assets/audio/sfx/SFX_Door_2.ogg",
+	"res://assets/audio/sfx/SFX_Door_3.ogg"
+]
 @export var room_id := GameState.Room.ATTIC
 @export var door_positions : Array[float] = []
 
@@ -15,9 +19,15 @@ const EDGE_ZONE = int(1280/4.0)
 
 @onready var open_desk : SoundQueue = $OpenDeskQueue
 @onready var open_cabinet : SoundQueue = $OpenCabinetQueue
+@onready var door_audio_player : AudioStreamPlayer = $DoorAudioPlayer
 
 
 func _ready() -> void:
+	GameState.emit_sound.connect(play_search_sound)
+	if GameState.game_start:
+		GameState.game_start = false
+	else:
+		GameState.emit_sound.emit("Door")
 	GameState.transition_state = true
 	GameState.player_location = room_id
 	name = "Room"
@@ -30,12 +40,16 @@ func _ready() -> void:
 	await tween.finished
 	
 	GameState.transition_state = false
-	GameState.emit_sound.connect(play_search_sound)
+	
 
 func play_search_sound(str: String = "Desk"):
 	match str:
 		"Desk": open_desk.play_sound()
 		"Cabinet": open_cabinet.play_sound()
+		"Door": 
+			door_audio_player.stream = load(DOOR_AUDIO_PATH[randi_range(0, len(DOOR_AUDIO_PATH)-1)])
+			door_audio_player.playing = true
+		_: pass
 
 
 func _process(_delta) -> void:
