@@ -1,11 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://dip10wy2elfnj"]
+[gd_scene load_steps=9 format=3 uid="uid://dip10wy2elfnj"]
 
 [ext_resource type="PackedScene" uid="uid://dltnr2rc0tcal" path="res://src/Room.tscn" id="1_i08ix"]
 [ext_resource type="Texture2D" uid="uid://de1x4sctv63vf" path="res://assets/rooms/door.png" id="2_n1suu"]
 [ext_resource type="PackedScene" uid="uid://dcxwu8pgdyd7l" path="res://src/Interactible.tscn" id="3_gf3sh"]
 [ext_resource type="PackedScene" uid="uid://cq8lo7hied5xs" path="res://src/light2D/lamp.tscn" id="3_tf7cc"]
 [ext_resource type="Texture2D" uid="uid://drimtgnwyx78m" path="res://assets/rooms/living-room/desk.png" id="4_flbdp"]
-[ext_resource type="Texture2D" uid="uid://bvgpvoi1undrm" path="res://assets/rooms/blueprint/hallway.png" id="4_p4snd"]
 [ext_resource type="Texture2D" uid="uid://cvijyen7fryjb" path="res://assets/rooms/hallway/painting5.png" id="5_bpa6e"]
 [ext_resource type="Texture2D" uid="uid://dvam36t5vtnlu" path="res://assets/rooms/kitchen/table.png" id="6_5t2pg"]
 [ext_resource type="Texture2D" uid="uid://c2cnkfaxtuep5" path="res://assets/rooms/hallway/painting4.png" id="7_4w84q"]
@@ -98,8 +97,3 @@ interactible_type = 2
 label = "Search Table"
 emit_sound_type = "Desk"
 storage_index = 8
-
-[node name="Hallway" type="Sprite2D" parent="." index="8"]
-position = Vector2(0, 1314)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("4_p4snd")

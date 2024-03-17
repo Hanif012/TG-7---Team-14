@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://dltnr2rc0tcal" path="res://src/Room.tscn" id="1_6kbmm"]
 [ext_resource type="Texture2D" uid="uid://da25fr886gse8" path="res://assets/rooms/bedroom/bg w light.png" id="2_mqig3"]
-[ext_resource type="Texture2D" uid="uid://chawt2104ug1k" path="res://assets/rooms/bedroom/bed.png" id="5_0pjjq"]
+[ext_resource type="Texture2D" uid="uid://chawt2104ug1k" path="res://assets/rooms/bedroom/bed.PNG" id="5_0pjjq"]
 [ext_resource type="Texture2D" uid="uid://cpt0yda2rjlm0" path="res://assets/rooms/bedroom/wardrobe.png" id="6_8irfk"]
 [ext_resource type="Texture2D" uid="uid://bu6n8vl1v2btr" path="res://assets/rooms/bedroom/door1.png" id="6_q4h5y"]
 [ext_resource type="Texture2D" uid="uid://c7gcxx0tyfl0b" path="res://assets/rooms/bedroom/mirror.png" id="7_pvvtk"]
@@ -118,9 +118,3 @@ position = Vector2(-782, 572)
 scale = Vector2(1.5, 1)
 interactible_type = 1
 label = "Hide in Wardrobe"
-
-[node name="AudioStreamPlayer" parent="OpenDeskQueue" index="0"]
-bus = &"SFX"
-
-[node name="AudioStreamPlayer" parent="OpenCabinetQueue" index="0"]
-bus = &"SFX"
