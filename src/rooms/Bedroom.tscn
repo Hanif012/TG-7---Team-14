@@ -28,6 +28,7 @@ texture = ExtResource("2_mqig3")
 scale = Vector2(0.81, 0.81)
 
 [node name="Candles" type="Sprite2D" parent="EnvironmentBackground" index="0"]
+visible = false
 position = Vector2(284.234, 362.284)
 texture = ExtResource("10_24smy")
 
