@@ -13,16 +13,15 @@ const STAMINA_REGEN_TIRED = 2
 
 var state = 0
 
+signal update_stamina()
 
-# Debug
-var debug_output
-@onready var debug_label = $DebugLabel
 @onready var sprite = $Sprite2D
+@onready var ui = get_parent().get_parent().get_node("UI")
 
 # On ready, set position to starting position or door position
 func  _ready():
 	position.x = GameState.player_position
-#	_play_anim()
+	update_stamina.connect(ui.update_stamina_bar)
 
 
 func _physics_process(_delta):
@@ -32,6 +31,7 @@ func _physics_process(_delta):
 		if GameState.stamina > TIRED_TRESHOLD: # If no longer tired, reset tired_state and sprite
 			sprite.modulate = (Color(1, 1, 1, 1))
 			GameState.tired_state = false
+			ui.stamina_bar.self_modulate = "ffffff"
 		else:
 			sprite.modulate = (Color(1, 1, 1, 0.5)) # Decelerate and handle stamina recovery when tired
 			velocity.x = 0
@@ -41,9 +41,7 @@ func _physics_process(_delta):
 		_movement_handler()
 	_stamina_handler()
 	
-	# Debug
-	debug_output = str("Stamina: ",GameState.stamina)
-	debug_label.set_text(debug_output)
+	update_stamina.emit()
 	
 	_play_anim()
 	move_and_slide()
@@ -86,6 +84,7 @@ func _stamina_handler() -> void:
 				GameState.stamina = max(0, GameState.stamina - STAMINA_DRAIN)
 				if GameState.stamina == 0:
 					GameState.tired_state = true
+					ui.stamina_bar.self_modulate = "ff0000"
 					sprite.modulate = (Color(1, 1, 1, 0.5))
 			GameState.MovementState.CROUCHING:
 				if GameState.stamina < STAMINA_CAP:

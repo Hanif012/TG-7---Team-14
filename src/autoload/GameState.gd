@@ -28,7 +28,7 @@ var enemy_distance := 0
 
 const ENEMY_SPEED = 375.0
 
-const DEFAULT_MONSTER_TIMER := 5.0
+const DEFAULT_MONSTER_TIMER := 3.0
 var time_left := DEFAULT_MONSTER_TIMER
 
 var enemy_state := EnemyState.ROAMING
@@ -131,12 +131,18 @@ func randomize_location(instances: int, item_type: Item, locations: Array) -> Ar
 	return locations
 
 func item_consumption(index: int):
+	var ui = get_node("/root/Room/UI")
 	match (inventory[index]):
 		Item.STIM: 
 			stamina = 600
 			adrenaline_rush()
-		Item.BANDAGE: hp += 1
-		Item.MEDKIT: hp = MAX_HP
+			ui.contextual_label.set_text("Used Energy Drink")
+		Item.BANDAGE: 
+			hp += 1
+			ui.contextual_label.set_text("Used Bandage")
+		Item.MEDKIT: 
+			hp = MAX_HP
+			ui.contextual_label.set_text("Used Medkit")
 	inventory[index] = Item.NOTHING
 
 func check_if_meet_up() -> void:

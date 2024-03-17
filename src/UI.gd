@@ -3,6 +3,10 @@ extends CanvasLayer
 @onready var SFX_BUS_ID = AudioServer.get_bus_index("SFX")
 @onready var MUSIC_BUS_ID = AudioServer.get_bus_index("Music")
 
+@onready var hp_bar = $Control/HPBar
+@onready var stamina_bar = $Control/StaminaBar
+@onready var contextual_label = %ContextualBG/ContextualLabel
+
 signal item_consumed(index: int)
 
 const ITEM_IMAGE_PATH = [
@@ -45,8 +49,11 @@ func update_inventory_panel(item_type: int, slot: int):
 	%Inventory.get_child(slot).get_child(0).texture = ITEM_IMAGE_PATH[item_type]
 
 func update_hp_counter():
-	%HPCounter.text = str(GameState.hp, "/", GameState.MAX_HP)
+	hp_bar.value = GameState.hp
 
+func update_stamina_bar():
+	stamina_bar.value = GameState.stamina
+	
 func _on_slot_1_gui_input(event):
 	verify_input(event, 0)
 
@@ -64,7 +71,8 @@ func use_item(index: int):
 	%Inventory.get_child(index).get_child(0).texture = null
 	item_consumed.emit(index)
 	%ContextualBG.show()
-	%ContextualBG/ContextualLabel.text = str("Used an Item in Slot ", index+1)
+	
+#	%ContextualBG/ContextualLabel.text = str("Used an Item in Slot ", index+1)
 	$Timer.start()
 	await $Timer.timeout
 	%ContextualBG.hide()

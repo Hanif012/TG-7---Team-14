@@ -4,8 +4,11 @@ signal player_moves
 
 var saw_player_when_entering_room := true
 var in_attack_animation := false
-@onready var metal_pipe = $MetalPipeSoundQueue
+@onready var scream_sfx = $ScreamSFX
 @onready var player_character = get_parent().get_node("Player")
+
+@onready var point_light = $Sprite2D/PointLight2D
+
 @onready var room = get_parent().get_parent()
 
 func _ready() -> void:
@@ -37,12 +40,17 @@ func _physics_process(_delta):
 			move_and_slide()
 
 func commence_attack():
+	GameState.enemy_state = GameState.EnemyState.CHASING
 	in_attack_animation = true 
 	
 	$StrikeTimer.start()
 	await $StrikeTimer.timeout   # Attacking Charging time
 	
-	$Sprite2D.flip_v = true
+	point_light.texture_scale = 2
+	point_light.color = "a10000"
+	point_light.energy = 4
+	scream_sfx.play_sound()
+	
 	var distance = player_character.position.x - position.x
 	if distance < GameState.STRIKE_DISTANCE and distance >= -GameState.STRIKE_DISTANCE/5 and !$Sprite2D.flip_h:
 		GameState.hp -= 1
@@ -51,10 +59,13 @@ func commence_attack():
 		GameState.hp -= 1
 		GameState.adrenaline_rush()
 	
-	print(GameState.hp, "/", GameState.MAX_HP)
+#	print(GameState.hp, "/", GameState.MAX_HP)
 	
 	$CooldownTimer.start()
 	await $CooldownTimer.timeout   # Recovery time
-
-	$Sprite2D.flip_v = false
+	
+	point_light.texture_scale = 1
+	point_light.color = "fff759"
+	point_light.energy = 2
+	
 	in_attack_animation = false

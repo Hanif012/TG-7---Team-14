@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://src/Enemy.gd" id="1_5du7c"]
 [ext_resource type="Texture2D" uid="uid://b1ilp0gbixrlt" path="res://assets/character/ghost-right.png" id="2_cgweu"]
 [ext_resource type="PackedScene" uid="uid://bsjf1lr440lo0" path="res://src/SoundQueue.tscn" id="3_qjyc1"]
-[ext_resource type="AudioStream" uid="uid://dnj2wm4mreme3" path="res://assets/audio/metal-pipe.mp3" id="4_6t3fk"]
+[ext_resource type="AudioStream" uid="uid://da3fyheopwjm6" path="res://assets/audio/sfx/SFX_Jump_Scare.ogg" id="4_vbu0o"]
 [ext_resource type="Texture2D" uid="uid://bsv5hnd6pvj6f" path="res://assets/character/ghost-left.png" id="6_vl3dm"]
 
 [sub_resource type="Gradient" id="Gradient_fiewn"]
@@ -134,11 +134,11 @@ position = Vector2(1.5, 6.5)
 shape = SubResource("CapsuleShape2D_2shc0")
 disabled = true
 
-[node name="MetalPipeSoundQueue" parent="." instance=ExtResource("3_qjyc1")]
-COUNT = 20
+[node name="ScreamSFX" parent="." instance=ExtResource("3_qjyc1")]
+COUNT = 3
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="MetalPipeSoundQueue"]
-stream = ExtResource("4_6t3fk")
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="ScreamSFX"]
+stream = ExtResource("4_vbu0o")
 bus = &"SFX"
 
 [node name="StrikeTimer" type="Timer" parent="."]
@@ -146,7 +146,7 @@ wait_time = 0.25
 one_shot = true
 
 [node name="CooldownTimer" type="Timer" parent="."]
-wait_time = 0.75
+wait_time = 1.25
 one_shot = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
