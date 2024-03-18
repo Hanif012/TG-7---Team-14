@@ -42,8 +42,8 @@ func _ready() -> void:
 	GameState.transition_state = false
 	
 
-func play_search_sound(str: String = "Desk"):
-	match str:
+func play_search_sound(string: String = "Desk"):
+	match string:
 		"Desk": open_desk.play_sound()
 		"Cabinet": open_cabinet.play_sound()
 		"Door": 

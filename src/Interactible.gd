@@ -95,8 +95,15 @@ func _pick_up_item() -> void:
 	GameState.emit_sound.emit(emit_sound_type)
 	if item_here == GameState.Item.KEY:
 		GameState.keys += 1
-		contextual_label.set_text("Found a Piece of the Key")
-		contextual.show()
+		if GameState.keys != 5:
+			contextual_label.set_text("Found a Piece of the Key")
+			contextual.show()
+		else:
+			contextual_label.set_text("All keys are found. Now, ESCAPE!")
+			GameState.enemy_state = GameState.EnemyState.FINAL
+			get_parent().get_parent().get_node("EnemyHandler").enemy_movement_timer.stop()
+			get_parent().get_parent().get_node("EnemyHandler").run_enemy_handler()
+			contextual.show()
 	elif item_here != GameState.Item.NOTHING:
 		if GameState.inventory[0] == GameState.Item.NOTHING:
 			GameState.inventory[0] = item_here

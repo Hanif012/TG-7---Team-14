@@ -13,6 +13,7 @@ var in_attack_animation := false
 
 func _ready() -> void:
 	if GameState.hiding_state:
+		print("AAAA")
 		saw_player_when_entering_room = false
 		GameState.enemy_state = GameState.EnemyState.LOSTTRACK
 		room.enemy_handler.run_enemy_handler()

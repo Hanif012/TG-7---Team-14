@@ -74,12 +74,10 @@ offset = Vector2(0, -200)
 script = ExtResource("5_b6txj")
 
 [node name="EnemyMovementTimer" type="Timer" parent="EnemyHandler"]
-unique_name_in_owner = true
 wait_time = 5.0
 one_shot = true
 
 [node name="LostTrackTimer" type="Timer" parent="EnemyHandler"]
-unique_name_in_owner = true
 one_shot = true
 
 [node name="OpenDeskQueue" type="Node" parent="."]
