@@ -84,3 +84,7 @@ func use_item(index: int):
 	$Timer.start()
 	await $Timer.timeout
 	%ContextualBG.hide()
+
+func _on_return_pressed():
+	%Menu.hide()
+	get_tree().paused = false
