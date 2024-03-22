@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://chawt2104ug1k"
-path="res://.godot/imported/bed.png-00cbbad931318634e3c642d5f7e94503.ctex"
+uid="uid://c61m10j1ssj4e"
+path="res://.godot/imported/victory_screen.png-6629a6976462bcdd64daf40f104a7955.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/rooms/bedroom/bed.png"
-dest_files=["res://.godot/imported/bed.png-00cbbad931318634e3c642d5f7e94503.ctex"]
+source_file="res://assets/screen/victory_screen.png"
+dest_files=["res://.godot/imported/victory_screen.png-6629a6976462bcdd64daf40f104a7955.ctex"]
 
 [params]
 

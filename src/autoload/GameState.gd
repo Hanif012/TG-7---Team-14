@@ -112,6 +112,7 @@ func restart_game():
 		Item.NOTHING, Item.NOTHING, Item.NOTHING, Item.NOTHING, Item.NOTHING
 	]
 	inventory = [Item.NOTHING, Item.NOTHING, Item.NOTHING]
+	keys = 0
 	distribute_items()
 
 func distribute_items() -> void :

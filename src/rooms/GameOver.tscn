@@ -1,15 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://ib1cfrp87svy"]
+[gd_scene load_steps=7 format=3 uid="uid://ib1cfrp87svy"]
 
 [ext_resource type="Script" path="res://src/rooms/GameOver.gd" id="1_kvhk8"]
 [ext_resource type="PackedScene" uid="uid://bsjf1lr440lo0" path="res://src/SoundQueue.tscn" id="2_dmqn2"]
 [ext_resource type="AudioStream" uid="uid://da3fyheopwjm6" path="res://assets/audio/sfx/SFX_Jump_Scare.ogg" id="3_nw110"]
-[ext_resource type="Script" path="res://src/menu/Menu.gd" id="4_v43vh"]
-[ext_resource type="FontFile" uid="uid://dy58wm81l37t" path="res://assets/fonts/Creepster-Regular.ttf" id="5_vavdt"]
+[ext_resource type="Texture2D" uid="uid://drhugjsrcy62b" path="res://assets/screen/game_over_screen.png" id="4_xdfq4"]
 [ext_resource type="PackedScene" uid="uid://d28spfrf4kn87" path="res://src/menu/MenuButton.tscn" id="6_0b3ti"]
 [ext_resource type="StyleBox" uid="uid://dn3hyd3jlh5pi" path="res://assets/theme/ButtonWithoutBG.tres" id="7_x65bu"]
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_dunn2"]
-light_mode = 1
 
 [node name="Game Over" type="Node2D"]
 script = ExtResource("1_kvhk8")
@@ -21,85 +17,36 @@ COUNT = 3
 stream = ExtResource("3_nw110")
 bus = &"SFX"
 
-[node name="Menu" type="Control" parent="."]
-material = SubResource("CanvasItemMaterial_dunn2")
-layout_mode = 3
-anchors_preset = 15
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
+offset_right = 1280.0
+offset_bottom = 720.0
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("4_xdfq4")
+expand_mode = 2
+
+[node name="Button" parent="CanvasLayer" instance=ExtResource("6_0b3ti")]
+use_parent_material = true
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 636.0
-offset_top = 203.0
-offset_right = 636.0
-offset_bottom = 203.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-script = ExtResource("4_v43vh")
-
-[node name="GameTitle" type="Label" parent="Menu"]
-use_parent_material = true
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -266.0
-offset_top = -142.0
-offset_right = 266.0
-offset_bottom = 11.0
-grow_horizontal = 2
-theme_override_colors/font_color = Color(0.823529, 0.0235294, 0.0235294, 1)
-theme_override_fonts/font = ExtResource("5_vavdt")
-theme_override_font_sizes/font_size = 128
-text = "Nightmare"
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Menu"]
-use_parent_material = true
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -111.0
-offset_top = 77.0
-offset_right = 95.0
-offset_bottom = 334.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-alignment = 1
-
-[node name="Play" parent="Menu/VBoxContainer" instance=ExtResource("6_0b3ti")]
-use_parent_material = true
-layout_mode = 2
+offset_left = -509.0
+offset_top = -107.0
+offset_right = -36.0
+offset_bottom = -32.0
+grow_horizontal = 0
+grow_vertical = 0
 theme_override_styles/normal = ExtResource("7_x65bu")
 theme_override_styles/hover = ExtResource("7_x65bu")
 theme_override_styles/pressed = ExtResource("7_x65bu")
 theme_override_styles/disabled = ExtResource("7_x65bu")
 theme_override_styles/focus = ExtResource("7_x65bu")
+text = "Back to Main Menu"
 
-[node name="Options" parent="Menu/VBoxContainer" instance=ExtResource("6_0b3ti")]
-use_parent_material = true
-layout_mode = 2
-theme_override_styles/normal = ExtResource("7_x65bu")
-theme_override_styles/hover = ExtResource("7_x65bu")
-theme_override_styles/pressed = ExtResource("7_x65bu")
-theme_override_styles/disabled = ExtResource("7_x65bu")
-theme_override_styles/focus = ExtResource("7_x65bu")
-text = "Options"
-
-[node name="Quit" parent="Menu/VBoxContainer" instance=ExtResource("6_0b3ti")]
-use_parent_material = true
-layout_mode = 2
-theme_override_styles/normal = ExtResource("7_x65bu")
-theme_override_styles/hover = ExtResource("7_x65bu")
-theme_override_styles/pressed = ExtResource("7_x65bu")
-theme_override_styles/disabled = ExtResource("7_x65bu")
-theme_override_styles/focus = ExtResource("7_x65bu")
-text = "Quit
-"
-
-[connection signal="pressed" from="Menu/VBoxContainer/Play" to="Menu" method="_on_play_pressed"]
-[connection signal="pressed" from="Menu/VBoxContainer/Options" to="Menu" method="_on_options_pressed"]
-[connection signal="pressed" from="Menu/VBoxContainer/Quit" to="Menu" method="_on_quit_pressed"]
+[connection signal="pressed" from="CanvasLayer/Button" to="." method="_on_button_pressed"]

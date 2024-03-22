@@ -1,7 +1,4 @@
 extends Node2D
 
-func _ready():
-	$ScreamSFX.play_sound()
-
 func _on_button_pressed():
 	get_tree().change_scene_to_file("res://src/menu/MainMenu.tscn")
