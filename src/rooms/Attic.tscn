@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://dvnvq8n2pw70a"]
 
 [ext_resource type="PackedScene" uid="uid://dltnr2rc0tcal" path="res://src/Room.tscn" id="1_fquxp"]
-[ext_resource type="Texture2D" uid="uid://sh7nbjssk3uy" path="res://assets/rooms/attic/bg.png" id="2_c0njg"]
+[ext_resource type="Texture2D" uid="uid://bbdtyx5gb6r2m" path="res://assets/rooms/attic-bg.png" id="2_bqnkp"]
 [ext_resource type="Texture2D" uid="uid://de1x4sctv63vf" path="res://assets/rooms/door.png" id="2_shvpn"]
 [ext_resource type="PackedScene" uid="uid://dcxwu8pgdyd7l" path="res://src/Interactible.tscn" id="3_livvt"]
 [ext_resource type="Texture2D" uid="uid://c0i8teyci4ecm" path="res://assets/rooms/bathroom/cabinet.png" id="4_rkkj8"]
@@ -14,9 +14,9 @@
 door_positions = Array[float]([-600.0])
 
 [node name="Background" parent="." index="0"]
-position = Vector2(-23, 277)
+position = Vector2(0, 334)
 scale = Vector2(0.85, 1)
-texture = ExtResource("2_c0njg")
+texture = ExtResource("2_bqnkp")
 
 [node name="Door1" type="Sprite2D" parent="EnvironmentBackground" index="0"]
 position = Vector2(-576.568, 364)

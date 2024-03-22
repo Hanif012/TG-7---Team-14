@@ -29,11 +29,11 @@ func _physics_process(_delta):
 		velocity.x = 0
 	elif GameState.tired_state:
 		if GameState.stamina > TIRED_TRESHOLD: # If no longer tired, reset tired_state and sprite
-			sprite.modulate = (Color(1, 1, 1, 1))
+#			sprite.modulate = (Color(1, 1, 1, 1))
 			GameState.tired_state = false
 			ui.stamina_bar.self_modulate = "ffffff"
 		else:
-			sprite.modulate = (Color(1, 1, 1, 0.5)) # Decelerate and handle stamina recovery when tired
+#			sprite.modulate = (Color(1, 1, 1, 0.5)) # Decelerate and handle stamina recovery when tired
 			velocity.x = 0
 			GameState.movement_state = GameState.MovementState.TIRED
 		
@@ -49,10 +49,7 @@ func _physics_process(_delta):
 func _movement_handler() -> void:
 	var direction = Input.get_axis("ui_left", "ui_right")
 	if direction:
-		if Input.is_action_pressed("crouch"): #Crouching
-			velocity.x = direction * GameState.speed / 2
-			GameState.movement_state = GameState.MovementState.CROUCHING
-		elif Input.is_action_pressed("sprint"):
+		if Input.is_action_pressed("sprint"):
 			if GameState.stamina > 0:
 				GameState.movement_state = GameState.MovementState.SPRINTING
 				velocity.x = direction * GameState.speed * 2
@@ -64,10 +61,7 @@ func _movement_handler() -> void:
 			GameState.movement_state = GameState.MovementState.WALKING
 	else:
 		velocity.x = 0
-		if Input.is_action_pressed("crouch"):
-			GameState.movement_state = GameState.MovementState.CROUCHING
-		else:
-			GameState.movement_state = GameState.MovementState.IDLE
+		GameState.movement_state = GameState.MovementState.IDLE
 	
 
 func _stamina_handler() -> void:
@@ -85,21 +79,22 @@ func _stamina_handler() -> void:
 				if GameState.stamina == 0:
 					GameState.tired_state = true
 					ui.stamina_bar.self_modulate = "ff0000"
-					sprite.modulate = (Color(1, 1, 1, 0.5))
-			GameState.MovementState.CROUCHING:
-				if GameState.stamina < STAMINA_CAP:
-					GameState.stamina = min(STAMINA_CAP, GameState.stamina + STAMINA_REGEN_CROUCHING)
+#					sprite.modulate = (Color(1, 1, 1, 0.5))
 			GameState.MovementState.TIRED:
 				GameState.stamina = min(GameState.MAX_STAMINA, GameState.stamina + STAMINA_REGEN_TIRED)
 
 func _play_anim() -> void:
 	match GameState.movement_state:
 		GameState.MovementState.IDLE:
-			$AnimationPlayer.play("RESET")
+			if !$Sprite2D.flip_h:
+				$AnimationPlayer.play("RESET")
+			else:
+				$AnimationPlayer.play("RESET")
 		GameState.MovementState.TIRED:
-			$AnimationPlayer.play("RESET")
-		GameState.MovementState.CROUCHING:
-			$AnimationPlayer.play("RESET")
+			if !$Sprite2D.flip_h:
+				$AnimationPlayer.play("tired_right")
+			else:
+				$AnimationPlayer.play("tired_left")
 		GameState.MovementState.WALKING:
 			if velocity.x > 0:
 				$AnimationPlayer.play("walk_right")

@@ -42,7 +42,7 @@ var hp := 3 :
 		hp = clamp(value, 0, MAX_HP)
 		hp_changed.emit()
 		if hp == 0:
-			get_tree().change_scene_to_file("res://src/rooms/GameOver.tscn")
+			get_tree().change_scene_to_file("res://src/menu/GameOverMenu.tscn")
 
 const DEFAULT_SPEED := 300.0
 var speed := DEFAULT_SPEED
