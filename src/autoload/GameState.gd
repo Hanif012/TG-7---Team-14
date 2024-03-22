@@ -36,6 +36,9 @@ var enemy_state := EnemyState.ROAMING
 const MAX_STAMINA := 600
 var stamina := MAX_STAMINA
 
+var music_slider_value: float = 1
+var sfx_slider_value: float = 1
+
 const MAX_HP := 3
 var hp := 3 :
 	set(value):

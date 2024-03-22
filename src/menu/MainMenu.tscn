@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://b47lvs3ytpt4t"]
+[gd_scene load_steps=21 format=3 uid="uid://b47lvs3ytpt4t"]
 
 [ext_resource type="Script" path="res://src/menu/MainMenu.gd" id="1_unyei"]
 [ext_resource type="Texture2D" uid="uid://da25fr886gse8" path="res://assets/rooms/bedroom/bg w light.png" id="2_5vht4"]
@@ -7,7 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://d28spfrf4kn87" path="res://src/menu/MenuButton.tscn" id="3_tf5xu"]
 [ext_resource type="StyleBox" uid="uid://dn3hyd3jlh5pi" path="res://assets/theme/ButtonWithoutBG.tres" id="4_3ctp3"]
 [ext_resource type="Texture2D" uid="uid://b1u0rrnkopcq7" path="res://assets/rooms/bedroom/desk.png" id="4_mh6ti"]
-[ext_resource type="Script" path="res://src/menu/Menu.gd" id="4_vkemu"]
 [ext_resource type="Texture2D" uid="uid://bu6n8vl1v2btr" path="res://assets/rooms/bedroom/door1.png" id="5_wrtwr"]
 [ext_resource type="Texture2D" uid="uid://egvijwi8gajh" path="res://assets/rooms/bedroom/door2.png" id="6_5jrya"]
 [ext_resource type="Texture2D" uid="uid://dj8sp4r3p0rwv" path="res://assets/rooms/bedroom/painting1.png" id="7_qhyb3"]
@@ -129,7 +128,9 @@ shape = SubResource("WorldBoundaryShape2D_lylfe")
 position = Vector2(350, 560)
 offset = Vector2(0, -200)
 
-[node name="Menu" type="Control" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="MainMenuControl" type="Control" parent="CanvasLayer"]
 material = SubResource("CanvasItemMaterial_4kvms")
 layout_mode = 3
 anchors_preset = 15
@@ -137,9 +138,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("4_vkemu")
 
-[node name="GameTitle" type="Label" parent="Menu"]
+[node name="GameTitle" type="Label" parent="CanvasLayer/MainMenuControl"]
 use_parent_material = true
 layout_mode = 1
 anchors_preset = 5
@@ -154,8 +154,10 @@ theme_override_colors/font_color = Color(0.823529, 0.0235294, 0.0235294, 1)
 theme_override_fonts/font = ExtResource("3_imwec")
 theme_override_font_sizes/font_size = 128
 text = "Nightmare"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Menu"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MainMenuControl"]
 use_parent_material = true
 layout_mode = 1
 anchors_preset = 8
@@ -173,7 +175,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 alignment = 1
 
-[node name="Play" parent="Menu/VBoxContainer" instance=ExtResource("3_tf5xu")]
+[node name="Play" parent="CanvasLayer/MainMenuControl/VBoxContainer" instance=ExtResource("3_tf5xu")]
 use_parent_material = true
 layout_mode = 2
 theme_override_styles/normal = ExtResource("4_3ctp3")
@@ -182,7 +184,7 @@ theme_override_styles/pressed = ExtResource("4_3ctp3")
 theme_override_styles/disabled = ExtResource("4_3ctp3")
 theme_override_styles/focus = ExtResource("4_3ctp3")
 
-[node name="Options" parent="Menu/VBoxContainer" instance=ExtResource("3_tf5xu")]
+[node name="Options" parent="CanvasLayer/MainMenuControl/VBoxContainer" instance=ExtResource("3_tf5xu")]
 use_parent_material = true
 layout_mode = 2
 theme_override_styles/normal = ExtResource("4_3ctp3")
@@ -192,7 +194,7 @@ theme_override_styles/disabled = ExtResource("4_3ctp3")
 theme_override_styles/focus = ExtResource("4_3ctp3")
 text = "Options"
 
-[node name="Quit" parent="Menu/VBoxContainer" instance=ExtResource("3_tf5xu")]
+[node name="Quit" parent="CanvasLayer/MainMenuControl/VBoxContainer" instance=ExtResource("3_tf5xu")]
 use_parent_material = true
 layout_mode = 2
 theme_override_styles/normal = ExtResource("4_3ctp3")
@@ -203,6 +205,106 @@ theme_override_styles/focus = ExtResource("4_3ctp3")
 text = "Quit
 "
 
-[connection signal="pressed" from="Menu/VBoxContainer/Play" to="Menu" method="_on_play_pressed"]
-[connection signal="pressed" from="Menu/VBoxContainer/Options" to="Menu" method="_on_options_pressed"]
-[connection signal="pressed" from="Menu/VBoxContainer/Quit" to="Menu" method="_on_quit_pressed"]
+[node name="OptionControl" type="Control" parent="CanvasLayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="OptionTitle" type="Label" parent="CanvasLayer/OptionControl"]
+use_parent_material = true
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -266.0
+offset_top = 50.0
+offset_right = 266.0
+offset_bottom = 203.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.823529, 0.0235294, 0.0235294, 1)
+theme_override_fonts/font = ExtResource("3_imwec")
+theme_override_font_sizes/font_size = 128
+text = "Options"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/OptionControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 400
+theme_override_constants/margin_right = 400
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/OptionControl/MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer/OptionControl/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 16
+columns = 2
+
+[node name="MusicLabel" type="Label" parent="CanvasLayer/OptionControl/MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_imwec")
+theme_override_font_sizes/font_size = 24
+text = "Music"
+horizontal_alignment = 2
+
+[node name="MusicSlider" type="HSlider" parent="CanvasLayer/OptionControl/MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.05
+value = 1.0
+
+[node name="SFXLabel" type="Label" parent="CanvasLayer/OptionControl/MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_imwec")
+theme_override_font_sizes/font_size = 24
+text = "SFX"
+horizontal_alignment = 2
+
+[node name="SFXSlider" type="HSlider" parent="CanvasLayer/OptionControl/MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.05
+value = 1.0
+
+[node name="Return" parent="CanvasLayer/OptionControl" instance=ExtResource("3_tf5xu")]
+use_parent_material = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -99.0
+offset_top = 66.5
+offset_right = 99.0
+offset_bottom = 141.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal = ExtResource("4_3ctp3")
+theme_override_styles/hover = ExtResource("4_3ctp3")
+theme_override_styles/pressed = ExtResource("4_3ctp3")
+theme_override_styles/disabled = ExtResource("4_3ctp3")
+theme_override_styles/focus = ExtResource("4_3ctp3")
+text = "Return"
+
+[connection signal="pressed" from="CanvasLayer/MainMenuControl/VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="CanvasLayer/MainMenuControl/VBoxContainer/Options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="CanvasLayer/MainMenuControl/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
+[connection signal="value_changed" from="CanvasLayer/OptionControl/MarginContainer/VBoxContainer/GridContainer/MusicSlider" to="." method="_on_music_slider_value_changed"]
+[connection signal="value_changed" from="CanvasLayer/OptionControl/MarginContainer/VBoxContainer/GridContainer/SFXSlider" to="." method="_on_sfx_slider_value_changed"]
+[connection signal="pressed" from="CanvasLayer/OptionControl/Return" to="." method="_on_return_pressed"]

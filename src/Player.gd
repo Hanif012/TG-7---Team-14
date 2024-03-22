@@ -86,10 +86,7 @@ func _stamina_handler() -> void:
 func _play_anim() -> void:
 	match GameState.movement_state:
 		GameState.MovementState.IDLE:
-			if !$Sprite2D.flip_h:
-				$AnimationPlayer.play("RESET")
-			else:
-				$AnimationPlayer.play("RESET")
+			$AnimationPlayer.play("RESET")
 		GameState.MovementState.TIRED:
 			if !$Sprite2D.flip_h:
 				$AnimationPlayer.play("tired_right")
