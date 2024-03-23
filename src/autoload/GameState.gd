@@ -10,7 +10,8 @@ const NUM_OF_STIM = 2
 const NUM_OF_BANDAGE = 1
 const NUM_OF_MEDKIT = 2
 
-var game_start := true
+var game_start := false
+var game_running := false
 var transition_state := false
 var hiding_state := false
 var movement_state := MovementState.IDLE
@@ -31,7 +32,12 @@ const ENEMY_SPEED = 375.0
 const DEFAULT_MONSTER_TIMER := 3.0
 var time_left := DEFAULT_MONSTER_TIMER
 
-var enemy_state := EnemyState.ROAMING
+var enemy_state := EnemyState.CHASING :
+	set(value):
+		if enemy_state != value:
+			MusicManager.set_track(value)
+			pass
+		enemy_state = value
 
 const MAX_STAMINA := 600
 var stamina := MAX_STAMINA
@@ -89,6 +95,7 @@ var keys := 0:
 
 func restart_game():
 	game_start = true
+	game_running = true
 	transition_state = false
 	hiding_state = false
 	movement_state = MovementState.IDLE

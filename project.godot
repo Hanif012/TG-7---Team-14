@@ -17,7 +17,7 @@ config/features=PackedStringArray("4.1", "Mobile")
 [autoload]
 
 GameState="*res://src/autoload/GameState.gd"
-SoundManager="*res://src/autoload/SoundManager.tscn"
+MusicManager="*res://src/autoload/MusicManager.tscn"
 
 [display]
 
