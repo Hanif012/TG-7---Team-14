@@ -12,7 +12,7 @@ dest_files=["res://.godot/imported/Music_Chase.ogg-66b1ce7756a6aff1938cf1fd196b5
 
 [params]
 
-loop=false
+loop=true
 loop_offset=0
 bpm=0
 beat_count=0

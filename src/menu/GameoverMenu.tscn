@@ -1,208 +1,52 @@
-[gd_scene load_steps=22 format=3 uid="uid://6c13t6puvj2x"]
+[gd_scene load_steps=7 format=3 uid="uid://ib1cfrp87svy"]
 
-[ext_resource type="Script" path="res://src/menu/MainMenu.gd" id="1_nip4y"]
-[ext_resource type="Texture2D" uid="uid://da25fr886gse8" path="res://assets/rooms/bedroom/bg w light.png" id="2_bnfik"]
-[ext_resource type="Texture2D" uid="uid://c4att4l6dxw2a" path="res://assets/rooms/bedroom/candles.png" id="3_b6qtj"]
-[ext_resource type="Texture2D" uid="uid://b1u0rrnkopcq7" path="res://assets/rooms/bedroom/desk.png" id="4_1mn7j"]
-[ext_resource type="Texture2D" uid="uid://bu6n8vl1v2btr" path="res://assets/rooms/bedroom/door1.png" id="5_p4bcy"]
-[ext_resource type="Texture2D" uid="uid://egvijwi8gajh" path="res://assets/rooms/bedroom/door2.png" id="6_pi7j0"]
-[ext_resource type="Texture2D" uid="uid://dj8sp4r3p0rwv" path="res://assets/rooms/bedroom/painting1.png" id="7_t0rvp"]
-[ext_resource type="Texture2D" uid="uid://dgr20ljtu7mcl" path="res://assets/rooms/bedroom/window.png" id="8_xckee"]
-[ext_resource type="Texture2D" uid="uid://c7gcxx0tyfl0b" path="res://assets/rooms/bedroom/mirror.png" id="9_ahn80"]
-[ext_resource type="Texture2D" uid="uid://bplmi61i61ue" path="res://assets/rooms/bedroom/table.png" id="10_aropv"]
-[ext_resource type="Texture2D" uid="uid://chawt2104ug1k" path="res://assets/rooms/bedroom/bed.PNG" id="11_s88vp"]
-[ext_resource type="Texture2D" uid="uid://cpt0yda2rjlm0" path="res://assets/rooms/bedroom/wardrobe.png" id="12_suwpq"]
-[ext_resource type="PackedScene" uid="uid://brq606f7n6bjg" path="res://src/light2D/BedLamp.tscn" id="13_l5t3v"]
-[ext_resource type="PackedScene" uid="uid://dcx6410y7h3gq" path="res://src/light2D/Candle.tscn" id="14_koio7"]
-[ext_resource type="Script" path="res://src/menu/Menu.gd" id="15_hbfqv"]
-[ext_resource type="FontFile" uid="uid://dy58wm81l37t" path="res://assets/fonts/Creepster-Regular.ttf" id="16_044im"]
-[ext_resource type="PackedScene" uid="uid://d28spfrf4kn87" path="res://src/menu/MenuButton.tscn" id="17_epc5s"]
-[ext_resource type="StyleBox" uid="uid://dn3hyd3jlh5pi" path="res://assets/theme/ButtonWithoutBG.tres" id="18_6hoxt"]
+[ext_resource type="Script" path="res://src/menu/GameOverMenu.gd" id="1_a6bge"]
+[ext_resource type="PackedScene" uid="uid://bsjf1lr440lo0" path="res://src/SoundQueue.tscn" id="2_fjtqh"]
+[ext_resource type="AudioStream" uid="uid://da3fyheopwjm6" path="res://assets/audio/sfx/SFX_Jump_Scare.ogg" id="3_xsn32"]
+[ext_resource type="Texture2D" uid="uid://drhugjsrcy62b" path="res://assets/screen/game_over_screen.png" id="4_nxeh0"]
+[ext_resource type="PackedScene" uid="uid://d28spfrf4kn87" path="res://src/menu/MenuButton.tscn" id="5_7x8y4"]
+[ext_resource type="StyleBox" uid="uid://dn3hyd3jlh5pi" path="res://assets/theme/ButtonWithoutBG.tres" id="6_grbbg"]
 
-[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_sic8f"]
-normal = Vector2(1, 0)
+[node name="Game Over" type="Node2D"]
+script = ExtResource("1_a6bge")
 
-[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_lylfe"]
-normal = Vector2(-1, 0)
+[node name="ScreamSFX" parent="." instance=ExtResource("2_fjtqh")]
+COUNT = 3
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_4kvms"]
-light_mode = 1
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="ScreamSFX"]
+stream = ExtResource("3_xsn32")
+bus = &"SFX"
 
-[node name="MainMenu" type="Node"]
-script = ExtResource("1_nip4y")
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="Background" type="Node2D" parent="."]
-position = Vector2(283, 0)
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
+offset_right = 1280.0
+offset_bottom = 720.0
 
-[node name="Room" type="Node2D" parent="Background"]
-process_mode = 1
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("4_nxeh0")
+expand_mode = 2
 
-[node name="Background" type="Sprite2D" parent="Background/Room"]
-texture_filter = 1
-texture_repeat = 1
-position = Vector2(0, 360)
-scale = Vector2(0.77, 0.81)
-texture = ExtResource("2_bnfik")
-
-[node name="EnvironmentBackground" type="Node2D" parent="Background/Room"]
-position = Vector2(0, 68)
-scale = Vector2(0.81, 0.81)
-
-[node name="Candles" type="Sprite2D" parent="Background/Room/EnvironmentBackground"]
-position = Vector2(284.234, 362.284)
-texture = ExtResource("3_b6qtj")
-
-[node name="Desk" type="Sprite2D" parent="Background/Room/EnvironmentBackground"]
-position = Vector2(284.234, 362.284)
-texture = ExtResource("4_1mn7j")
-
-[node name="Door1" type="Sprite2D" parent="Background/Room/EnvironmentBackground"]
-position = Vector2(284.234, 362.284)
-texture = ExtResource("5_p4bcy")
-
-[node name="Door2" type="Sprite2D" parent="Background/Room/EnvironmentBackground"]
-position = Vector2(284.234, 362.284)
-texture = ExtResource("6_pi7j0")
-
-[node name="Painting1" type="Sprite2D" parent="Background/Room/EnvironmentBackground"]
-position = Vector2(284.234, 362.284)
-texture = ExtResource("7_t0rvp")
-
-[node name="Window" type="Sprite2D" parent="Background/Room/EnvironmentBackground"]
-position = Vector2(284.234, 362.284)
-texture = ExtResource("8_xckee")
-
-[node name="Mirror" type="Sprite2D" parent="Background/Room/EnvironmentBackground"]
-position = Vector2(49.6667, 365.247)
-scale = Vector2(0.143, 0.143)
-texture = ExtResource("9_ahn80")
-
-[node name="Table" type="Sprite2D" parent="Background/Room/EnvironmentBackground"]
-position = Vector2(284.234, 362.284)
-texture = ExtResource("10_aropv")
-
-[node name="Bed" type="Sprite2D" parent="Background/Room/EnvironmentBackground"]
-position = Vector2(284.234, 362.284)
-texture = ExtResource("11_s88vp")
-
-[node name="Wardrobe" type="Sprite2D" parent="Background/Room/EnvironmentBackground"]
-position = Vector2(-964.673, 486.42)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("12_suwpq")
-
-[node name="Lighting" type="Node2D" parent="Background/Room"]
-position = Vector2(0, 360)
-scale = Vector2(1.22, 1.22)
-
-[node name="DarkCanvas" type="CanvasModulate" parent="Background/Room/Lighting"]
-editor_description = "for creating night effect"
-visibility_layer = 2
-color = Color(0.258824, 0.223529, 0.341176, 1)
-
-[node name="BedLamp" parent="Background/Room/Lighting" instance=ExtResource("13_l5t3v")]
-position = Vector2(-445.902, 48.3604)
-scale = Vector2(0.999998, 0.999998)
-
-[node name="Candle" parent="Background/Room/Lighting" instance=ExtResource("14_koio7")]
-position = Vector2(404.098, 63.1147)
-scale = Vector2(0.819672, 0.819672)
-
-[node name="Borders" type="Node2D" parent="Background/Room"]
-position = Vector2(0, 360)
-scale = Vector2(1.22, 1.22)
-
-[node name="LeftBorder" type="StaticBody2D" parent="Background/Room/Borders"]
-position = Vector2(-760, 0)
-metadata/_edit_group_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Background/Room/Borders/LeftBorder"]
-shape = SubResource("WorldBoundaryShape2D_sic8f")
-
-[node name="RightBorder" type="StaticBody2D" parent="Background/Room/Borders"]
-position = Vector2(760, 0)
-metadata/_edit_group_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Background/Room/Borders/RightBorder"]
-shape = SubResource("WorldBoundaryShape2D_lylfe")
-
-[node name="Camera2D" type="Camera2D" parent="Background/Room"]
-position = Vector2(350, 560)
-offset = Vector2(0, -200)
-
-[node name="Menu" type="Control" parent="."]
-material = SubResource("CanvasItemMaterial_4kvms")
-layout_mode = 3
-anchors_preset = 15
+[node name="Button" parent="CanvasLayer" instance=ExtResource("5_7x8y4")]
+use_parent_material = true
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("15_hbfqv")
+offset_left = -509.0
+offset_top = -107.0
+offset_right = -36.0
+offset_bottom = -32.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_styles/normal = ExtResource("6_grbbg")
+theme_override_styles/hover = ExtResource("6_grbbg")
+theme_override_styles/pressed = ExtResource("6_grbbg")
+theme_override_styles/disabled = ExtResource("6_grbbg")
+theme_override_styles/focus = ExtResource("6_grbbg")
+text = "Back to Main Menu"
 
-[node name="GameTitle" type="Label" parent="Menu"]
-use_parent_material = true
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -266.0
-offset_top = 50.0
-offset_right = 266.0
-offset_bottom = 203.0
-grow_horizontal = 2
-theme_override_colors/font_color = Color(0.823529, 0.0235294, 0.0235294, 1)
-theme_override_fonts/font = ExtResource("16_044im")
-theme_override_font_sizes/font_size = 128
-text = "Nightmare"
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Menu"]
-use_parent_material = true
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -111.0
-offset_top = -85.0
-offset_right = 95.0
-offset_bottom = 172.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-alignment = 1
-
-[node name="Play" parent="Menu/VBoxContainer" instance=ExtResource("17_epc5s")]
-use_parent_material = true
-layout_mode = 2
-theme_override_styles/normal = ExtResource("18_6hoxt")
-theme_override_styles/hover = ExtResource("18_6hoxt")
-theme_override_styles/pressed = ExtResource("18_6hoxt")
-theme_override_styles/disabled = ExtResource("18_6hoxt")
-theme_override_styles/focus = ExtResource("18_6hoxt")
-
-[node name="Options" parent="Menu/VBoxContainer" instance=ExtResource("17_epc5s")]
-use_parent_material = true
-layout_mode = 2
-theme_override_styles/normal = ExtResource("18_6hoxt")
-theme_override_styles/hover = ExtResource("18_6hoxt")
-theme_override_styles/pressed = ExtResource("18_6hoxt")
-theme_override_styles/disabled = ExtResource("18_6hoxt")
-theme_override_styles/focus = ExtResource("18_6hoxt")
-text = "Options"
-
-[node name="Quit" parent="Menu/VBoxContainer" instance=ExtResource("17_epc5s")]
-use_parent_material = true
-layout_mode = 2
-theme_override_styles/normal = ExtResource("18_6hoxt")
-theme_override_styles/hover = ExtResource("18_6hoxt")
-theme_override_styles/pressed = ExtResource("18_6hoxt")
-theme_override_styles/disabled = ExtResource("18_6hoxt")
-theme_override_styles/focus = ExtResource("18_6hoxt")
-text = "Quit
-"
-
-[connection signal="pressed" from="Menu/VBoxContainer/Play" to="Menu" method="_on_play_pressed"]
-[connection signal="pressed" from="Menu/VBoxContainer/Options" to="Menu" method="_on_options_pressed"]
-[connection signal="pressed" from="Menu/VBoxContainer/Quit" to="Menu" method="_on_quit_pressed"]
+[connection signal="pressed" from="CanvasLayer/Button" to="." method="_on_button_pressed"]

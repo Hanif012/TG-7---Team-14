@@ -1,18 +1,22 @@
-[gd_scene load_steps=7 format=3 uid="uid://cpv844mjr71nn"]
+[gd_scene load_steps=9 format=3 uid="uid://cpv844mjr71nn"]
 
 [ext_resource type="PackedScene" uid="uid://dltnr2rc0tcal" path="res://src/Room.tscn" id="1_c74n5"]
+[ext_resource type="Texture2D" uid="uid://f4kgac67cdlx" path="res://assets/rooms/garage-bg.png" id="2_bvosn"]
 [ext_resource type="Texture2D" uid="uid://de1x4sctv63vf" path="res://assets/rooms/door.png" id="2_tdj0d"]
 [ext_resource type="PackedScene" uid="uid://dcxwu8pgdyd7l" path="res://src/Interactible.tscn" id="3_2j5cr"]
 [ext_resource type="Texture2D" uid="uid://c0i8teyci4ecm" path="res://assets/rooms/bathroom/cabinet.png" id="3_p64n6"]
 [ext_resource type="Texture2D" uid="uid://dvam36t5vtnlu" path="res://assets/rooms/kitchen/table.png" id="4_afu13"]
 [ext_resource type="Texture2D" uid="uid://djpvvaxngksk0" path="res://assets/rooms/garage/car.png" id="5_iv7o8"]
+[ext_resource type="PackedScene" uid="uid://dcx6410y7h3gq" path="res://src/light2D/Candle.tscn" id="8_hyx5x"]
 
 [node name="Room" instance=ExtResource("1_c74n5")]
 room_id = 3
 door_positions = Array[float]([-604.0])
 
 [node name="Background" parent="." index="0"]
-scale = Vector2(0.615, 0.81)
+position = Vector2(0, 338)
+scale = Vector2(1, 1)
+texture = ExtResource("2_bvosn")
 
 [node name="Door" type="Sprite2D" parent="EnvironmentBackground" index="0"]
 position = Vector2(-592, 364)
@@ -85,3 +89,6 @@ interactible_type = 2
 label = "Search Cabinet"
 emit_sound_type = "Cabinet"
 storage_index = 14
+
+[node name="Candle" parent="." index="12" instance=ExtResource("8_hyx5x")]
+position = Vector2(524, 391)

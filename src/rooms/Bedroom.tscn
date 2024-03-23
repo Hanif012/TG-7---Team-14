@@ -1,8 +1,7 @@
-[gd_scene load_steps=16 format=3 uid="uid://b3jq0wly8t2j4"]
+[gd_scene load_steps=15 format=3 uid="uid://b3jq0wly8t2j4"]
 
 [ext_resource type="PackedScene" uid="uid://dltnr2rc0tcal" path="res://src/Room.tscn" id="1_6kbmm"]
-[ext_resource type="Texture2D" uid="uid://da25fr886gse8" path="res://assets/rooms/bedroom/bg w light.png" id="2_mqig3"]
-[ext_resource type="Texture2D" uid="uid://chawt2104ug1k" path="res://assets/rooms/bedroom/bed.PNG" id="5_0pjjq"]
+[ext_resource type="Texture2D" uid="uid://chawt2104ug1k" path="res://assets/rooms/bedroom/bed.png" id="5_0pjjq"]
 [ext_resource type="Texture2D" uid="uid://cpt0yda2rjlm0" path="res://assets/rooms/bedroom/wardrobe.png" id="6_8irfk"]
 [ext_resource type="Texture2D" uid="uid://bu6n8vl1v2btr" path="res://assets/rooms/bedroom/door1.png" id="6_q4h5y"]
 [ext_resource type="Texture2D" uid="uid://c7gcxx0tyfl0b" path="res://assets/rooms/bedroom/mirror.png" id="7_pvvtk"]
@@ -22,7 +21,6 @@ door_positions = Array[float]([285.0, 830.0])
 
 [node name="Background" parent="." index="0"]
 scale = Vector2(0.77, 0.81)
-texture = ExtResource("2_mqig3")
 
 [node name="EnvironmentBackground" parent="." index="1"]
 scale = Vector2(0.81, 0.81)

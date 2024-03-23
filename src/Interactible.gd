@@ -72,7 +72,7 @@ func _change_scene() -> void:
 		get_tree().change_scene_to_file("res://src/rooms/" + target_room + ".tscn")
 	else:
 		if GameState.keys == GameState.NUM_OF_KEYS:
-			get_tree().change_scene_to_file("res://src/rooms/Ending.tscn")
+			get_tree().change_scene_to_file("res://src/menu/EndingMenu.tscn")
 		else:
 			contextual_label.set_text("The Key is Incomplete")
 			contextual.show()

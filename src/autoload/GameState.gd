@@ -5,12 +5,21 @@ enum Item {STIM, BANDAGE, MEDKIT, KEY, NOTHING = -1}
 enum Room {ATTIC, BATHROOM, BEDROOM, GARAGE, HALLWAY, KITCHEN, LIVINGROOM}
 enum EnemyState {ROAMING, CHASING, LOSTTRACK, FINAL}
 
+const FOOTSTEP_FLOOR = [
+	preload("res://assets/audio/sfx/SFX_Footstep_Floor_1.ogg"), 
+	preload("res://assets/audio/sfx/SFX_Footstep_Floor_2.ogg"), 
+	preload("res://assets/audio/sfx/SFX_Footstep_Floor_3.ogg")]
+const FOOTSTEP_WOOD = [
+	preload("res://assets/audio/sfx/SFX_Footstep_Wood_1.ogg"), 
+	preload("res://assets/audio/sfx/SFX_Footstep_Wood_2.ogg"), 
+	preload("res://assets/audio/sfx/SFX_Footstep_Wood_3.ogg")]
 const NUM_OF_KEYS = 5
 const NUM_OF_STIM = 2
 const NUM_OF_BANDAGE = 1
 const NUM_OF_MEDKIT = 2
 
-var game_start := true
+var game_start := false
+var game_running := false
 var transition_state := false
 var hiding_state := false
 var movement_state := MovementState.IDLE
@@ -25,16 +34,25 @@ var player_location := Room.BEDROOM:
 var last_player_location := Room.BEDROOM
 var enemy_location := Room.ATTIC
 var enemy_distance := 0
+var rush := false
 
 const ENEMY_SPEED = 375.0
 
 const DEFAULT_MONSTER_TIMER := 3.0
 var time_left := DEFAULT_MONSTER_TIMER
 
-var enemy_state := EnemyState.ROAMING
+var enemy_state := EnemyState.CHASING :
+	set(value):
+		if enemy_state != value:
+			MusicManager.set_track(value)
+			pass
+		enemy_state = value
 
 const MAX_STAMINA := 600
 var stamina := MAX_STAMINA
+
+var music_slider_value: float = 1
+var sfx_slider_value: float = 1
 
 const MAX_HP := 3
 var hp := 3 :
@@ -42,7 +60,7 @@ var hp := 3 :
 		hp = clamp(value, 0, MAX_HP)
 		hp_changed.emit()
 		if hp == 0:
-			get_tree().change_scene_to_file("res://src/rooms/GameOver.tscn")
+			get_tree().change_scene_to_file("res://src/menu/GameOverMenu.tscn")
 
 const DEFAULT_SPEED := 300.0
 var speed := DEFAULT_SPEED
@@ -86,10 +104,12 @@ var keys := 0:
 
 func restart_game():
 	game_start = true
+	game_running = true
 	transition_state = false
 	hiding_state = false
 	movement_state = MovementState.IDLE
 	tired_state = false
+	rush = false
 	
 	hp = MAX_HP
 	stamina = MAX_STAMINA
@@ -163,5 +183,7 @@ func check_if_meet_up() -> void:
 
 func adrenaline_rush() -> void:
 	speed = DEFAULT_SPEED * 1.5
+	rush = true
 	await get_tree().create_timer(5).timeout
 	speed = DEFAULT_SPEED
+	rush = false

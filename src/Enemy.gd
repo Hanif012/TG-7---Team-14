@@ -44,6 +44,13 @@ func commence_attack():
 	GameState.enemy_state = GameState.EnemyState.CHASING
 	in_attack_animation = true 
 	
+	if player_character.position.x - position.x > 0: 
+		$Sprite2D.flip_h = false
+		$AnimationPlayer.play("idle_right")
+	elif player_character.position.x - position.x < 0: 
+		$Sprite2D.flip_h = true
+		$AnimationPlayer.play("idle_left")
+
 	$StrikeTimer.start()
 	await $StrikeTimer.timeout   # Attacking Charging time
 	
@@ -53,10 +60,10 @@ func commence_attack():
 	scream_sfx.play_sound()
 	
 	var distance = player_character.position.x - position.x
-	if distance < GameState.STRIKE_DISTANCE and distance >= -GameState.STRIKE_DISTANCE/5 and !$Sprite2D.flip_h:
+	if distance < GameState.STRIKE_DISTANCE and !$Sprite2D.flip_h:
 		GameState.hp -= 1
 		GameState.adrenaline_rush()
-	elif distance > -GameState.STRIKE_DISTANCE and distance <= GameState.STRIKE_DISTANCE/5 and $Sprite2D.flip_h:
+	elif distance > -GameState.STRIKE_DISTANCE and $Sprite2D.flip_h:
 		GameState.hp -= 1
 		GameState.adrenaline_rush()
 	

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://c17jc5h2fylaa"]
+[gd_scene load_steps=13 format=3 uid="uid://c17jc5h2fylaa"]
 
 [ext_resource type="Script" path="res://src/UI.gd" id="1_07pr5"]
 [ext_resource type="Texture2D" uid="uid://bhkxtrj54pfj4" path="res://assets/icon.svg" id="2_2yj7k"]
@@ -7,6 +7,9 @@
 [ext_resource type="Texture2D" uid="uid://cpjnvg8w2cuhe" path="res://assets/ui/hp-empty-bar.png" id="5_283uc"]
 [ext_resource type="Texture2D" uid="uid://bw0e4vjyywlo1" path="res://assets/ui/stamina-inside-bar.png" id="6_o5dvc"]
 [ext_resource type="Texture2D" uid="uid://bnf82cttmsbbv" path="res://assets/ui/stamina-empty-bar.png" id="7_wm6q1"]
+[ext_resource type="FontFile" uid="uid://dy58wm81l37t" path="res://assets/fonts/Creepster-Regular.ttf" id="8_cf02x"]
+[ext_resource type="PackedScene" uid="uid://d28spfrf4kn87" path="res://src/menu/MenuButton.tscn" id="9_bb7jg"]
+[ext_resource type="StyleBox" uid="uid://dn3hyd3jlh5pi" path="res://assets/theme/ButtonWithoutBG.tres" id="10_3xmfq"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_7g8v1"]
 font_size = 32
@@ -274,6 +277,24 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.203922, 0.203922, 0.203922, 0.498039)
 
+[node name="OptionTitle" type="Label" parent="Menu"]
+use_parent_material = true
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -266.0
+offset_top = 50.0
+offset_right = 266.0
+offset_bottom = 203.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.823529, 0.0235294, 0.0235294, 1)
+theme_override_fonts/font = ExtResource("8_cf02x")
+theme_override_font_sizes/font_size = 128
+text = "PAUSED"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="MarginContainer" type="MarginContainer" parent="Menu"]
 layout_mode = 1
 anchors_preset = 15
@@ -319,6 +340,27 @@ max_value = 1.0
 step = 0.05
 value = 1.0
 
+[node name="Return" parent="Menu" instance=ExtResource("9_bb7jg")]
+use_parent_material = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -99.0
+offset_top = 66.5
+offset_right = 99.0
+offset_bottom = 141.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal = ExtResource("10_3xmfq")
+theme_override_styles/hover = ExtResource("10_3xmfq")
+theme_override_styles/pressed = ExtResource("10_3xmfq")
+theme_override_styles/disabled = ExtResource("10_3xmfq")
+theme_override_styles/focus = ExtResource("10_3xmfq")
+text = "Return"
+
 [node name="Timer" type="Timer" parent="."]
 
 [connection signal="gui_input" from="Control/Bottom Screen/InventoryContainer/Inventory/Slot1" to="." method="_on_slot_1_gui_input"]
@@ -326,3 +368,4 @@ value = 1.0
 [connection signal="gui_input" from="Control/Bottom Screen/InventoryContainer/Inventory/Slot3" to="." method="_on_slot_3_gui_input"]
 [connection signal="value_changed" from="Menu/MarginContainer/VBoxContainer/GridContainer/MusicSlider" to="." method="_on_music_slider_value_changed"]
 [connection signal="value_changed" from="Menu/MarginContainer/VBoxContainer/GridContainer/SFXSlider" to="." method="_on_sfx_slider_value_changed"]
+[connection signal="pressed" from="Menu/Return" to="." method="_on_return_pressed"]

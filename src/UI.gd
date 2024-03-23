@@ -7,6 +7,9 @@ extends CanvasLayer
 @onready var stamina_bar = $Control/StaminaBar
 @onready var contextual_label = %ContextualBG/ContextualLabel
 
+@onready var music_slider = $Menu/MarginContainer/VBoxContainer/GridContainer/MusicSlider
+@onready var sfx_slider = $Menu/MarginContainer/VBoxContainer/GridContainer/SFXSlider
+
 signal item_consumed(index: int)
 
 const ITEM_IMAGE_PATH = [
@@ -19,6 +22,9 @@ func _ready():
 	GameState.hp_changed.connect(update_hp_counter)
 	GameState.found_an_item.connect(update_inventory_panel)
 	item_consumed.connect(GameState.item_consumption)
+	
+	music_slider.value = GameState.music_slider_value
+	sfx_slider.value = GameState.sfx_slider_value
 	
 	update_hp_counter()
 	update_key_counter()
@@ -37,10 +43,12 @@ func _input(event):
 func _on_music_slider_value_changed(value):
 	AudioServer.set_bus_volume_db(MUSIC_BUS_ID, linear_to_db(value))
 	AudioServer.set_bus_mute(MUSIC_BUS_ID, value < .05)
+	GameState.music_slider_value = value
 
 func _on_sfx_slider_value_changed(value):
 	AudioServer.set_bus_volume_db(SFX_BUS_ID, linear_to_db(value))
 	AudioServer.set_bus_mute(SFX_BUS_ID, value < .05)
+	GameState.sfx_slider_value = value
 
 func update_key_counter():
 	%KeyCounter.text = str(GameState.keys, "/", GameState.NUM_OF_KEYS)
@@ -76,3 +84,7 @@ func use_item(index: int):
 	$Timer.start()
 	await $Timer.timeout
 	%ContextualBG.hide()
+
+func _on_return_pressed():
+	%Menu.hide()
+	get_tree().paused = false

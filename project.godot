@@ -19,7 +19,7 @@ config/windows_native_icon="res://assets/favicon.ico"
 [autoload]
 
 GameState="*res://src/autoload/GameState.gd"
-SoundManager="*res://src/autoload/SoundManager.tscn"
+MusicManager="*res://src/autoload/MusicManager.tscn"
 
 [display]
 

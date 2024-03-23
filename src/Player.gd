@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 signal player_moves
 
+@onready var walk_audio_player = $WalkAudioPlayer
 
 const TIRED_TRESHOLD = 200
 const STAMINA_CAP = 300
@@ -11,7 +12,16 @@ const STAMINA_REGEN_WALKING = 4
 const STAMINA_REGEN_CROUCHING = 1
 const STAMINA_REGEN_TIRED = 2
 
+const DEFAULT_FOOTSTEP_PITCH = 0.5
+var footstep_pitch = 0.5
+
 var state = 0
+
+var audio_track : int = 0:
+	set(value):
+		if (value != audio_track):
+			_play_audio_track(value)
+		audio_track = value
 
 signal update_stamina()
 
@@ -29,11 +39,11 @@ func _physics_process(_delta):
 		velocity.x = 0
 	elif GameState.tired_state:
 		if GameState.stamina > TIRED_TRESHOLD: # If no longer tired, reset tired_state and sprite
-			sprite.modulate = (Color(1, 1, 1, 1))
+#			sprite.modulate = (Color(1, 1, 1, 1))
 			GameState.tired_state = false
 			ui.stamina_bar.self_modulate = "ffffff"
 		else:
-			sprite.modulate = (Color(1, 1, 1, 0.5)) # Decelerate and handle stamina recovery when tired
+#			sprite.modulate = (Color(1, 1, 1, 0.5)) # Decelerate and handle stamina recovery when tired
 			velocity.x = 0
 			GameState.movement_state = GameState.MovementState.TIRED
 		
@@ -49,10 +59,7 @@ func _physics_process(_delta):
 func _movement_handler() -> void:
 	var direction = Input.get_axis("ui_left", "ui_right")
 	if direction:
-		if Input.is_action_pressed("crouch"): #Crouching
-			velocity.x = direction * GameState.speed / 2
-			GameState.movement_state = GameState.MovementState.CROUCHING
-		elif Input.is_action_pressed("sprint"):
+		if Input.is_action_pressed("sprint"):
 			if GameState.stamina > 0:
 				GameState.movement_state = GameState.MovementState.SPRINTING
 				velocity.x = direction * GameState.speed * 2
@@ -64,11 +71,7 @@ func _movement_handler() -> void:
 			GameState.movement_state = GameState.MovementState.WALKING
 	else:
 		velocity.x = 0
-		if Input.is_action_pressed("crouch"):
-			GameState.movement_state = GameState.MovementState.CROUCHING
-		else:
-			GameState.movement_state = GameState.MovementState.IDLE
-	
+		GameState.movement_state = GameState.MovementState.IDLE
 
 func _stamina_handler() -> void:
 	if GameState.hiding_state:
@@ -85,10 +88,7 @@ func _stamina_handler() -> void:
 				if GameState.stamina == 0:
 					GameState.tired_state = true
 					ui.stamina_bar.self_modulate = "ff0000"
-					sprite.modulate = (Color(1, 1, 1, 0.5))
-			GameState.MovementState.CROUCHING:
-				if GameState.stamina < STAMINA_CAP:
-					GameState.stamina = min(STAMINA_CAP, GameState.stamina + STAMINA_REGEN_CROUCHING)
+#					sprite.modulate = (Color(1, 1, 1, 0.5))
 			GameState.MovementState.TIRED:
 				GameState.stamina = min(GameState.MAX_STAMINA, GameState.stamina + STAMINA_REGEN_TIRED)
 
@@ -96,24 +96,60 @@ func _play_anim() -> void:
 	match GameState.movement_state:
 		GameState.MovementState.IDLE:
 			$AnimationPlayer.play("RESET")
+			$AnimationPlayer.speed_scale = 1
+			audio_track = 0
 		GameState.MovementState.TIRED:
-			$AnimationPlayer.play("RESET")
-		GameState.MovementState.CROUCHING:
-			$AnimationPlayer.play("RESET")
+			if !$Sprite2D.flip_h:
+				$AnimationPlayer.play("tired_right")
+			else:
+				$AnimationPlayer.play("tired_left")
+			$AnimationPlayer.speed_scale = 0.5
+			audio_track = 0
 		GameState.MovementState.WALKING:
 			if velocity.x > 0:
 				$AnimationPlayer.play("walk_right")
 			else:
 				$AnimationPlayer.play("walk_left")
+			$AnimationPlayer.speed_scale = 0.75
+			audio_track = 1
 		GameState.MovementState.SPRINTING:
 			if velocity.x > 0:
 				$AnimationPlayer.play("run_right")
 			else:
 				$AnimationPlayer.play("run_left")
-			
+			$AnimationPlayer.speed_scale = 1.25
+			audio_track = 2
 	
+	if GameState.rush: $AnimationPlayer.speed_scale *= 1.5
+		
 	if velocity.x != 0:
 		if velocity.x > 0:
 			$Sprite2D.flip_h = false
 		else:
 			$Sprite2D.flip_h = true
+
+func _play_audio_track(value: int):
+	var audio_rng = randi_range(0, 2) 
+	match value:
+		1: 
+			walk_audio_player.stream = GameState.FOOTSTEP_WOOD[audio_rng]
+			walk_audio_player.pitch_scale = DEFAULT_FOOTSTEP_PITCH
+
+		2: 
+			walk_audio_player.stream = GameState.FOOTSTEP_WOOD[audio_rng]
+			walk_audio_player.pitch_scale = DEFAULT_FOOTSTEP_PITCH * 1.5
+
+	if value == 0:
+		walk_audio_player.stop()
+		return
+	
+	if GameState.rush: walk_audio_player.pitch_scale *= 1.5
+	if  !walk_audio_player.playing: walk_audio_player.play()
+
+func _on_walk_audio_player_finished():
+	if audio_track == 0:
+		walk_audio_player.stop()
+		return
+	var audio_rng = randi_range(0, 2)
+	walk_audio_player.stream = GameState.FOOTSTEP_WOOD[audio_rng]
+	walk_audio_player.play()

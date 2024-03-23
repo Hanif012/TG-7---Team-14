@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ddua3pawa6um1"
-path="res://.godot/imported/living-room.png-ab82345743237ae3b360c5214efa6725.ctex"
+uid="uid://f4kgac67cdlx"
+path="res://.godot/imported/garage-bg.png-a75661ee8abc63d9cd8cc9053afc15b3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/rooms/blueprint/living-room.png"
-dest_files=["res://.godot/imported/living-room.png-ab82345743237ae3b360c5214efa6725.ctex"]
+source_file="res://assets/rooms/garage-bg.png"
+dest_files=["res://.godot/imported/garage-bg.png-a75661ee8abc63d9cd8cc9053afc15b3.ctex"]
 
 [params]
 

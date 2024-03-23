@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://seufjv1y45t4"
-path="res://.godot/imported/kitchen.png-6e6562b7fbf45c73df55b5e8d272637b.ctex"
+uid="uid://bxg567gs65xob"
+path="res://.godot/imported/tired-right.png-2552134cfeefc25e9cabe0c4a49171e5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/rooms/blueprint/kitchen.png"
-dest_files=["res://.godot/imported/kitchen.png-6e6562b7fbf45c73df55b5e8d272637b.ctex"]
+source_file="res://assets/character/tired-right.png"
+dest_files=["res://.godot/imported/tired-right.png-2552134cfeefc25e9cabe0c4a49171e5.ctex"]
 
 [params]
 

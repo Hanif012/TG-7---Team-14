@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bsp3yk8mcio7l"
-path="res://.godot/imported/background.png-60989bb5711919fe9d0b6f86a0e3845e.ctex"
+uid="uid://bbdtyx5gb6r2m"
+path="res://.godot/imported/attic-bg.png-29148853e8536b28dc9c0640c6e3952e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/rooms/background.png"
-dest_files=["res://.godot/imported/background.png-60989bb5711919fe9d0b6f86a0e3845e.ctex"]
+source_file="res://assets/rooms/attic-bg.png"
+dest_files=["res://.godot/imported/attic-bg.png-29148853e8536b28dc9c0640c6e3952e.ctex"]
 
 [params]
 
