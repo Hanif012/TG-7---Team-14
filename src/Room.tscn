@@ -1,8 +1,8 @@
 [gd_scene load_steps=12 format=3 uid="uid://dltnr2rc0tcal"]
 
 [ext_resource type="Script" path="res://src/Room.gd" id="1_6p7ka"]
-[ext_resource type="Texture2D" uid="uid://bsp3yk8mcio7l" path="res://assets/rooms/background.png" id="2_hw2cj"]
 [ext_resource type="PackedScene" uid="uid://c17jc5h2fylaa" path="res://src/UI.tscn" id="2_nkud2"]
+[ext_resource type="Texture2D" uid="uid://bii1w4d76iv1t" path="res://assets/rooms/main-bg.png" id="2_vfb5d"]
 [ext_resource type="PackedScene" uid="uid://chjam1dcabmk5" path="res://src/Player.tscn" id="4_c3yxc"]
 [ext_resource type="Script" path="res://src/EnemyHandler.gd" id="5_b6txj"]
 [ext_resource type="Script" path="res://src/SoundQueue.gd" id="6_5usal"]
@@ -25,19 +25,18 @@ texture_filter = 1
 texture_repeat = 1
 position = Vector2(0, 360)
 scale = Vector2(1, 0.81)
-texture = ExtResource("2_hw2cj")
+texture = ExtResource("2_vfb5d")
 
 [node name="EnvironmentBackground" type="Node2D" parent="."]
 position = Vector2(0, 68)
 
 [node name="Lighting" type="Node2D" parent="."]
-visible = false
 position = Vector2(0, 360)
 scale = Vector2(1.22, 1.22)
 
 [node name="DarkCanvas" type="CanvasModulate" parent="Lighting"]
 editor_description = "for creating night effect"
-color = Color(0.258824, 0.223529, 0.341176, 1)
+color = Color(0.1716, 0.1474, 0.22, 1)
 
 [node name="Borders" type="Node2D" parent="."]
 position = Vector2(0, 360)

@@ -363,5 +363,6 @@ active = true
 
 [node name="WalkAudioPlayer" type="AudioStreamPlayer" parent="."]
 pitch_scale = 0.5
+bus = &"SFX"
 
 [connection signal="finished" from="WalkAudioPlayer" to="." method="_on_walk_audio_player_finished"]

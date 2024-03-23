@@ -1,7 +1,7 @@
 [gd_scene load_steps=21 format=3 uid="uid://b47lvs3ytpt4t"]
 
 [ext_resource type="Script" path="res://src/menu/MainMenu.gd" id="1_unyei"]
-[ext_resource type="Texture2D" uid="uid://da25fr886gse8" path="res://assets/rooms/bedroom/bg w light.png" id="2_5vht4"]
+[ext_resource type="Texture2D" uid="uid://bii1w4d76iv1t" path="res://assets/rooms/main-bg.png" id="2_cemwv"]
 [ext_resource type="Texture2D" uid="uid://c4att4l6dxw2a" path="res://assets/rooms/bedroom/candles.png" id="3_7fhad"]
 [ext_resource type="FontFile" uid="uid://dy58wm81l37t" path="res://assets/fonts/Creepster-Regular.ttf" id="3_imwec"]
 [ext_resource type="PackedScene" uid="uid://d28spfrf4kn87" path="res://src/menu/MenuButton.tscn" id="3_tf5xu"]
@@ -41,7 +41,7 @@ texture_filter = 1
 texture_repeat = 1
 position = Vector2(0, 360)
 scale = Vector2(0.77, 0.81)
-texture = ExtResource("2_5vht4")
+texture = ExtResource("2_cemwv")
 
 [node name="EnvironmentBackground" type="Node2D" parent="Background/Room"]
 position = Vector2(0, 68)

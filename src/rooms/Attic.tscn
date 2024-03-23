@@ -5,9 +5,9 @@
 [ext_resource type="Texture2D" uid="uid://de1x4sctv63vf" path="res://assets/rooms/door.png" id="2_shvpn"]
 [ext_resource type="PackedScene" uid="uid://dcxwu8pgdyd7l" path="res://src/Interactible.tscn" id="3_livvt"]
 [ext_resource type="Texture2D" uid="uid://c0i8teyci4ecm" path="res://assets/rooms/bathroom/cabinet.png" id="4_rkkj8"]
-[ext_resource type="Texture2D" uid="uid://bu7kcmavj2b50" path="res://assets/rooms/blueprint/attic.png" id="4_wmoua"]
 [ext_resource type="Texture2D" uid="uid://dp5wrmc210kp5" path="res://assets/rooms/attic/boxes.png" id="5_fjef0"]
 [ext_resource type="Texture2D" uid="uid://dkmabjmhjf81e" path="res://assets/rooms/attic/chest.png" id="6_h3no5"]
+[ext_resource type="PackedScene" uid="uid://dcx6410y7h3gq" path="res://src/light2D/Candle.tscn" id="7_4srms"]
 [ext_resource type="Texture2D" uid="uid://y7n06dr6hnjn" path="res://assets/rooms/kitchen/Window.png" id="7_htpx5"]
 
 [node name="Room" instance=ExtResource("1_fquxp")]
@@ -44,15 +44,19 @@ scale = Vector2(0.15, 0.15)
 texture = ExtResource("5_fjef0")
 flip_h = true
 
-[node name="Chest" type="Sprite2D" parent="EnvironmentBackground" index="5"]
-position = Vector2(592, 519)
-scale = Vector2(0.065, 0.065)
-texture = ExtResource("6_h3no5")
-
-[node name="Window" type="Sprite2D" parent="EnvironmentBackground" index="6"]
+[node name="Window" type="Sprite2D" parent="EnvironmentBackground" index="5"]
 position = Vector2(-15, 218)
 scale = Vector2(0.113, 0.113)
 texture = ExtResource("7_htpx5")
+
+[node name="Candle" parent="EnvironmentBackground" index="6" instance=ExtResource("7_4srms")]
+position = Vector2(-8, 326)
+scale = Vector2(1, 1)
+
+[node name="Chest" type="Sprite2D" parent="EnvironmentBackground" index="7"]
+position = Vector2(592, 519)
+scale = Vector2(0.065, 0.065)
+texture = ExtResource("6_h3no5")
 
 [node name="LeftBorder" parent="Borders" index="0"]
 position = Vector2(-555, 0)
@@ -102,4 +106,3 @@ storage_index = 18
 [node name="Attic" type="Sprite2D" parent="." index="8"]
 position = Vector2(0, 1334)
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("4_wmoua")
