@@ -10,6 +10,7 @@ extends Node
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	MusicManager.music_track = 0
 	music_slider.value = GameState.music_slider_value
 	sfx_slider.value = GameState.sfx_slider_value
 

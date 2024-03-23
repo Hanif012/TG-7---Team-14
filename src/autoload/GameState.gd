@@ -5,6 +5,14 @@ enum Item {STIM, BANDAGE, MEDKIT, KEY, NOTHING = -1}
 enum Room {ATTIC, BATHROOM, BEDROOM, GARAGE, HALLWAY, KITCHEN, LIVINGROOM}
 enum EnemyState {ROAMING, CHASING, LOSTTRACK, FINAL}
 
+const FOOTSTEP_FLOOR = [
+	preload("res://assets/audio/sfx/SFX_Footstep_Floor_1.ogg"), 
+	preload("res://assets/audio/sfx/SFX_Footstep_Floor_2.ogg"), 
+	preload("res://assets/audio/sfx/SFX_Footstep_Floor_3.ogg")]
+const FOOTSTEP_WOOD = [
+	preload("res://assets/audio/sfx/SFX_Footstep_Wood_1.ogg"), 
+	preload("res://assets/audio/sfx/SFX_Footstep_Wood_2.ogg"), 
+	preload("res://assets/audio/sfx/SFX_Footstep_Wood_3.ogg")]
 const NUM_OF_KEYS = 5
 const NUM_OF_STIM = 2
 const NUM_OF_BANDAGE = 1
@@ -26,6 +34,7 @@ var player_location := Room.BEDROOM:
 var last_player_location := Room.BEDROOM
 var enemy_location := Room.ATTIC
 var enemy_distance := 0
+var rush := false
 
 const ENEMY_SPEED = 375.0
 
@@ -100,6 +109,7 @@ func restart_game():
 	hiding_state = false
 	movement_state = MovementState.IDLE
 	tired_state = false
+	rush = false
 	
 	hp = MAX_HP
 	stamina = MAX_STAMINA
@@ -173,5 +183,7 @@ func check_if_meet_up() -> void:
 
 func adrenaline_rush() -> void:
 	speed = DEFAULT_SPEED * 1.5
+	rush = true
 	await get_tree().create_timer(5).timeout
 	speed = DEFAULT_SPEED
+	rush = false

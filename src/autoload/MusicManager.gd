@@ -28,4 +28,6 @@ func update_music_player(value):
 		2: music_player.stream = MUSIC_CHASING
 		3: music_player.stream = MUSIC_VICTORY
 		4: music_player.stream = MUSIC_GAME_OVER
-	music_player.play()
+		_: music_player.stream = null
+	if value != 0: music_player.play()
+	else: music_player.stop()
