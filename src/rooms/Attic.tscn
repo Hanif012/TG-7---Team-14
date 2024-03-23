@@ -51,7 +51,6 @@ texture = ExtResource("7_htpx5")
 
 [node name="Candle" parent="EnvironmentBackground" index="6" instance=ExtResource("7_4srms")]
 position = Vector2(-8, 326)
-scale = Vector2(1, 1)
 
 [node name="Chest" type="Sprite2D" parent="EnvironmentBackground" index="7"]
 position = Vector2(592, 519)

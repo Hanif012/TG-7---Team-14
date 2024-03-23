@@ -34,7 +34,8 @@ func _ready():
 		item_here = GameState.item_index[storage_index]
 
 func _input(_event):
-	if is_interactible and Input.is_action_pressed("interact") and !GameState.transition_state:
+	
+	if is_interactible and Input.is_action_just_pressed("interact") and !GameState.transition_state:
 		match (interactible_type):
 			InteractibleType.DOOR:
 				_change_scene()
@@ -82,13 +83,20 @@ func _enter_hiding_spot() -> void:
 	var characters := get_parent().get_parent().get_node("Characters")
 	if GameState.hiding_state:
 		characters.get_node("Player/Sprite2D").hide()
+		characters.get_node("Player").audio_track = 0
+		GameState.movement_state = GameState.MovementState.IDLE
 		contextual_label.set_text("You are hiding...")
 		contextual.show()
+		
 	else:
 		if characters.get_child_count() > 1:
 			characters.get_node("Enemy").saw_player_when_entering_room = true
 			GameState.enemy_state = GameState.EnemyState.ROAMING
+		
+
 		characters.get_node("Player/Sprite2D").show()
+		
+		
 		contextual.hide()
 
 func _pick_up_item() -> void:
